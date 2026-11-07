@@ -718,7 +718,15 @@ function checkout() {
     "_blank"
   );
 }
+const heroArt = document.querySelector(".hero-art");
 
+if (heroArt) {
+  heroArt.innerHTML = '<div class="hero-label">LEVEL UP</div>';
+  heroArt.style.backgroundImage =
+    "linear-gradient(#0003,#0005),url('./file_000000009f0881f4becb6fa6a0914e1f.png')";
+  heroArt.style.backgroundSize = "cover";
+  heroArt.style.backgroundPosition = "center";
+}
 loadProducts();
 updateCart();
 </script>
