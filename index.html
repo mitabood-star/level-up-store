@@ -726,6 +726,23 @@ if (heroArt) {
     "linear-gradient(#0003,#0005),url('./file_000000009f0881f4becb6fa6a0914e1f.png')";
   heroArt.style.backgroundSize = "cover";
   heroArt.style.backgroundPosition = "center";
+}const categoryBox = document.querySelector(".categories");
+
+if (categoryBox) {
+  const order = ["cards", "pass", "games", "shared"];
+
+  const items = Array.from(categoryBox.querySelectorAll(".cat"));
+
+  items.sort((a, b) => {
+    const getType = el => {
+      const match = el.getAttribute("onclick").match(/'([^']+)'/);
+      return match ? match[1] : "";
+    };
+
+    return order.indexOf(getType(a)) - order.indexOf(getType(b));
+  });
+
+  items.forEach(item => categoryBox.appendChild(item));
 }
 loadProducts();
 updateCart();
