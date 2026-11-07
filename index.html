@@ -1,122 +1,431 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090909">
-<title>LEVEL UP Gaming Store | العب أكثر، استمتع أكثر</title>
-<meta name="description" content="LEVEL UP Gaming Store - ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية في الأردن. اطلب عبر واتساب.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090910">
+<title>LEVEL UP Gaming Store</title>
+<meta name="description" content="LEVEL UP Gaming Store - ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية في الأردن.">
+
 <style>
-:root{--bg:#090909;--panel:#141414;--panel2:#1b1b1b;--red:#ed2436;--gold:#d8b56d;--muted:#a7a7a7;--line:#292929;--green:#8de34c}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#351016 0,transparent 35%),var(--bg);color:#f7f7f7;font-family:Tahoma,Arial,sans-serif}
-a{color:inherit;text-decoration:none}button,input,select{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}
-.top{background:#111;border-bottom:1px solid var(--line);font-size:12px;color:#ccc;text-align:center;padding:9px}
-header{position:sticky;top:0;z-index:5;background:#090909ed;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.4px}.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(145deg,#ff4350,#850b18);display:grid;place-items:center;box-shadow:0 0 24px #ed24364d;font-size:21px}
-.brand b{font-size:19px}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:2px;margin-top:3px}
-nav{display:flex;gap:23px;color:#ddd;font-size:13px}nav a:hover{color:var(--gold)}
-.actions{display:flex;gap:8px}.btn{border:0;border-radius:11px;padding:12px 17px;background:var(--red);color:#fff;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{filter:brightness(1.12)}.btn.ghost{background:#202020;border:1px solid #343434}.btn.gold{background:linear-gradient(110deg,#e7c57c,#a77a32);color:#160f06}
-.hero{padding:62px 0 42px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
-.kicker{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px}.hero h1{font-size:clamp(36px,6vw,65px);line-height:1.15;margin:15px 0}.hero h1 span{color:var(--red);text-shadow:0 0 30px #ed243655}.hero p{color:#bbb;line-height:1.9;max-width:580px;font-size:15px}
-.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.hero-art{min-height:330px;border-radius:28px;border:1px solid #4a2428;background:radial-gradient(circle at 50% 40%,#6e1624 0,#261014 42%,#111 75%);display:grid;place-items:center;position:relative;overflow:hidden}
-.hero-art:before,.hero-art:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ed243655;border-radius:50%;transform:rotateX(65deg)}.hero-art:after{width:340px;height:340px}
-.mascot{font-size:105px;filter:drop-shadow(0 15px 25px #000);z-index:1}.mascot-label{position:absolute;bottom:24px;text-align:center;font-weight:900;letter-spacing:4px;color:var(--gold);font-size:21px}
-.stats{display:flex;gap:24px;margin-top:27px;color:#aaa;font-size:12px}.stats b{display:block;color:#fff;font-size:18px;margin-bottom:4px}
-section{padding:35px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:19px}.section-head h2{font-size:25px;margin:0}.section-head p{margin:7px 0 0;color:var(--muted);font-size:12px}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.cat{background:linear-gradient(145deg,#1b1b1b,#101010);border:1px solid var(--line);border-radius:17px;padding:20px;cursor:pointer;transition:.2s}.cat:hover{border-color:var(--red);transform:translateY(-3px)}.cat .ico{font-size:27px}.cat b{display:block;margin-top:12px}.cat small{color:var(--muted);display:block;margin-top:5px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.search{flex:1;min-width:190px;background:#171717;border:1px solid #333;border-radius:11px;padding:13px;color:white}.filter{background:#171717;border:1px solid #333;border-radius:11px;padding:12px;color:#eee}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.product{background:linear-gradient(155deg,#1a1a1a,#101010);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}.cover{height:155px;background:radial-gradient(circle at 50% 35%,#54202a,#191012 65%,#101010);display:grid;place-items:center;font-size:47px;position:relative}.tag{position:absolute;top:12px;right:12px;background:#ed2436;color:#fff;border-radius:7px;padding:5px 8px;font-size:10px;font-weight:bold}.prod-info{padding:14px;display:flex;flex-direction:column;flex:1}.prod-info small{color:var(--gold);font-size:10px}.prod-info h3{font-size:15px;margin:8px 0}.prod-info p{color:#aaa;font-size:11px;line-height:1.6;margin:0 0 14px;flex:1}.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:900;color:#fff}.price em{font-style:normal;color:var(--gold);font-size:11px}.add{border:1px solid #633038;background:#2b1216;color:#fff;border-radius:9px;padding:9px 11px;cursor:pointer;font-size:12px}
-.notice{border:1px dashed #70552c;background:#211b10;color:#dfc58f;padding:13px 15px;border-radius:12px;font-size:12px;line-height:1.7;margin-top:18px}
-.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.benefit{background:#151515;border:1px solid var(--line);padding:20px;border-radius:16px}.benefit b{display:block;margin:8px 0}.benefit p{color:#aaa;font-size:12px;line-height:1.7;margin:0}
-.payments{display:flex;gap:10px;flex-wrap:wrap}.pay{padding:13px 19px;border:1px solid #343434;background:#171717;border-radius:12px;font-weight:bold}
-.faq{border-top:1px solid var(--line);padding:16px 0;color:#ddd}.faq summary{cursor:pointer;font-weight:bold}.faq p{color:#aaa;font-size:13px;line-height:1.8}
-footer{border-top:1px solid var(--line);margin-top:35px;padding:35px 0;color:#aaa;font-size:12px}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.float{position:fixed;bottom:20px;left:20px;z-index:8;border-radius:50px;box-shadow:0 8px 30px #0008}
-.cart-panel{position:fixed;inset:0;background:#0009;z-index:20;display:none;justify-content:flex-end}.cart-panel.open{display:flex}.cart{width:min(420px,100%);background:#111;height:100%;padding:22px;overflow:auto;border-right:1px solid #333}.cart-head{display:flex;justify-content:space-between;align-items:center}.cart-item{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #333;font-size:13px}.cart-total{font-size:19px;font-weight:bold;margin:22px 0}.empty{color:#999;text-align:center;padding:50px 0}
-@media(max-width:850px){nav{display:none}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:260px}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.nav{height:66px}.brand b{font-size:16px}.actions .ghost{display:none}.hero{padding-top:38px}.hero-art{min-height:230px}.products{gap:10px}.cover{height:120px}.prod-info{padding:11px}.prod-info h3{font-size:13px}.benefits{grid-template-columns:1fr}.stats{gap:15px}.section-head h2{font-size:21px}}
-/* توحيد صور وبطاقات الألعاب */
+:root{
+  --bg:#08080e;
+  --panel:#13131e;
+  --red:#ff2548;
+  --purple:#9b42ff;
+  --text:#fff;
+  --muted:#aaaabb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+.wrap{width:min(1180px,94%);margin:auto}
+.top{
+  background:linear-gradient(90deg,#420c27,#25104a,#420c27);
+  text-align:center;padding:10px;font-size:12px;
+}
+header{
+  position:sticky;top:0;z-index:10;
+  background:#090910ed;
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #30203f;
+}
+.nav{
+  min-height:75px;display:flex;
+  align-items:center;justify-content:space-between;gap:15px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.logo{
+  width:45px;height:45px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--red),var(--purple));
+  box-shadow:0 0 22px #a52cff66;font-size:23px;
+}
+.brand b{font-size:20px}
+.brand small{
+  display:block;color:#c18aff;font-size:10px;
+  letter-spacing:2px;margin-top:4px;
+}
+nav{display:flex;gap:22px;font-size:13px;color:#ddd}
+nav a:hover{color:#d49cff}
+.btn{
+  border:0;border-radius:10px;padding:12px 17px;
+  background:linear-gradient(110deg,var(--red),#a52cff);
+  color:white;font-weight:bold;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn.ghost{background:#191522;border:1px solid #49315e}
+.hero{
+  padding:55px 0 45px;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  align-items:center;gap:30px;
+}
+.kicker{color:#d18aff;font-size:12px;letter-spacing:2px;font-weight:bold}
+.hero h1{font-size:clamp(35px,6vw,65px);line-height:1.2;margin:15px 0}
+.hero h1 span{
+  background:linear-gradient(90deg,#ff3154,#b45cff);
+  -webkit-background-clip:text;color:transparent;
+}
+.hero p{color:#b8b5c5;line-height:2;font-size:14px;max-width:570px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.hero-art{
+  min-height:320px;border-radius:25px;
+  border:1px solid #7134a0;
+  background:
+    radial-gradient(circle at 50% 45%,#722b9d 0,transparent 42%),
+    linear-gradient(140deg,#24102e,#10101c 65%,#340d22);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  box-shadow:0 0 45px #922cff20;
+}
+.hero-art:before,.hero-art:after{
+  content:"";position:absolute;border:1px solid #d14aff55;
+  width:260px;height:260px;border-radius:50%;
+}
+.hero-art:after{width:340px;height:340px}
+.hero-icon{font-size:110px;z-index:1;filter:drop-shadow(0 10px 20px #000)}
+.hero-label{
+  position:absolute;bottom:25px;z-index:2;
+  font-size:23px;font-weight:900;letter-spacing:4px;
+  color:#f0c9ff;text-shadow:0 0 18px #bc45ff;
+}
+section{padding:30px 0}
+.section-head{margin-bottom:20px}
+.section-head h2{font-size:25px;margin:0}
+.section-head p{color:var(--muted);font-size:12px;margin:8px 0 0}
+.categories{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:15px;
+}
+.cat{
+  height:190px;border-radius:17px;overflow:hidden;
+  position:relative;cursor:pointer;
+  border:1px solid #49305f;
+  background:#191322;
+  transition:.25s;
+}
+.cat:hover{
+  transform:translateY(-5px);
+  border-color:#d04aff;
+  box-shadow:0 0 25px #9b42ff45;
+}
+.cat img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transition:.3s;
+}
+.cat:hover img{transform:scale(1.07)}
+.cat:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,#080610 0%,#080610aa 35%,transparent 100%);
+}
+.cat-title{
+  position:absolute;bottom:17px;right:15px;z-index:2;
+  font-size:17px;font-weight:900;
+  text-shadow:0 2px 10px #000;
+}
+.cat-title small{
+  display:block;color:#d5a4ff;font-size:10px;
+  margin-top:6px;font-weight:normal;
+}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.search,.filter{
+  background:#15131f;border:1px solid #3b2a50;
+  border-radius:10px;padding:13px;color:white;
+}
+.search{flex:1;min-width:180px}
+.filter{min-width:130px}
+.products{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;
+}
 .product{
-  min-width:0;
+  min-width:0;overflow:hidden;display:flex;flex-direction:column;
+  background:linear-gradient(150deg,#1a1725,#101019);
+  border:1px solid #352443;border-radius:16px;
+  transition:.2s;
 }
-
+.product:hover{
+  border-color:#b44cff;
+  box-shadow:0 0 22px #9b42ff25;
+  transform:translateY(-3px);
+}
 .cover{
-  height:190px;
-  flex:0 0 190px;
-  width:100%;
+  height:200px;flex:0 0 200px;width:100%;
+  background:radial-gradient(circle,#38204b,#15121e 70%);
+  position:relative;display:grid;place-items:center;
 }
-
 .cover img{
-  width:100%;
-  height:100%;
-  object-fit:contain!important;
-  padding:8px;
-  display:block;
+  width:100%;height:100%;object-fit:contain;
+  padding:9px;display:block;
 }
-
+.tag{
+  position:absolute;top:10px;right:10px;z-index:2;
+  background:linear-gradient(100deg,var(--red),var(--purple));
+  border-radius:7px;padding:6px 9px;font-size:10px;font-weight:bold;
+}
+.prod-info{
+  padding:14px;display:flex;flex-direction:column;flex:1;
+}
+.prod-info small{color:#d19aff;font-size:10px}
 .prod-info h3{
-  min-height:38px;
-  line-height:1.4;
+  font-size:14px;margin:9px 0;line-height:1.5;
+  min-height:42px;
 }
-
 .prod-info p{
-  min-height:36px;
-  max-height:36px;
-  overflow:hidden;
+  color:#aaa7b8;font-size:11px;line-height:1.7;
+  min-height:38px;max-height:38px;overflow:hidden;
+  margin:0 0 12px;
 }
+.price-row{
+  margin-top:auto;display:flex;align-items:center;
+  justify-content:space-between;gap:7px;
+}
+.price{font-size:15px;font-weight:900}
+.price em{font-style:normal;color:#d29aff;font-size:10px}
+.add{
+  border:1px solid #633d83;background:#281638;
+  color:white;border-radius:8px;padding:9px 10px;
+  cursor:pointer;font-size:11px;
+}
+.add:hover{background:#542078}
+.notice{
+  margin-top:18px;padding:13px;
+  border:1px dashed #704a91;border-radius:11px;
+  color:#d4b5ed;font-size:11px;line-height:1.8;
+}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.benefit{
+  background:#15131f;border:1px solid #352443;
+  border-radius:14px;padding:20px;
+}
+.benefit b{display:block;margin:9px 0}
+.benefit p{color:#aaa;font-size:12px;line-height:1.8;margin:0}
+.payments{display:flex;gap:10px;flex-wrap:wrap}
+.pay{
+  padding:14px 20px;background:#171421;
+  border:1px solid #49305e;border-radius:10px;font-weight:bold;
+}
+.faq{border-top:1px solid #30243c;padding:16px 0;color:#eee}
+.faq summary{cursor:pointer;font-weight:bold}
+.faq p{color:#aaa;font-size:12px;line-height:1.8}
+footer{
+  border-top:1px solid #30243c;margin-top:35px;
+  padding:30px 0;color:#aaa;font-size:12px;
+}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.float{
+  position:fixed;bottom:18px;left:18px;z-index:8;
+  border-radius:40px;box-shadow:0 5px 25px #000;
+}
+.cart-panel{
+  position:fixed;inset:0;background:#000b;z-index:30;
+  display:none;justify-content:flex-end;
+}
+.cart-panel.open{display:flex}
+.cart{
+  width:min(420px,100%);height:100%;overflow:auto;
+  background:#11101a;padding:22px;border-right:1px solid #49305e;
+}
+.cart-head{display:flex;justify-content:space-between;align-items:center}
+.cart-item{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:14px 0;border-bottom:1px solid #34263f;font-size:13px;
+}
+.cart-total{font-size:18px;font-weight:bold;margin:22px 0}
+.empty{color:#aaa;text-align:center;padding:45px 0}
 
+@media(max-width:850px){
+  nav{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-art{min-height:250px}
+  .categories{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media(max-width:480px){
-  .cover{
-    height:155px;
-    flex-basis:155px;
-  }
-}</style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
+  .nav{min-height:65px}
+  .brand b{font-size:16px}
+  .actions .ghost{display:none}
+  .hero{padding:35px 0}
+  .hero-art{min-height:220px}
+  .cat{height:155px}
+  .cat-title{font-size:14px;right:11px;bottom:12px}
+  .products{gap:10px}
+  .cover{height:155px;flex-basis:155px}
+  .prod-info{padding:10px}
+  .prod-info h3{font-size:12px}
+  .prod-info p{font-size:10px}
+  .price{font-size:13px}
+  .add{padding:8px;font-size:10px}
+  .benefits{grid-template-columns:1fr}
+}
+</style>
+</head>
+
 <body>
-<div class="top">🇯🇴 متجر ألعاب واشتراكات رقمية — الطلب والتأكيد عبر واتساب</div>
-<header><div class="wrap nav">
-<a class="brand" href="#"><span class="logo">▲</span><span><b>LEVEL UP</b><small>GAMING STORE</small></span></a>
-<nav><a href="#home">الرئيسية</a><a href="#categories">الأقسام</a><a href="#products">المنتجات</a><a href="#payments">طرق الدفع</a></nav>
-<div class="actions"><button class="btn ghost" onclick="openCart()">🛒 السلة <span id="cartCount">0</span></button><a class="btn" href="https://wa.me/962790984231" target="_blank">اطلب الآن</a></div>
-</div></header>
+<div class="top">🇯🇴 LEVEL UP — عالم الألعاب والاشتراكات الرقمية في الأردن</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <span class="logo">▲</span>
+      <span><b>LEVEL UP</b><small>GAMING STORE</small></span>
+    </a>
+    <nav>
+      <a href="#home">الرئيسية</a>
+      <a href="#categories">الأقسام</a>
+      <a href="#products">المنتجات</a>
+      <a href="#payments">طرق الدفع</a>
+    </nav>
+    <div class="actions">
+      <button class="btn ghost" onclick="openCart()">🛒 السلة <span id="cartCount">0</span></button>
+      <a class="btn" href="https://wa.me/962790984231" target="_blank">اطلب الآن</a>
+    </div>
+  </div>
+</header>
+
 <main>
-<div class="wrap hero" id="home"><div class="hero-grid">
-<div><div class="kicker">YOUR NEXT LEVEL STARTS HERE</div><h1>اللعب إله مستوى…<br><span>ارفع مستواك!</span></h1><p>كل اللي تحتاجه لعالم Xbox من ألعاب واشتراكات وبطاقات رقمية. اختار اللي بناسبك، ضيفه للسلة، وكمّل طلبك معنا على واتساب.</p>
-<div class="hero-cta"><a class="btn gold" href="#products">تسوّق المنتجات ←</a><a class="btn ghost" href="https://wa.me/962790984231" target="_blank">تواصل معنا</a></div>
-<div class="stats"><div><b>🎮</b> عالم الألعاب</div><div><b>⚡</b> طلب سريع</div><div><b>🇯🇴</b> الأردن</div></div></div>
-<div class="hero-art"><div class="mascot">🧑🏻‍🎮</div><div class="mascot-label">LEVEL UP</div></div>
-</div></div>
-<section class="wrap" id="categories"><div class="section-head"><div><h2>تصفّح حسب القسم</h2><p>اختار عالمك وبلّش اللعب</p></div></div>
-<div class="categories">
-<div class="cat" onclick="setCategory('games')"><div class="ico">🎮</div><b>ألعاب Xbox</b><small>ألعابك المفضلة بمكان واحد</small></div>
-<div class="cat" onclick="setCategory('pass')"><div class="ico">⚡</div><b>Game Pass</b><small>اشتراكات وتجارب لعب</small></div>
-<div class="cat" onclick="setCategory('cards')"><div class="ico">🎁</div><b>بطاقات رقمية</b><small>رصيد وبطاقات رقمية</small></div>
-<div class="cat" onclick="setCategory('shared')"><div class="ico">👥</div><b>حسابات مشتركة</b><small>خيارات اقتصادية للألعاب</small></div>
-</div></section>
-<section class="wrap" id="products"><div class="section-head"><div><h2>المنتجات</h2><p>كتالوج تجريبي — الأسعار والمنتجات بحاجة لتأكيد المتجر قبل البيع</p></div></div>
-<div class="toolbar"><input id="search" class="search" placeholder="ابحث عن لعبة أو اشتراك..." oninput="render()"><select id="category" class="filter" onchange="render()"><option value="all">كل الأقسام</option><option value="games">ألعاب Xbox</option><option value="pass">Game Pass</option><option value="cards">بطاقات رقمية</option><option value="shared">حسابات مشتركة</option></select><select id="sort" class="filter" onchange="render()"><option value="default">الترتيب الافتراضي</option><option value="low">السعر: الأقل أولاً</option><option value="high">السعر: الأعلى أولاً</option></select></div>
-<div class="products" id="productGrid"></div>
-<div class="notice">تنويه: هذه بيانات توضيحية لتجربة تصميم المتجر وليست عروضاً مؤكدة. يتم تثبيت السعر والتوفر وطريقة التفعيل عند التواصل مع LEVEL UP عبر واتساب.</div>
+<div class="wrap hero" id="home">
+  <div>
+    <div class="kicker">YOUR NEXT LEVEL STARTS HERE</div>
+    <h1>اللعب إله مستوى…<br><span>ارفع مستواك!</span></h1>
+    <p>كل اللي تحتاجه لعالم Xbox من ألعاب واشتراكات وبطاقات رقمية. اختار اللي بناسبك واطلب بسهولة من LEVEL UP.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#products">تسوّق المنتجات ←</a>
+      <a class="btn ghost" href="https://wa.me/962790984231" target="_blank">تواصل معنا</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="hero-icon">🎮</div>
+    <div class="hero-label">LEVEL UP</div>
+  </div>
+</div>
+
+<section class="wrap" id="categories">
+  <div class="section-head">
+    <h2>اكتشف أقسامنا</h2>
+    <p>اختار القسم اللي بناسبك وابدأ مغامرتك</p>
+  </div>
+
+  <div class="categories">
+    <div class="cat" onclick="setCategory('games')">
+      <img src="https://images.unsplash.com/photo-1605901309584-818e25960a8f?auto=format&fit=crop&w=800&q=85" alt="ألعاب Xbox">
+      <div class="cat-title">🎮 ألعاب Xbox<small>ألعابك المفضلة</small></div>
+    </div>
+    <div class="cat" onclick="setCategory('pass')">
+      <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=85" alt="Game Pass">
+      <div class="cat-title">⚡ Game Pass<small>اشتراكات وتجارب لعب</small></div>
+    </div>
+    <div class="cat" onclick="setCategory('cards')">
+      <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=85" alt="بطاقات رقمية">
+      <div class="cat-title">🎁 بطاقات رقمية<small>رصيد وبطاقات</small></div>
+    </div>
+    <div class="cat" onclick="setCategory('shared')">
+      <img src="https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=800&q=85" alt="حسابات مشتركة">
+      <div class="cat-title">👥 حسابات مشتركة<small>خيارات اقتصادية</small></div>
+    </div>
+  </div>
 </section>
-<section class="wrap"><div class="section-head"><div><h2>ليش LEVEL UP؟</h2><p>تجربة شراء واضحة وسهلة</p></div></div><div class="benefits">
-<div class="benefit"><div>⚡</div><b>طلب سريع</b><p>اختار المنتج وأرسل تفاصيل طلبك مباشرة عبر واتساب.</p></div>
-<div class="benefit"><div>🛡️</div><b>تفاصيل واضحة</b><p>تأكد من المنطقة ونوع الحساب وطريقة التفعيل قبل إتمام الطلب.</p></div>
-<div class="benefit"><div>🤝</div><b>تواصل مباشر</b><p>بنرتب معك تفاصيل الطلب والدفع قبل التنفيذ.</p></div>
-</div></section>
-<section class="wrap" id="payments"><div class="section-head"><div><h2>طرق الدفع</h2><p>الدفع يتم تنسيقه بعد التواصل مع المتجر</p></div></div><div class="payments"><div class="pay">CliQ</div><div class="pay">Zain Cash</div><div class="pay">Orange Money</div></div></section>
-<section class="wrap"><div class="section-head"><div><h2>أسئلة بتهمك</h2><p>قبل ما تطلب</p></div></div>
-<details class="faq"><summary>كيف أطلب من المتجر؟</summary><p>ضيف المنتجات للسلة واضغط إرسال الطلب عبر واتساب، ورح توصلك رسالة فيها تفاصيل اختيارك.</p></details>
-<details class="faq"><summary>هل الأسعار المعروضة نهائية؟</summary><p>لا، المنتجات والأسعار الموجودة حالياً تجريبية لتجهيز شكل المتجر، ويتم اعتماد الأسعار الفعلية بعد تحديث الكتالوج.</p></details>
-<details class="faq"><summary>هل الدفع من خلال الموقع؟</summary><p>لا، الموقع لا يستقبل بطاقات بنكية. يتم تأكيد الطلب والدفع مباشرة مع المتجر عبر واتساب.</p></details>
+
+<section class="wrap" id="products">
+  <div class="section-head">
+    <h2>منتجات LEVEL UP</h2>
+    <p>اختار لعبتك أو اشتراكك المفضل</p>
+  </div>
+  <div class="toolbar">
+    <input id="search" class="search" placeholder="ابحث عن لعبة أو اشتراك..." oninput="render()">
+    <select id="category" class="filter" onchange="render()">
+      <option value="all">كل الأقسام</option>
+      <option value="games">ألعاب Xbox</option>
+      <option value="pass">Game Pass</option>
+      <option value="cards">بطاقات رقمية</option>
+      <option value="shared">حسابات مشتركة</option>
+    </select>
+    <select id="sort" class="filter" onchange="render()">
+      <option value="default">الترتيب الافتراضي</option>
+      <option value="low">السعر: الأقل أولاً</option>
+      <option value="high">السعر: الأعلى أولاً</option>
+    </select>
+  </div>
+  <div class="products" id="productGrid">
+    <p>جاري تحميل المنتجات...</p>
+  </div>
+  <div class="notice">يتم تأكيد السعر والتوفر ونوع الحساب وطريقة التفعيل قبل إتمام الطلب.</div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2>ليش LEVEL UP؟</h2>
+    <p>تجربة شراء واضحة وسهلة</p>
+  </div>
+  <div class="benefits">
+    <div class="benefit"><div>⚡</div><b>طلب سريع</b><p>اختار المنتج وأرسل تفاصيل طلبك مباشرة عبر واتساب.</p></div>
+    <div class="benefit"><div>🛡️</div><b>تفاصيل واضحة</b><p>تأكد من المنطقة ونوع الحساب وطريقة التفعيل قبل الطلب.</p></div>
+    <div class="benefit"><div>🤝</div><b>تواصل مباشر</b><p>بنرتب معك تفاصيل الطلب والدفع قبل التنفيذ.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="payments">
+  <div class="section-head">
+    <h2>طرق الدفع</h2>
+    <p>طرق الدفع المتوفرة لدى LEVEL UP</p>
+  </div>
+  <div class="payments">
+    <div class="pay">CliQ</div>
+    <div class="pay">Zain Cash</div>
+    <div class="pay">Orange Money</div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head"><h2>أسئلة بتهمك</h2><p>قبل ما تطلب</p></div>
+  <details class="faq">
+    <summary>كيف أطلب من المتجر؟</summary>
+    <p>ضيف المنتجات للسلة واضغط إرسال الطلب عبر واتساب.</p>
+  </details>
+  <details class="faq">
+    <summary>هل الأسعار نهائية؟</summary>
+    <p>يتم تأكيد السعر والتوفر قبل إتمام الطلب.</p>
+  </details>
+  <details class="faq">
+    <summary>هل الدفع من خلال الموقع؟</summary>
+    <p>يتم تنسيق الدفع مباشرة مع المتجر عبر واتساب.</p>
+  </details>
 </section>
 </main>
-<footer><div class="wrap foot"><div><b style="color:#fff;font-size:17px">LEVEL UP Gaming Store</b><p>العب أكثر، استمتع أكثر 🎮</p></div><div>الأردن · الطلب عبر واتساب<br><a href="https://wa.me/962790984231">0790984231</a></div><div>© LEVEL UP — جميع الحقوق محفوظة</div></div></footer>
+
+<footer>
+  <div class="wrap foot">
+    <div><b style="color:#fff;font-size:17px">LEVEL UP Gaming Store</b><p>العب أكثر، استمتع أكثر 🎮</p></div>
+    <div>الأردن · الطلب عبر واتساب<br><a href="https://wa.me/962790984231">0790984231</a></div>
+    <div>© LEVEL UP — جميع الحقوق محفوظة</div>
+  </div>
+</footer>
+
 <a class="btn float" href="https://wa.me/962790984231" target="_blank">واتساب 💬</a>
-<div class="cart-panel" id="cartPanel" onclick="if(event.target===this)closeCart()"><div class="cart"><div class="cart-head"><h2>سلة المشتريات</h2><button class="btn ghost" onclick="closeCart()">إغلاق ✕</button></div><div id="cartItems"></div><div class="cart-total" id="cartTotal"></div><button class="btn" style="width:100%" onclick="checkout()">إرسال الطلب عبر واتساب</button></div></div>
-<script>let products = [];
+
+<div class="cart-panel" id="cartPanel" onclick="if(event.target===this)closeCart()">
+  <div class="cart">
+    <div class="cart-head">
+      <h2>سلة المشتريات</h2>
+      <button class="btn ghost" onclick="closeCart()">إغلاق ✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal"></div>
+    <button class="btn" style="width:100%" onclick="checkout()">إرسال الطلب عبر واتساب</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+let products = [];
 let cart = [];
+
 const SUPABASE_URL = "https://miiuhfafabjwtiirirpk.supabase.co";
 const SUPABASE_KEY = "sb_publishable_bhRWwfsgSTnU0YB7xUWywA_6LiL5qPh";
-
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const catNames = {
@@ -128,11 +437,9 @@ const catNames = {
 
 function getCategory(p) {
   const value = String(p.product_type || p.category || "").toLowerCase();
-
   if (value.includes("pass") || value.includes("subscription") || value.includes("اشتراك")) return "pass";
   if (value.includes("card") || value.includes("gift") || value.includes("بطاقة")) return "cards";
   if (value.includes("shared") || value.includes("مشترك")) return "shared";
-
   return "games";
 }
 
@@ -148,7 +455,7 @@ async function loadProducts() {
 
   if (error) {
     console.error(error);
-    grid.innerHTML = "<p>تعذر تحميل المنتجات. تأكد من إعدادات قاعدة البيانات.</p>";
+    grid.innerHTML = "<p>تعذر تحميل المنتجات. حاول تحديث الصفحة.</p>";
     return;
   }
 
@@ -172,16 +479,16 @@ function render() {
     String(p.name || "").toLowerCase().includes(q)
   );
 
-  if (s === "low") list.sort((a, b) => Number(a.price) - Number(b.price));
-  if (s === "high") list.sort((a, b) => Number(b.price) - Number(a.price));
+  if (s === "low") list.sort((a,b) => Number(a.price)-Number(b.price));
+  if (s === "high") list.sort((a,b) => Number(b.price)-Number(a.price));
 
   document.getElementById("productGrid").innerHTML = list.map(p => `
     <article class="product">
       <div class="cover">
         <span class="tag">${catNames[p.cat]}</span>
         ${p.image_url
-          ? `<img src="${p.image_url}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover">`
-          : p.icon}
+          ? `<img src="${p.image_url}" alt="${p.name}">`
+          : `<span style="font-size:45px">${p.icon}</span>`}
       </div>
       <div class="prod-info">
         <small>${catNames[p.cat]}</small>
@@ -199,30 +506,27 @@ function render() {
 function setCategory(c) {
   document.getElementById("category").value = c;
   render();
-  document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+  document.getElementById("products").scrollIntoView({behavior:"smooth"});
 }
 
 function add(id) {
   const p = products.find(x => String(x.id) === String(id));
   if (!p) return;
-
   const old = cart.find(x => String(x.id) === String(id));
   if (old) old.qty++;
-  else cart.push({ ...p, qty: 1 });
-
+  else cart.push({...p,qty:1});
   updateCart();
   openCart();
 }
 
 function updateCart() {
   document.getElementById("cartCount").textContent =
-    cart.reduce((n, x) => n + x.qty, 0);
+    cart.reduce((n,x) => n+x.qty,0);
 
   document.getElementById("cartItems").innerHTML = cart.length
     ? cart.map(x => `
       <div class="cart-item">
-        <span>${x.name}<br>
-        <small style="color:#aaa">الكمية: ${x.qty}</small></span>
+        <span>${x.name}<br><small style="color:#aaa">الكمية: ${x.qty}</small></span>
         <button class="add" onclick="removeItem('${x.id}')">حذف</button>
       </div>
     `).join("")
@@ -240,7 +544,6 @@ function removeItem(id) {
 function openCart() {
   document.getElementById("cartPanel").classList.add("open");
 }
-
 function closeCart() {
   document.getElementById("cartPanel").classList.remove("open");
 }
@@ -251,10 +554,7 @@ function checkout() {
     return;
   }
 
-  const items = cart.map(x =>
-    `- ${x.name} × ${x.qty}`
-  ).join("\n");
-
+  const items = cart.map(x => `- ${x.name} × ${x.qty}`).join("\n");
   const msg = "مرحبا LEVEL UP، بدي أستفسر عن الطلب التالي:\n" +
     items +
     "\nيرجى تأكيد السعر والتوفر وطريقة التفعيل.";
@@ -268,4 +568,5 @@ function checkout() {
 loadProducts();
 updateCart();
 </script>
-</body></html>
+</body>
+</html>
