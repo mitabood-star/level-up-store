@@ -7,7 +7,161 @@
 <title>LEVEL UP Gaming Store</title>
 <meta name="description" content="LEVEL UP Gaming Store - ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية في الأردن.">
 
-<style>
+<style>/* LEVEL UP - PREMIUM XBOX NEON DESIGN */
+
+:root{
+  --bg:#030605;
+  --panel:#09110c;
+  --red:#ff202e;
+  --purple:#a900ff;
+  --green:#39ff14;
+  --text:#fff;
+  --muted:#b9c5bb;
+}
+
+body{
+  background:
+    radial-gradient(ellipse at 10% 15%,#07521c66,transparent 38%),
+    radial-gradient(ellipse at 90% 20%,#6c071b55,transparent 38%),
+    radial-gradient(ellipse at 50% 85%,#06351b44,transparent 50%),
+    #030605;
+}
+
+header{
+  background:#030605ed;
+  border-bottom:1px solid #39ff1466;
+  box-shadow:0 5px 25px #000;
+}
+
+.logo{
+  background:linear-gradient(135deg,#39ff14,#087b20);
+  box-shadow:0 0 25px #39ff1488;
+}
+
+.btn{
+  background:linear-gradient(110deg,#087d20,#39ff14);
+  color:#031006;
+  box-shadow:0 0 18px #39ff1455;
+}
+
+.btn.ghost{
+  background:#080d09;
+  color:white;
+  border:1px solid #39ff14;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  background:
+    radial-gradient(ellipse at 75% 50%,#0b9e3655,transparent 45%),
+    linear-gradient(110deg,#04180a,#050706 55%,#26070a);
+}
+
+.hero h1 span{
+  background:linear-gradient(90deg,#fff,#39ff14,#ff263c);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.kicker{
+  color:#39ff14;
+}
+
+.hero-art{
+  background:
+    radial-gradient(circle at 50% 50%,#159b3b77,transparent 50%),
+    linear-gradient(135deg,#071b0b,#080808 55%,#36070d);
+  border:2px solid #39ff1488;
+  box-shadow:0 0 40px #39ff1433;
+}
+
+.hero-art:before,
+.hero-art:after{
+  border-color:#39ff1466;
+}
+
+.hero-icon{
+  filter:drop-shadow(0 0 25px #39ff14);
+}
+
+.hero-label{
+  color:#39ff14;
+  text-shadow:0 0 20px #39ff14;
+}
+
+.cat{
+  border:2px solid #39ff1488;
+  box-shadow:0 0 15px #39ff1433;
+}
+
+.cat:nth-child(2){
+  border-color:#39ff14;
+}
+
+.cat:nth-child(3){
+  border-color:#ff263c;
+  box-shadow:0 0 18px #ff263c44;
+}
+
+.cat:nth-child(4){
+  border-color:#a900ff;
+  box-shadow:0 0 18px #a900ff44;
+}
+
+.cat-title small{
+  color:#39ff14;
+}
+
+.product{
+  background:linear-gradient(150deg,#101b13,#080b09);
+  border-color:#285b35;
+}
+
+.product:hover{
+  border-color:#39ff14;
+  box-shadow:0 0 22px #39ff1444;
+}
+
+.cover{
+  background:radial-gradient(circle,#174d27,#080d09 75%);
+}
+
+.tag{
+  background:linear-gradient(100deg,#087d20,#39ff14);
+  color:#031006;
+}
+
+.add{
+  background:#092111;
+  border-color:#39ff14;
+}
+
+.add:hover{
+  background:#126d25;
+}
+
+.search,.filter{
+  background:#080d09;
+  border-color:#315d3b;
+}
+
+.benefit,.pay{
+  background:#09110c;
+  border-color:#315d3b;
+}
+
+.notice{
+  border-color:#39ff1488;
+  color:#c9ffd0;
+}
+
+.float{
+  background:linear-gradient(100deg,#087d20,#39ff14);
+  color:#031006;
+}
 :root{
   --bg:#08080e;
   --panel:#13131e;
