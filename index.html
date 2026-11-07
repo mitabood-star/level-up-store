@@ -35,7 +35,7 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding:35px 0;color:#aa
 @media(max-width:850px){nav{display:none}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:260px}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.nav{height:66px}.brand b{font-size:16px}.actions .ghost{display:none}.hero{padding-top:38px}.hero-art{min-height:230px}.products{gap:10px}.cover{height:120px}.prod-info{padding:11px}.prod-info h3{font-size:13px}.benefits{grid-template-columns:1fr}.stats{gap:15px}.section-head h2{font-size:21px}}
 </style>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
 <body>
 <div class="top">🇯🇴 متجر ألعاب واشتراكات رقمية — الطلب والتأكيد عبر واتساب</div>
 <header><div class="wrap nav">
@@ -77,31 +77,160 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding:35px 0;color:#aa
 <footer><div class="wrap foot"><div><b style="color:#fff;font-size:17px">LEVEL UP Gaming Store</b><p>العب أكثر، استمتع أكثر 🎮</p></div><div>الأردن · الطلب عبر واتساب<br><a href="https://wa.me/962790984231">0790984231</a></div><div>© LEVEL UP — جميع الحقوق محفوظة</div></div></footer>
 <a class="btn float" href="https://wa.me/962790984231" target="_blank">واتساب 💬</a>
 <div class="cart-panel" id="cartPanel" onclick="if(event.target===this)closeCart()"><div class="cart"><div class="cart-head"><h2>سلة المشتريات</h2><button class="btn ghost" onclick="closeCart()">إغلاق ✕</button></div><div id="cartItems"></div><div class="cart-total" id="cartTotal"></div><button class="btn" style="width:100%" onclick="checkout()">إرسال الطلب عبر واتساب</button></div></div>
-<script>
-const products=[
-{id:1,name:"اشتراك Game Pass Ultimate",cat:"pass",price:0,icon:"⚡",desc:"مدة الاشتراك ونوع التفعيل يتم تأكيدهما قبل الطلب."},
-{id:2,name:"لعبة Xbox — إصدار رقمي",cat:"games",price:0,icon:"🎮",desc:"حدد اسم اللعبة والمنطقة المطلوبة عند التواصل."},
-{id:3,name:"بطاقة Xbox Gift Card",cat:"cards",price:0,icon:"🎁",desc:"اختر قيمة البطاقة والمنطقة المناسبة لحسابك."},
-{id:4,name:"لعبة بنظام حساب مشترك",cat:"shared",price:0,icon:"👥",desc:"تأكد من شروط الاستخدام وطريقة التفعيل قبل الشراء."},
-{id:5,name:"اشتراك Game Pass — حساب جديد",cat:"pass",price:0,icon:"🕹️",desc:"تفاصيل المدة والتوافق يتم تأكيدها عبر واتساب."},
-{id:6,name:"لعبة Xbox Series X|S",cat:"games",price:0,icon:"🔥",desc:"اسأل عن توفر اللعبة ونوع النسخة."},
-{id:7,name:"بطاقة رقمية",cat:"cards",price:0,icon:"💳",desc:"تتوفر القيم والمناطق حسب المخزون."},
-{id:8,name:"عرض ألعاب مشترك",cat:"shared",price:0,icon:"🏆",desc:"تواصل لمعرفة العروض الحالية والشروط."}
-];
-let cart=[];
-const catNames={games:"ألعاب Xbox",pass:"Game Pass",cards:"بطاقات رقمية",shared:"حسابات مشتركة"};
-function render(){
-let q=document.getElementById('search').value.trim().toLowerCase(),c=document.getElementById('category').value,s=document.getElementById('sort').value;
-let list=products.filter(p=>(c==='all'||p.cat===c)&&p.name.toLowerCase().includes(q));
-if(s==='low')list.sort((a,b)=>a.price-b.price);if(s==='high')list.sort((a,b)=>b.price-a.price);
-document.getElementById('productGrid').innerHTML=list.map(p=>`<article class="product"><div class="cover"><span class="tag">مثال تجريبي</span>${p.icon}</div><div class="prod-info"><small>${catNames[p.cat]}</small><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">السعر عند الاستفسار</span><button class="add" onclick="add(${p.id})">أضف للسلة +</button></div></div></article>`).join('')||'<p>ما لقينا منتجات مطابقة.</p>';
+<script>let products = [];
+let cart = [];
+const SUPABASE_URL = "https://miiuhfafabjwtiirirpk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_bhRWwfsgSTnU0YB7xUWywA_6LiL5qPh";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const catNames = {
+  games: "ألعاب Xbox",
+  pass: "Game Pass",
+  cards: "بطاقات رقمية",
+  shared: "حسابات مشتركة"
+};
+
+function getCategory(p) {
+  const value = String(p.product_type || p.category || "").toLowerCase();
+
+  if (value.includes("pass") || value.includes("subscription") || value.includes("اشتراك")) return "pass";
+  if (value.includes("card") || value.includes("gift") || value.includes("بطاقة")) return "cards";
+  if (value.includes("shared") || value.includes("مشترك")) return "shared";
+
+  return "games";
 }
-function setCategory(c){document.getElementById('category').value=c;render();document.getElementById('products').scrollIntoView({behavior:'smooth'});}
-function add(id){let p=products.find(x=>x.id===id),old=cart.find(x=>x.id===id);if(old)old.qty++;else cart.push({...p,qty:1});updateCart();openCart();}
-function updateCart(){document.getElementById('cartCount').textContent=cart.reduce((n,x)=>n+x.qty,0);document.getElementById('cartItems').innerHTML=cart.length?cart.map(x=>`<div class="cart-item"><span>${x.name}<br><small style="color:#aaa">الكمية: ${x.qty}</small></span><button class="add" onclick="removeItem(${x.id})">حذف</button></div>`).join(''):'<div class="empty">السلة فاضية حالياً 🎮</div>';document.getElementById('cartTotal').textContent=cart.length?'الأسعار تُؤكد عبر واتساب':'';}
-function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCart();}
-function openCart(){document.getElementById('cartPanel').classList.add('open');}function closeCart(){document.getElementById('cartPanel').classList.remove('open');}
-function checkout(){if(!cart.length){alert('السلة فارغة');return;}let msg='مرحبا LEVEL UP، بدي أستفسر عن الطلب التالي:%0A'+cart.map(x=>'- '+x.name+' × '+x.qty).join('%0A')+'%0Aيرجى تأكيد السعر والتوفر وطريقة التفعيل.';window.open('https://wa.me/962790984231?text='+msg,'_blank');}
-render();updateCart();
+
+async function loadProducts() {
+  const grid = document.getElementById("productGrid");
+  grid.innerHTML = "<p>جاري تحميل المنتجات...</p>";
+
+  const { data, error } = await db
+    .from("products")
+    .select("id,name,description,price,category,product_type,image_url,is_active,created_at")
+    .eq("is_active", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    grid.innerHTML = "<p>تعذر تحميل المنتجات. تأكد من إعدادات قاعدة البيانات.</p>";
+    return;
+  }
+
+  products = (data || []).map(p => ({
+    ...p,
+    cat: getCategory(p),
+    icon: "🎮",
+    desc: p.description || "تواصل معنا لمعرفة التفاصيل."
+  }));
+
+  render();
+}
+
+function render() {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const c = document.getElementById("category").value;
+  const s = document.getElementById("sort").value;
+
+  let list = products.filter(p =>
+    (c === "all" || p.cat === c) &&
+    String(p.name || "").toLowerCase().includes(q)
+  );
+
+  if (s === "low") list.sort((a, b) => Number(a.price) - Number(b.price));
+  if (s === "high") list.sort((a, b) => Number(b.price) - Number(a.price));
+
+  document.getElementById("productGrid").innerHTML = list.map(p => `
+    <article class="product">
+      <div class="cover">
+        <span class="tag">${catNames[p.cat]}</span>
+        ${p.image_url
+          ? `<img src="${p.image_url}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover">`
+          : p.icon}
+      </div>
+      <div class="prod-info">
+        <small>${catNames[p.cat]}</small>
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="price-row">
+          <span class="price">${Number(p.price || 0)} د.أ</span>
+          <button class="add" onclick="add('${p.id}')">أضف للسلة +</button>
+        </div>
+      </div>
+    </article>
+  `).join("") || "<p>ما في منتجات معروضة حالياً.</p>";
+}
+
+function setCategory(c) {
+  document.getElementById("category").value = c;
+  render();
+  document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+}
+
+function add(id) {
+  const p = products.find(x => String(x.id) === String(id));
+  if (!p) return;
+
+  const old = cart.find(x => String(x.id) === String(id));
+  if (old) old.qty++;
+  else cart.push({ ...p, qty: 1 });
+
+  updateCart();
+  openCart();
+}
+
+function updateCart() {
+  document.getElementById("cartCount").textContent =
+    cart.reduce((n, x) => n + x.qty, 0);
+
+  document.getElementById("cartItems").innerHTML = cart.length
+    ? cart.map(x => `
+      <div class="cart-item">
+        <span>${x.name}<br>
+        <small style="color:#aaa">الكمية: ${x.qty}</small></span>
+        <button class="add" onclick="removeItem('${x.id}')">حذف</button>
+      </div>
+    `).join("")
+    : '<div class="empty">السلة فاضية حالياً 🎮</div>';
+
+  document.getElementById("cartTotal").textContent =
+    cart.length ? "الأسعار تُؤكد عبر واتساب" : "";
+}
+
+function removeItem(id) {
+  cart = cart.filter(x => String(x.id) !== String(id));
+  updateCart();
+}
+
+function openCart() {
+  document.getElementById("cartPanel").classList.add("open");
+}
+
+function closeCart() {
+  document.getElementById("cartPanel").classList.remove("open");
+}
+
+function checkout() {
+  if (!cart.length) {
+    alert("السلة فارغة");
+    return;
+  }
+
+  const items = cart.map(x =>
+    `- ${x.name} × ${x.qty}`
+  ).join("\n");
+
+  const msg = "مرحبا LEVEL UP، بدي أستفسر عن الطلب التالي:\n" +
+    items +
+    "\nيرجى تأكيد السعر والتوفر وطريقة التفعيل.";
+
+  window.open(
+    "https://wa.me/962790984231?text=" + encodeURIComponent(msg),
+    "_blank"
+  );
+}
+
+loadProducts();
+updateCart();
 </script>
 </body></html>
