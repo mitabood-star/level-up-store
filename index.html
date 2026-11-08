@@ -164,8 +164,8 @@ font-weight:bold;
 
 .product {
   position: relative;
-  background: linear-gradient(145deg, #171d19, #0b0d0c);
-  border: 1px solid #303b32;
+  background: linear-gradient(145deg,#18120d,#090909 65%,#21170d);
+  border: 1px solid #66502b;
   border-radius: 13px;
   overflow: hidden;
   transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
@@ -188,11 +188,8 @@ font-weight:bold;
 .product:hover,
 .product:focus-within {
   transform: translateY(-5px);
-  border-color: #39ff72;
-  box-shadow:
-    0 0 8px #39ff7260,
-    0 0 22px #39ff7240,
-    0 0 40px #39ff721c;
+  border-color: #d8b56d;
+box-shadow:0 0 8px #d8b56d60,0 0 22px #d8b56d40,0 0 40px #d8b56d20;
 }
 
 .product:hover img,
@@ -209,16 +206,17 @@ font-weight:bold;
 }
 
 .buy {
-  background: linear-gradient(135deg, #168b3d, #24d65b);
+  background:linear-gradient(120deg,#c8102e,#ed1c24);
   color: white;
   transition: .25s;
 }
 
 .buy:hover {
-  background: #39ff72;
-  box-shadow: 0 0 15px #39ff7260;
+ background: #a80f20;
+ box-shadow: 0 0 18px #d8b56d80;
+ transform: translateY(-2px);
 }
-
+  
 @media(max-width:800px) {
   .products {
     grid-template-columns: repeat(2, minmax(0, 1fr));
