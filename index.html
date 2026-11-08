@@ -617,6 +617,50 @@ box-shadow:0 0 8px #d8b56d60,0 0 22px #d8b56d40,0 0 40px #d8b56d20;
     margin-top:12px !important;
   }
 }
+/* LEVEL UP 3D HERO */
+.hero{
+  position:relative !important;
+  padding:0 !important;
+  height:auto !important;
+  aspect-ratio:16/9 !important;
+  background:
+    #050805
+    url("Screenshot_20261108-212915.jpg")
+    center center / 100% 100% no-repeat !important;
+  border-bottom:1px solid #39ff72 !important;
+  box-shadow:0 8px 30px #39ff7220 !important;
+  margin-bottom:65px !important;
+}
+
+.hero h1,
+.hero p{
+  display:none !important;
+}
+
+.hero .wrap{
+  height:100% !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-end !important;
+}
+
+.hero-btn{
+  transform:translateY(58px);
+  background:linear-gradient(135deg,#087b32,#25d95d) !important;
+  color:#fff !important;
+  border:1px solid #39ff72 !important;
+  box-shadow:0 0 15px #39ff7260 !important;
+  padding:12px 30px !important;
+  border-radius:10px !important;
+  font-weight:bold !important;
+}
+
+@media(max-width:700px){
+  .hero{
+    aspect-ratio:16/9 !important;
+    margin-bottom:58px !important;
+  }
+}
 </style>
 </head>
 <body>
