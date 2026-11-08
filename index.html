@@ -502,6 +502,60 @@ box-shadow:0 0 8px #d8b56d60,0 0 22px #d8b56d40,0 0 40px #d8b56d20;
     font-size:12px !important;
   }
   }
+  /* LEVEL UP - Royal Mobile Design */
+@media(max-width:700px){
+  .products{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+
+  .product{
+    border:1px solid #b99a55 !important;
+    border-radius:10px !important;
+    background:linear-gradient(145deg,#191919,#080808) !important;
+    box-shadow:0 0 8px #d9b66d20 !important;
+  }
+
+  .product:hover,
+  .product:active,
+  .product:focus-within{
+    border-color:#d9b66d !important;
+    box-shadow:0 0 12px #d9b66d35 !important;
+    transform:none !important;
+  }
+
+  .product img{
+    height:95px !important;
+    max-height:95px !important;
+    object-fit:cover !important;
+  }
+
+  .product-body{
+    padding:7px !important;
+  }
+
+  .product h3{
+    font-size:12px !important;
+  }
+
+  .desc{
+    font-size:10px !important;
+    min-height:30px !important;
+  }
+
+  .price{
+    font-size:14px !important;
+  }
+
+  .buy{
+    background:linear-gradient(120deg,#a90d17,#ed1c2b) !important;
+    color:#fff !important;
+    border:1px solid #d9b66d !important;
+    box-shadow:none !important;
+    padding:8px 3px !important;
+    font-size:11px !important;
+  }
+}
 </style>
 </head>
 <body>
