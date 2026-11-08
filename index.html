@@ -230,7 +230,6 @@ function renderProducts(){
   card.append(img,body);
   grid.appendChild(card);
  });
-}
 function updateDiscountCountdowns(){
  const timers=document.querySelectorAll(".discount-countdown");
  let expired=false;
@@ -241,15 +240,18 @@ function updateDiscountCountdowns(){
   if(remaining<=0){
    expired=true;
    return;
-  const totalHours=Math.floor(remaining/3600000);
-const days=Math.floor(totalHours/24);
-const hours=totalHours%24;
+  }
 
-timer.textContent=days+" يوم و "+hours+" ساعة";
+  const totalHours=Math.floor(remaining/3600000);
+  const days=Math.floor(totalHours/24);
+  const hours=totalHours%24;
+
+  timer.textContent=days+" يوم و "+hours+" ساعة";
+ });
 
  if(expired)renderProducts();
 }
-async function loadProducts(){
+ async function loadProducts(){
  grid.innerHTML='<div class="empty-state">جاري تحميل المنتجات...</div>';
 
  const {data,error}=await db.from("products")
