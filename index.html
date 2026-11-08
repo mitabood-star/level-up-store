@@ -51,11 +51,17 @@ footer strong{color:var(--gold)}
 @media(max-width:800px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}}
 @media(max-width:520px){.products{grid-template-columns:1fr 1fr;gap:9px}.product img{height:145px}.product-body{padding:10px}.product h3{font-size:15px}.price{font-size:18px}.desc{font-size:12px}.features{gap:7px}.feature{font-size:11px;padding:12px 5px}.section-head h2{font-size:21px}}
  .discount-note{
+display:inline-flex!important;
+width:max-content;
+max-width:100%;
+align-items:center;
 background:#e31b23!important;
 color:#fff!important;
 border:1px solid #ff5961!important;
-border-radius:8px;
-padding:9px 11px;
+border-radius:7px;
+padding:6px 9px;
+margin:4px 0 8px;
+font-size:11px;
 font-weight:bold;
  }
 </style>
@@ -237,13 +243,11 @@ function updateDiscountCountdowns(){
    return;
   }
 
-  const total=Math.floor(remaining/1000);
-  const h=Math.floor(total/3600);
-  const m=Math.floor((total%3600)/60);
-  const s=total%60;
+  const totalHours=Math.floor(remaining/3600000);
+const days=Math.floor(totalHours/24);
+const hours=totalHours%24;
 
-  timer.textContent=[h,m,s].map(n=>String(n).padStart(2,"0")).join(":");
- });
+timer.textContent=days+" يوم و "+hours+" ساعة";
 
  if(expired)renderProducts();
 }
