@@ -18,7 +18,18 @@ header{padding:18px 0;border-bottom:1px solid #292929;background:#0d0d0d}
 .logo{font-size:25px;font-weight:900;letter-spacing:1px;color:var(--gold)}
 .logo span{color:var(--red)}
 .nav a{background:#202020;padding:10px 15px;border-radius:9px;font-size:14px}
-.hero{padding:55px 0 45px;text-align:center;background:radial-gradient(ellipse at center,#351010 0%,#130b0b 40%,#090909 75%)}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:85px 18px 75px;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 50% 20%,rgba(190,25,35,.35),transparent 55%),
+    radial-gradient(ellipse at 15% 80%,rgba(201,155,70,.12),transparent 45%),
+    linear-gradient(145deg,#170707 0%,#090909 55%,#160808 100%);
+  border-bottom:1px solid rgba(217,182,109,.25);
+  box-shadow:inset 0 -35px 65px rgba(0,0,0,.5);
+}
 .hero h1{font-size:clamp(32px,7vw,58px);margin:0 0 15px;font-weight:900}
 .hero h1 span{color:var(--gold)}
 .hero p{color:#ccc;line-height:1.9;max-width:650px;margin:0 auto 22px}
