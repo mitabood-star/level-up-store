@@ -426,6 +426,39 @@ box-shadow:0 0 8px #d8b56d60,0 0 22px #d8b56d40,0 0 40px #d8b56d20;
   font-size:12px !important;
   padding:8px !important;
 }
+/* LEVEL UP - Mobile Compact Cards */
+@media(max-width:700px){
+  .products{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+
+  .product{
+    min-width:0 !important;
+    border-radius:12px !important;
+  }
+
+  .product img{
+    height:105px !important;
+    max-height:105px !important;
+    aspect-ratio:16/9 !important;
+    object-fit:cover !important;
+    padding:0 !important;
+  }
+
+  .product-body{
+    padding:8px !important;
+  }
+
+  .product h3{
+    font-size:13px !important;
+  }
+
+  .buy{
+    width:100% !important;
+    min-height:34px !important;
+    font-size:12px !important;
+  }
 
 </style>
 </head>
