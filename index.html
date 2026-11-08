@@ -41,7 +41,7 @@ header{padding:18px 0;border-bottom:1px solid #292929;background:#0d0d0d}
 .price-row{display:flex;align-items:center;gap:9px;margin:12px 0}
 .price{font-size:23px;font-weight:900;color:var(--gold)}
 .old-price{font-size:14px;color:#888;text-decoration:line-through}
-.discount-note{color:#ff7777;font-size:12px;margin-bottom:10px}
+..discount-note{display:inline-flex;align-items:center;justify-content:center;gap:5px;background:linear-gradient(135deg,#9f1018,#e32630);color:#fff;font-size:12px;font-weight:800;padding:9px 11px;margin:2px 0 12px;border:1px solid #ff5961;border-radius:8px;box-shadow:0 4px 14px #e31b2328}.discount-countdown{font-variant-numeric:tabular-nums;letter-spacing:.5px;white-space:nowrap}
 .buy{display:block;text-align:center;background:var(--red);padding:12px;border-radius:8px;font-weight:bold;margin-top:auto}
 .buy:hover{background:#b90f16}
 .empty-state{grid-column:1/-1;text-align:center;padding:35px;color:#bbb;background:#151515;border-radius:12px}
@@ -208,7 +208,7 @@ function renderProducts(){
     <span class="price">${price.toFixed(2)} د.أ</span>
     ${discounted?`<span class="old-price">${Number(p.price).toFixed(2)} د.أ</span>`:""}
    </div>
-   ${discounted?'<div class="discount-note">🔥 عرض خاص لفترة محدودة</div>':""}
+   ${discounted?'<div class="discount-note">🔥 ينتهي العرض بعد <span class="discount-countdown" data-ends="'+new Date(p.discount_ends_at).getTime()+'">--:--:--</span></div>':""}
    <a class="buy" target="_blank" rel="noopener"
    href="https://wa.me/962790984231?text=${encodeURIComponent(message)}">اطلب الآن</a>
   `;
@@ -217,7 +217,28 @@ function renderProducts(){
   grid.appendChild(card);
  });
 }
+function updateDiscountCountdowns(){
+ const timers=document.querySelectorAll(".discount-countdown");
+ let expired=false;
 
+ timers.forEach(timer=>{
+  const remaining=Number(timer.dataset.ends)-Date.now();
+
+  if(remaining<=0){
+   expired=true;
+   return;
+  }
+
+  const total=Math.floor(remaining/1000);
+  const h=Math.floor(total/3600);
+  const m=Math.floor((total%3600)/60);
+  const s=total%60;
+
+  timer.textContent=[h,m,s].map(n=>String(n).padStart(2,"0")).join(":");
+ });
+
+ if(expired)renderProducts();
+}
 async function loadProducts(){
  grid.innerHTML='<div class="empty-state">جاري تحميل المنتجات...</div>';
 
@@ -241,6 +262,7 @@ category.addEventListener("change",renderProducts);
 sort.addEventListener("change",renderProducts);
 
 loadProducts();
+ setInterval(updateDiscountCountdowns,1000);
 </script>
 </body>
 </html>
