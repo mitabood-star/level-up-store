@@ -106,7 +106,32 @@ nav a:hover{color:var(--gold2)}
 .section-title{font-size:25px;margin:0}
 .section-sub{font-size:11px;color:var(--muted);margin-top:8px}
 .gold-line{height:2px;width:45px;background:var(--gold);margin-top:12px}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.categories{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:14px;
+}
+.category-card{
+ padding:0;
+ border:1px solid #19e66b;
+ border-radius:22px;
+ overflow:hidden;
+ background:#050b0b;
+ aspect-ratio:1/1;
+ cursor:pointer;
+ transition:.3s;
+}
+.category-card:hover{
+ transform:translateY(-4px);
+ box-shadow:0 0 20px #00e65c55;
+ border-color:#5cff9a;
+}
+.category-card img{
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+}
 .category-card{
  text-align:right;min-height:145px;padding:20px;
  border:1px solid var(--line);border-radius:16px;
@@ -231,7 +256,11 @@ footer{
  .hero h1{font-size:40px}
  .hero-stage{min-height:260px}
  .categories{grid-template-columns:repeat(2,1fr);gap:9px}
- .category-card{min-height:125px;padding:14px}
+ .category-card{
+ min-height:0;
+ padding:0;
+ aspect-ratio:1/1;
+ }
  .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
  .cover{height:130px}
  .prod-body{padding:10px}
@@ -298,38 +327,34 @@ footer{
   </div>
  </div>
 </section>
-
 <section class="wrap section" id="categories">
  <div class="section-head">
-  <h2 class="section-title">تسوّق حسب القسم</h2>
+  <h2 class="section-title">اختر القسم</h2>
   <p class="section-sub">اختار القسم المناسب إلك</p>
   <div class="gold-line"></div>
  </div>
+
  <div class="categories">
+
   <button class="category-card" data-category="games">
-   <span class="cat-icon">🎮</span>
-   <strong>ألعاب Xbox</strong>
-   <small>ألعابك المفضلة</small>
+   <img src="category-add-to-account.png" alt="إضافة على حسابك">
   </button>
-  <button class="category-card" data-category="pass">
-   <span class="cat-icon">⚡</span>
-   <strong>Game Pass</strong>
-   <small>اشتراكات وتجارب لعب</small>
-  </button>
-  <button class="category-card" data-category="cards">
-   <span class="cat-icon">🎁</span>
-   <strong>بطاقات رقمية</strong>
-   <small>رصيد وبطاقات رقمية</small>
-  </button>
+
   <button class="category-card" data-category="shared">
-   <span class="cat-icon">👥</span>
-   <strong>حسابات مشتركة</strong>
-   <small>خيارات اقتصادية</small>
+   <img src="category-shared-account.png" alt="حساب مشترك">
   </button>
+
+  <button class="category-card" data-category="pass">
+   <img src="category-game-pass.png" alt="Game Pass">
+  </button>
+
+  <button class="category-card" data-category="all">
+   <img src="category-all-products.png" alt="كل المنتجات">
+  </button>
+
  </div>
 </section>
-
-<section class="wrap section" id="products">
+<section class="wrap section" id="products" style="display:none">
  <div class="section-head">
   <h2 class="section-title">منتجات LEVEL UP</h2>
   <p class="section-sub">المنتجات المتوفرة حالياً بالمتجر</p>
@@ -708,6 +733,7 @@ document.getElementById("sort").addEventListener("change",renderProducts);
 
 document.querySelectorAll(".category-card").forEach(button=>{
  button.addEventListener("click",()=>{
+  document.getElementById("products").style.display = "block";
   const category = button.dataset.category;
   document.getElementById("categoryFilter").value = category;
 
