@@ -1058,6 +1058,46 @@ box-shadow:0 0 8px #d8b56d60,0 0 22px #d8b56d40,0 0 40px #d8b56d20;
     box-shadow:0 0 7px #39ff7240 !important;
   }
 }
+/* LEVEL UP - Compact Black & White Cards */
+@media(max-width:700px){
+  .products{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+  .product{
+    background:#111 !important;
+    border:1px solid #333 !important;
+    border-radius:16px !important;
+    box-shadow:none !important;
+    overflow:hidden !important;
+  }
+  .product img{
+    width:100% !important;
+    height:105px !important;
+    object-fit:cover !important;
+  }
+  .product-body{padding:8px !important}
+  .product h3{font-size:12px !important;line-height:1.4 !important}
+  .desc{font-size:10px !important;line-height:1.4 !important}
+  .category-tag{font-size:9px !important}
+  .price{font-size:13px !important;color:#fff !important}
+  .old-price{font-size:9px !important}
+  .discount-note{
+    font-size:8px !important;
+    padding:4px 6px !important;
+    border-radius:7px !important;
+  }
+  .discount-countdown{font-size:8px !important}
+  .buy{
+    min-height:32px !important;
+    padding:5px !important;
+    font-size:11px !important;
+    background:#222 !important;
+    color:#fff !important;
+    border:1px solid #555 !important;
+    box-shadow:none !important;
+  }
+}
 </style>
 </head>
 <body>
