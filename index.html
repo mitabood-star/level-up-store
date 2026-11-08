@@ -241,8 +241,6 @@ function updateDiscountCountdowns(){
   if(remaining<=0){
    expired=true;
    return;
-  }
-
   const totalHours=Math.floor(remaining/3600000);
 const days=Math.floor(totalHours/24);
 const hours=totalHours%24;
