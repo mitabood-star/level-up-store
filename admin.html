@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,10 +14,14 @@ h1{color:#ff3030}
 .card{background:#171717;border:1px solid #333;border-radius:14px;padding:18px;margin:15px 0}
 input,textarea,select,button{width:100%;padding:13px;margin:7px 0;border-radius:8px;border:1px solid #444;font-size:16px}
 input,textarea,select{background:#222;color:white}
-button{background:#d71920;color:white;font-weight:bold;border:0}
+button{background:#d71920;color:white;font-weight:bold;border:0;cursor:pointer}
 .secondary{background:#333}
-.product{border-bottom:1px solid #444;padding:12px 0}
+.product{border-bottom:1px solid #444;padding:16px 0}
 small{color:#bbb}
+.discount-box{background:#202020;border:1px solid #444;border-radius:10px;padding:12px;margin-top:12px}
+.discount-box h3{margin:5px 0 10px;color:#ff5555}
+.discount-box label{display:block;margin-top:8px;color:#ddd}
+.discount-status{color:#ffb347;font-size:13px}
 </style>
 </head>
 <body>
@@ -51,7 +56,7 @@ small{color:#bbb}
 </section>
 
 <section class="card">
-<h2>المنتجات الحالية</h2>
+<h2>المنتجات الحالية وإدارة الخصومات</h2>
 <div id="products">جاري التحميل...</div>
 </section>
 <button class="secondary" onclick="logout()">تسجيل خروج</button>
@@ -64,15 +69,23 @@ const SUPABASE_KEY="sb_publishable_bhRWwfsgSTnU0YB7xUWywA_6LiL5qPh";
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const OWNER_EMAIL="mitabood@gmail.com";
 
-function message(t){document.getElementById("status").textContent=t}
-function owner(user){return user && user.email && user.email.toLowerCase()===OWNER_EMAIL.toLowerCase()}
+function message(t){
+ document.getElementById("status").textContent=t;
+}
+function owner(user){
+ return user && user.email && user.email.toLowerCase()===OWNER_EMAIL.toLowerCase();
+}
 
 async function login(){
  const email=document.getElementById("email").value.trim();
  const password=document.getElementById("password").value;
  const {data,error}=await db.auth.signInWithPassword({email,password});
  if(error){message("تعذر الدخول: "+error.message);return}
- if(!owner(data.user)){await db.auth.signOut();message("هذا الحساب غير مخوّل لإدارة المتجر");return}
+ if(!owner(data.user)){
+  await db.auth.signOut();
+  message("هذا الحساب غير مخوّل لإدارة المتجر");
+  return;
+ }
  await showDashboard();
 }
 
@@ -89,12 +102,18 @@ async function showDashboard(){
  await loadProducts();
 }
 
-async function logout(){await db.auth.signOut();location.reload()}
+async function logout(){
+ await db.auth.signOut();
+ location.reload();
+}
 
 async function addProduct(){
  const name=document.getElementById("name").value.trim();
  const price=Number(document.getElementById("price").value);
- if(!name || !Number.isFinite(price) || price<0){message("أدخل اسم المنتج وسعراً صحيحاً");return}
+ if(!name || !Number.isFinite(price) || price<0){
+  message("أدخل اسم المنتج وسعراً صحيحاً");
+  return;
+ }
  const file=document.getElementById("photo").files[0];
  let image_url=null;
  if(file){
@@ -116,33 +135,174 @@ async function addProduct(){
  });
  if(error){message("خطأ إضافة المنتج: "+error.message);return}
  message("تمت إضافة المنتج بنجاح");
- ["name","description","price","category","photo"].forEach(id=>document.getElementById(id).value="");
+ ["name","description","price","category","photo"].forEach(id=>{
+  document.getElementById(id).value="";
+ });
  await loadProducts();
 }
 
+function toLocalDateTime(value){
+ if(!value)return "";
+ const d=new Date(value);
+ if(Number.isNaN(d.getTime()))return "";
+ const pad=n=>String(n).padStart(2,"0");
+ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+
+ "T"+pad(d.getHours())+":"+pad(d.getMinutes());
+}
+
 async function loadProducts(){
- const {data,error}=await db.from("products").select("*").order("created_at",{ascending:false});
- if(error){document.getElementById("products").textContent="خطأ تحميل المنتجات: "+error.message;return}
+ const {data,error}=await db.from("products")
+  .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  document.getElementById("products").textContent="خطأ تحميل المنتجات: "+error.message;
+  return;
+ }
+
  const box=document.getElementById("products");
  box.innerHTML="";
+
  (data||[]).forEach(p=>{
   const item=document.createElement("div");
   item.className="product";
+
   const title=document.createElement("strong");
   title.textContent=p.name+" — "+p.price+" د.أ";
+
   const info=document.createElement("small");
   info.textContent=" | "+(p.is_active?"ظاهر للزبائن":"مخفي");
+
   const toggle=document.createElement("button");
   toggle.className="secondary";
   toggle.textContent=p.is_active?"إخفاء المنتج":"إظهار المنتج";
   toggle.onclick=()=>toggleProduct(p.id,!p.is_active);
+
   const del=document.createElement("button");
   del.textContent="حذف المنتج";
   del.onclick=()=>deleteProduct(p.id);
-  item.append(title,info,toggle,del);
+
+  const discount=document.createElement("div");
+  discount.className="discount-box";
+
+  const heading=document.createElement("h3");
+  heading.textContent="إدارة الخصم";
+
+  const priceLabel=document.createElement("label");
+  priceLabel.textContent="سعر الخصم بالدينار";
+
+  const discountPrice=document.createElement("input");
+  discountPrice.type="number";
+  discountPrice.step="0.01";
+  discountPrice.min="0";
+  discountPrice.placeholder="مثال: 15";
+  discountPrice.value=p.discount_price??"";
+
+  const dateLabel=document.createElement("label");
+  dateLabel.textContent="تاريخ ووقت انتهاء الخصم";
+
+  const endDate=document.createElement("input");
+  endDate.type="datetime-local";
+  endDate.value=toLocalDateTime(p.discount_ends_at);
+
+  const activeLabel=document.createElement("label");
+  activeLabel.style.display="flex";
+  activeLabel.style.alignItems="center";
+  activeLabel.style.gap="8px";
+
+  const active=document.createElement("input");
+  active.type="checkbox";
+  active.style.width="auto";
+  active.checked=!!p.discount_active;
+
+  const activeText=document.createElement("span");
+  activeText.textContent="تفعيل الخصم";
+
+  activeLabel.append(active,activeText);
+
+  const save=document.createElement("button");
+  save.textContent="حفظ إعدادات الخصم";
+  save.onclick=()=>saveDiscount(
+   p.id,
+   Number(p.price),
+   discountPrice.value,
+   endDate.value,
+   active.checked
+  );
+
+  const discountStatus=document.createElement("div");
+  discountStatus.className="discount-status";
+
+  const isCurrent=!!p.discount_active &&
+   p.discount_price!==null &&
+   p.discount_ends_at &&
+   new Date(p.discount_ends_at).getTime()>Date.now();
+
+  discountStatus.textContent=isCurrent
+   ?"الخصم مفعّل حالياً: "+p.discount_price+" د.أ"
+   :(p.discount_active?"الخصم منتهي أو بياناته غير مكتملة":"لا يوجد خصم مفعّل");
+
+  discount.append(
+   heading,priceLabel,discountPrice,
+   dateLabel,endDate,activeLabel,save,discountStatus
+  );
+
+  item.append(title,info,toggle,del,discount);
   box.appendChild(item);
  });
+
  if(!data || !data.length)box.textContent="لا توجد منتجات حالياً";
+}
+
+async function saveDiscount(id,originalPrice,priceValue,endValue,isActive){
+ const discountPrice=priceValue.trim()===""?null:Number(priceValue);
+ let endsAt=null;
+
+ if(isActive){
+  if(discountPrice===null || !Number.isFinite(discountPrice) ||
+     discountPrice<=0 || discountPrice>=originalPrice){
+   message("سعر الخصم لازم يكون أقل من السعر الأصلي وأكبر من صفر");
+   return;
+  }
+
+  if(!endValue){
+   message("حدد تاريخ ووقت انتهاء الخصم");
+   return;
+  }
+
+  const endDate=new Date(endValue);
+  if(Number.isNaN(endDate.getTime()) || endDate.getTime()<=Date.now()){
+   message("تاريخ انتهاء الخصم لازم يكون بالمستقبل");
+   return;
+  }
+
+  endsAt=endDate.toISOString();
+ }else{
+  if(discountPrice!==null &&
+     (!Number.isFinite(discountPrice) || discountPrice<=0 ||
+      discountPrice>=originalPrice)){
+   message("سعر الخصم لازم يكون أقل من السعر الأصلي وأكبر من صفر");
+   return;
+  }
+
+  if(endValue){
+   const endDate=new Date(endValue);
+   if(!Number.isNaN(endDate.getTime()))endsAt=endDate.toISOString();
+  }
+ }
+
+ const {error}=await db.from("products").update({
+  discount_price:discountPrice,
+  discount_ends_at:endsAt,
+  discount_active:isActive
+ }).eq("id",id);
+
+ if(error){
+  message("خطأ حفظ الخصم: "+error.message);
+  return;
+ }
+
+ message(isActive?"تم حفظ وتفعيل الخصم بنجاح":"تم حفظ إعدادات الخصم وإيقافه");
+ await loadProducts();
 }
 
 async function toggleProduct(id,active){
