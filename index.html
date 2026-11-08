@@ -1119,6 +1119,21 @@ header{
 .section-head h2 span{
   color:#39e875 !important;
 }
+/* LEVEL UP - Product Section Titles */
+.product-group-title{
+  grid-column:1 / -1 !important;
+  width:100%;
+  margin:22px 0 8px;
+  padding:12px 15px;
+  color:#39e875;
+  background:linear-gradient(90deg,#102719,#080d09);
+  border:1px solid #176b36;
+  border-right:4px solid #39e875;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:900;
+  text-align:right;
+}
 </style>
 </head>
 <body>
@@ -1213,7 +1228,17 @@ function getCategory(p){
  if(t==="subscription"||c.includes("pass"))return "pass";
  if(t==="gift_card"||c.includes("card")||c.includes("بطاق"))return "cards";
  if(t==="shared_account"||c.includes("shared")||c.includes("مشترك"))return "shared";
- return "games";
+ if(t==="personal_account")return "games";
+ return "other";
+}
+
+function getCategoryName(p){
+ const t=(p.product_type||"").toLowerCase();
+ if(t==="personal_account")return "تفعيل مباشر";
+ if(t==="shared_account")return "حساب مشترك";
+ if(t==="subscription")return "Game Pass";
+ if(t==="gift_card")return "بطاقة رقمية";
+ return "أخرى";
 }
 
 function activeDiscount(p){
@@ -1258,13 +1283,37 @@ function renderProducts(){
   return;
  }
 
- list.forEach(p=>{
+ const categoryOrder=["games","pass","shared","cards","other"];
+
+list.sort((a,b)=>
+ categoryOrder.indexOf(getCategory(a))-categoryOrder.indexOf(getCategory(b))
+);
+
+let lastCategory="";
+
+list.forEach(p=>{
+ const currentCategory=getCategory(p);
+
+ if(currentCategory!==lastCategory){
+  const heading=document.createElement("div");
+  heading.className="product-group-title";
+  heading.textContent={
+   games:"🎮 ألعاب Xbox",
+   pass:"🟢 Game Pass",
+   shared:"👥 حساب مشترك",
+   cards:"🎁 بطاقات رقمية",
+   other:"📦 منتجات أخرى"
+  }[currentCategory];
+
+  grid.appendChild(heading);
+  lastCategory=currentCategory;
+ }
   const discounted=activeDiscount(p);
   const price=discounted?Number(p.discount_price):Number(p.price);
   const image=p.image_url||"";
   const title=safeText(p.name);
   const desc=safeText(p.description||"");
-  const catName=safeText(p.category||"ألعاب Xbox");
+  const catName=safeText(getCategoryName(p));
 
   const message="مرحبا LEVEL UP، بدي أطلب: "+(p.name||"منتج")+
   " - السعر: "+price+" دينار";
