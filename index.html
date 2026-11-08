@@ -4,261 +4,243 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090909">
-<title>LEVEL UP Gaming Store | العب أكثر، استمتع أكثر</title>
+<title>LEVEL UP Gaming Store</title>
 <meta name="description" content="LEVEL UP Gaming Store - ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية في الأردن.">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{
-  --bg:#080808;--surface:#111;--surface2:#181818;--surface3:#202020;
-  --red:#d7192d;--red2:#ff3348;--gold:#d8b56d;--gold2:#f5d99a;
-  --muted:#a6a6a6;--line:#302a25;--green:#a4e86b;
-  --shadow:0 22px 70px #0009;
-}
+:root{--red:#e31b23;--gold:#d9b66d;--bg:#090909;--card:#171717}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{
-  margin:0;color:#f8f5ef;background:
-  radial-gradient(ellipse at 85% 0%,#4b1018 0,transparent 28%),
-  radial-gradient(ellipse at 0% 35%,#21170e 0,transparent 24%),var(--bg);
-  font-family:Tahoma,Arial,sans-serif;
-}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;z-index:-1;
-  background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-  background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 78%)}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
 a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
-.topline{background:#0c0b0a;border-bottom:1px solid #3b2b1c;color:#d9c7a5;text-align:center;padding:9px 12px;font-size:11px;letter-spacing:.2px}
-header{position:sticky;top:0;z-index:30;background:#090909eF;backdrop-filter:blur(18px);border-bottom:1px solid #30261d}
-.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:11px;min-width:max-content}
-.brand-mark{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
-  color:#17100a;font-weight:1000;font-size:23px;background:linear-gradient(145deg,#f4d99b,#a97932);
-  box-shadow:0 0 26px #d8b56d35, inset 0 1px 0 #fff9}
-.brand-name{font-weight:1000;font-size:20px;letter-spacing:1px}
-.brand-name span{color:var(--gold)}
-.brand-sub{display:block;color:#9d8b6e;font-size:9px;letter-spacing:3px;margin-top:4px}
-nav{display:flex;align-items:center;gap:24px;color:#c9c1b5;font-size:12px}
-nav a{transition:.2s}nav a:hover{color:var(--gold2)}
-.nav-actions{display:flex;align-items:center;gap:9px}
-.btn{border:1px solid transparent;border-radius:10px;padding:12px 17px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:12px;transition:.2s}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
-.btn-primary{background:linear-gradient(110deg,#f0d18b,#b8873c);color:#17100a;box-shadow:0 8px 24px #d8b56d26}
-.btn-dark{background:#171514;border-color:#44372b;color:#f4e7cf}
-.btn-red{background:linear-gradient(120deg,#ed3347,#9d1020);color:#fff;box-shadow:0 8px 25px #d7192d35}
-.cart-count{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:50%;background:var(--gold);color:#17100a;font-size:10px;padding:0 5px}
-.hero{padding:64px 0 48px}
-.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center}
-.eyebrow{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:10px;font-weight:900;letter-spacing:2.4px}
-.eyebrow:before{content:"";width:30px;height:1px;background:var(--gold)}
-.hero h1{font-size:clamp(38px,5.5vw,66px);line-height:1.2;margin:18px 0 14px;font-weight:1000;letter-spacing:-1.5px}
-.hero h1 em{font-style:normal;color:var(--gold2);text-shadow:0 0 35px #d8b56d35}
-.hero-copy{color:#bdb5aa;font-size:14px;line-height:2;max-width:540px}
-.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
-.hero-meta{display:flex;gap:23px;flex-wrap:wrap;margin-top:31px;color:#b9ad9c;font-size:11px}
-.hero-meta b{display:block;color:#f4e4c5;font-size:16px;margin-bottom:5px}
-.hero-stage{min-height:390px;position:relative;display:grid;place-items:center;isolation:isolate}
-.stage-frame{position:absolute;inset:10px 0;border:1px solid #604a2b;border-radius:28px;
-  background:radial-gradient(ellipse at 50% 45%,#4b2020 0,#201313 42%,#0d0c0b 76%);
-  box-shadow:inset 0 0 80px #000a,var(--shadow);overflow:hidden}
-.stage-frame:before{content:"";position:absolute;inset:18px;border:1px solid #d8b56d26;border-radius:20px}
-.stage-frame:after{content:"";position:absolute;width:420px;height:420px;border:1px solid #d8b56d40;border-radius:50%;left:50%;top:46%;transform:translate(-50%,-50%) rotateX(68deg);box-shadow:0 0 0 32px #d8b56d09,0 0 0 66px #d8b56d06}
-.stage-glow{position:absolute;width:240px;height:240px;border-radius:50%;background:#c51b2c55;filter:blur(65px)}
-.controller{position:relative;z-index:2;width:min(82%,390px);filter:drop-shadow(0 25px 24px #000b);transform:rotate(-8deg)}
-.stage-caption{position:absolute;z-index:3;bottom:33px;text-align:center}
-.stage-caption strong{display:block;color:var(--gold2);font-size:22px;letter-spacing:5px}
-.stage-caption small{color:#a99a82;letter-spacing:3px;font-size:9px}
-.stage-chip{position:absolute;z-index:4;top:40px;right:27px;padding:9px 13px;border:1px solid #8b6938;background:#100e0bd9;color:#e8ce9a;border-radius:30px;font-size:10px}
-.stage-chip.left{top:auto;right:auto;left:25px;bottom:75px}
-.section{padding:38px 0}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:22px}
-.section-title{margin:0;font-size:25px;font-weight:900}
-.section-sub{margin:7px 0 0;color:var(--muted);font-size:11px}
-.gold-line{width:43px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:12px}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.category-card{position:relative;overflow:hidden;text-align:right;min-height:155px;padding:21px;border-radius:17px;
-  border:1px solid #3a3025;background:linear-gradient(145deg,#201b16,#100f0e 75%);
-  color:#fff;transition:.22s;cursor:pointer}
-.category-card:before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;left:-30px;bottom:-65px;background:#d8b56d12;filter:blur(2px)}
-.category-card:hover,.category-card.active{transform:translateY(-4px);border-color:#b38a4a;box-shadow:0 12px 32px #0007}
-.category-card.active{background:linear-gradient(145deg,#302218,#17110f)}
-.cat-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#d8b56d16;border:1px solid #d8b56d4a;color:var(--gold2);font-size:21px}
-.category-card strong{display:block;margin-top:15px;font-size:14px}
-.category-card small{display:block;color:#a99e90;font-size:10px;margin-top:6px}
-.category-card .cat-arrow{position:absolute;left:18px;top:21px;color:#9b8052;font-size:17px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
-.search,.filter{background:#131210;border:1px solid #3a3127;border-radius:10px;color:#f5eee4;padding:13px 14px;outline:none}
-.search{flex:1;min-width:200px}.search:focus,.filter:focus{border-color:#a9844a}
-.filter{min-width:145px}
-.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
-.product{display:flex;flex-direction:column;overflow:hidden;min-width:0;border:1px solid #342b22;border-radius:17px;
-  background:linear-gradient(160deg,#1b1916,#0f0e0d 70%);transition:.22s;position:relative}
-.product:hover{transform:translateY(-5px);border-color:#80633a;box-shadow:0 15px 35px #0008}
-.cover{height:168px;position:relative;display:grid;place-items:center;overflow:hidden;background:
-  radial-gradient(ellipse at 50% 35%,#65302a 0,#291716 45%,#12100e 80%)}
-.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0e0d0c 0,transparent 55%)}
-.cover img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
-.cover-fallback{font-size:48px;color:#d8b56d;filter:drop-shadow(0 8px 14px #000)}
-.product-tag{position:absolute;z-index:3;top:11px;right:11px;border:1px solid #d8b56d77;background:#100e0bdc;color:#f0d69f;border-radius:20px;padding:6px 9px;font-size:9px}
-.prod-body{padding:14px;display:flex;flex-direction:column;flex:1}
-.prod-category{color:#c6a56b;font-size:9px;letter-spacing:.3px}
-.prod-body h3{font-size:14px;line-height:1.6;margin:8px 0}
-.prod-desc{color:#a9a198;font-size:10px;line-height:1.7;min-height:34px;margin:0 0 13px}
-.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}
-.price{font-weight:900;color:#f6e8cc;font-size:15px;white-space:nowrap}
-.add-btn{border:1px solid #8a6838;background:linear-gradient(110deg,#d8b56d,#a77b3b);color:#17100a;border-radius:8px;padding:9px 10px;font-size:10px;font-weight:900}
-.discount-box{border:1px solid #7b452d;background:#24140f;border-radius:9px;padding:9px;margin:0 0 11px}
-.discount-label{display:inline-block;background:#9f1c2a;color:#fff;border-radius:5px;padding:4px 7px;font-size:9px;margin-bottom:5px}
-.old-price{font-size:10px;color:#9b9287;text-decoration:line-through}
-.new-price{display:block;color:var(--green);font-weight:1000;font-size:18px;margin-top:2px}
-.discount-timer{font-size:9px;color:#e6c17e;margin-top:6px;line-height:1.5}
-.empty-state{grid-column:1/-1;padding:45px 15px;text-align:center;border:1px dashed #4a3b2b;border-radius:15px;color:#b8aa97;background:#13110f}
-.trust-strip{margin-top:20px;padding:13px 16px;border:1px solid #5d482c;background:linear-gradient(100deg,#1d1710,#15110e);border-radius:11px;color:#d9c18f;font-size:10px;line-height:1.8}
-.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.benefit{border:1px solid #352d24;border-radius:15px;padding:20px;background:linear-gradient(145deg,#1b1814,#100f0e)}
-.benefit-icon{width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:#d8b56d17;color:var(--gold2);font-size:18px}
-.benefit strong{display:block;margin:12px 0 7px;font-size:13px}
-.benefit p{margin:0;color:#aaa196;font-size:10px;line-height:1.9}
-.payments{display:flex;gap:11px;flex-wrap:wrap}
-.pay{min-width:145px;padding:15px 18px;text-align:center;border:1px solid #423629;border-radius:12px;background:linear-gradient(145deg,#1b1814,#100f0e);color:#f0d7a4;font-size:12px;font-weight:900}
-.faq-list{border-top:1px solid #3a3026}
-.faq{border-bottom:1px solid #3a3026;padding:16px 2px;color:#eee}
-.faq summary{cursor:pointer;font-size:12px;font-weight:bold}
-.faq p{color:#aaa196;font-size:11px;line-height:1.9;margin:12px 0 0}
-footer{margin-top:38px;padding:35px 0;border-top:1px solid #392e22;background:#0b0a09;color:#a79c8c;font-size:10px}
-.footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer-brand{color:#f2dfb8;font-size:17px;font-weight:1000}
-.footer-brand span{color:var(--gold)}
-.footer-note{line-height:1.9}
-.float-wa{position:fixed;bottom:18px;left:18px;z-index:15;border-radius:30px;box-shadow:0 10px 30px #0009}
-.cart-overlay{position:fixed;inset:0;z-index:60;background:#000b;display:none;justify-content:flex-start}
-.cart-overlay.open{display:flex}
-.cart-panel{width:min(430px,100%);height:100%;overflow:auto;background:#100f0d;border-right:1px solid #4b3a25;padding:22px;box-shadow:var(--shadow)}
-.cart-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #3b3024;padding-bottom:15px}
-.cart-head h2{font-size:19px;margin:0;color:#f2dfb8}
-.cart-items{padding:8px 0}
-.cart-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #302820;font-size:11px}
-.cart-item strong{display:block;color:#f1d59b;margin-top:6px}
-.qty-controls{display:flex;align-items:center;gap:7px;margin-top:7px}
-.qty-controls button,.remove-btn{border:1px solid #51412d;background:#211b14;color:#f3dcae;border-radius:6px;padding:5px 8px;font-size:10px}
-.remove-btn{color:#ff9aa3;border-color:#69313a}
-.cart-total{font-size:16px;font-weight:900;color:#f3dcae;padding:18px 0}
-.cart-hint{font-size:10px;color:#a9a094;line-height:1.8;margin-bottom:14px}
-.close-btn{border:1px solid #51412d;background:#211b14;color:#eee;border-radius:8px;padding:8px 11px}
-.empty-cart{text-align:center;color:#a99f91;padding:45px 10px;font-size:12px}
-@media(max-width:900px){
- nav{gap:13px}.hero-grid{gap:20px}.products{grid-template-columns:repeat(3,minmax(0,1fr))}
- .hero-stage{min-height:340px}
-}
-@media(max-width:700px){
- .wrap{width:min(100% - 26px,560px)}
- .nav{height:68px}.brand-mark{width:40px;height:40px}.brand-name{font-size:17px}
- nav{display:none}.nav-actions .btn-dark{display:none}
- .hero{padding:39px 0 27px}.hero-grid{grid-template-columns:1fr}
- .hero h1{font-size:42px}.hero-copy{font-size:12px}
- .hero-stage{min-height:290px}.stage-frame{inset:4px 0}
- .controller{width:min(78%,330px)}.stage-caption{bottom:25px}
- .section{padding:28px 0}.section-title{font-size:21px}
- .categories{grid-template-columns:repeat(2,1fr);gap:10px}
- .category-card{min-height:138px;padding:15px}.cat-icon{width:37px;height:37px}
- .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- .cover{height:125px}.prod-body{padding:11px}.prod-body h3{font-size:12px}
- .prod-desc{font-size:9px}.price{font-size:13px}.add-btn{padding:8px;font-size:9px}
- .benefits{grid-template-columns:1fr}.pay{flex:1;min-width:calc(50% - 8px)}
- .hero-meta{gap:15px}.hero-meta b{font-size:14px}
-}
-@media(max-width:370px){.hero h1{font-size:35px}.products{gap:8px}.price-row{align-items:flex-start;flex-direction:column}.add-btn{width:100%}}
+.wrap{width:min(1150px,92%);margin:auto}
+header{padding:18px 0;border-bottom:1px solid #292929;background:#0d0d0d}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:25px;font-weight:900;letter-spacing:1px;color:var(--gold)}
+.logo span{color:var(--red)}
+.nav a{background:#202020;padding:10px 15px;border-radius:9px;font-size:14px}
+.hero{padding:55px 0 45px;text-align:center;background:radial-gradient(ellipse at center,#351010 0%,#130b0b 40%,#090909 75%)}
+.hero h1{font-size:clamp(32px,7vw,58px);margin:0 0 15px;font-weight:900}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#ccc;line-height:1.9;max-width:650px;margin:0 auto 22px}
+.hero-btn{display:inline-block;background:var(--red);padding:13px 28px;border-radius:9px;font-weight:bold}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px auto}
+.feature{background:#151515;border:1px solid #292929;padding:16px;border-radius:12px;text-align:center;color:#ddd;font-size:14px}
+.section{padding:25px 0 45px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.section-head h2{margin:0;font-size:25px}
+.section-head h2 span{color:var(--gold)}
+.toolbar{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:18px 0}
+.search,.filter{width:100%;background:#171717;border:1px solid #333;color:white;padding:13px;border-radius:9px;font-size:15px}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.product{background:linear-gradient(145deg,#1b1b1b,#101010);border:1px solid #303030;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.product img{width:100%;height:205px;object-fit:cover;background:#222}
+.product-body{padding:15px;display:flex;flex-direction:column;flex:1}
+.product h3{font-size:19px;margin:0 0 9px}
+.desc{color:#aaa;font-size:13px;line-height:1.7;min-height:40px}
+.category-tag{display:inline-block;background:#30221a;color:var(--gold);padding:5px 9px;border-radius:6px;font-size:11px;margin:8px 0;width:max-content}
+.price-row{display:flex;align-items:center;gap:9px;margin:12px 0}
+.price{font-size:23px;font-weight:900;color:var(--gold)}
+.old-price{font-size:14px;color:#888;text-decoration:line-through}
+.discount-note{color:#ff7777;font-size:12px;margin-bottom:10px}
+.buy{display:block;text-align:center;background:var(--red);padding:12px;border-radius:8px;font-weight:bold;margin-top:auto}
+.buy:hover{background:#b90f16}
+.empty-state{grid-column:1/-1;text-align:center;padding:35px;color:#bbb;background:#151515;border-radius:12px}
+.trust-strip{margin-top:22px;padding:17px;background:#171717;border:1px solid #333;border-radius:12px;text-align:center;color:#ccc;line-height:1.8}
+footer{border-top:1px solid #292929;padding:25px 0;text-align:center;color:#888;font-size:13px}
+footer strong{color:var(--gold)}
+@media(max-width:800px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}}
+@media(max-width:520px){.products{grid-template-columns:1fr 1fr;gap:9px}.product img{height:145px}.product-body{padding:10px}.product h3{font-size:15px}.price{font-size:18px}.desc{font-size:12px}.features{gap:7px}.feature{font-size:11px;padding:12px 5px}.section-head h2{font-size:21px}}
 </style>
 </head>
 <body>
-<div class="topline">🇯🇴 LEVEL UP GAMING STORE — ألعاب واشتراكات رقمية في الأردن</div>
+
 <header>
-  <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="LEVEL UP">
-      <span class="brand-mark">LU</span>
-      <span><span class="brand-name">LEVEL <span>UP</span></span><small class="brand-sub">GAMING STORE</small></span>
-    </a>
-    <nav>
-      <a href="#home">الرئيسية</a><a href="#categories">الأقسام</a><a href="#products">المنتجات</a><a href="#payments">طرق الدفع</a>
-    </nav>
-    <div class="nav-actions">
-      <button class="btn btn-dark" type="button" onclick="openCart()">🛒 السلة <span class="cart-count" id="cartCount">0</span></button>
-      <a class="btn btn-primary" href="https://wa.me/962790984231" target="_blank" rel="noopener">اطلب الآن</a>
-    </div>
-  </div>
+ <div class="wrap nav">
+  <div class="logo">LEVEL <span>UP</span></div>
+  <a href="#products">تصفح المنتجات 🎮</a>
+ </div>
 </header>
 
-<main>
-  <section class="wrap hero" id="home">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow">THE NEXT LEVEL OF GAMING</div>
-        <h1>اللعب إله مستوى…<br><em>ارفع مستواك!</em></h1>
-        <p class="hero-copy">كل اللي بتدور عليه لعالم Xbox بمكان واحد. ألعاب، اشتراكات Game Pass وبطاقات رقمية — اختار منتجك، ضيفه للسلة، وكمّل طلبك بسهولة مع LEVEL UP.</p>
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#products">تسوّق المنتجات <span>←</span></a>
-          <a class="btn btn-dark" href="https://wa.me/962790984231" target="_blank" rel="noopener">تواصل معنا</a>
-        </div>
-        <div class="hero-meta">
-          <div><b>🎮 ألعاب</b>عالمك بين إيديك</div>
-          <div><b>⚡ تفعيل سريع</b>طلب مباشر وسهل</div>
-          <div><b>🇯🇴 الأردن</b>خدمة محلية</div>
-        </div>
-      </div>
-      <div class="hero-stage" aria-label="LEVEL UP gaming">
-        <div class="stage-frame"></div><div class="stage-glow"></div>
-        <span class="stage-chip">PREMIUM GAMING</span>
-        <span class="stage-chip left">LEVEL UP YOUR GAME</span>
-        <svg class="controller" viewBox="0 0 520 330" role="img" aria-label="رسم يد تحكم ألعاب">
-          <defs>
-            <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#51453a"/><stop offset=".48" stop-color="#171513"/><stop offset="1" stop-color="#080808"/></linearGradient>
-            <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6dda1"/><stop offset="1" stop-color="#a87934"/></linearGradient>
-            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          <path d="M147 84 Q112 78 91 122 L35 238 Q16 282 53 296 Q88 310 119 275 L165 226 Q260 254 355 226 L401 275 Q432 310 467 296 Q504 282 485 238 L429 122 Q408 78 373 84 Q260 110 147 84Z" fill="url(#bodyGrad)" stroke="#b58b4d" stroke-width="5"/>
-          <path d="M153 99 Q260 124 367 99" fill="none" stroke="#6f5735" stroke-width="3"/>
-          <path d="M115 157h75v22h-26v26h-23v-26h-26z" fill="#d8b56d"/>
-          <circle cx="345" cy="151" r="15" fill="#d7192d" stroke="#f4dca5" stroke-width="3"/>
-          <circle cx="383" cy="181" r="15" fill="#d8b56d" stroke="#f4dca5" stroke-width="3"/>
-          <circle cx="307" cy="185" r="15" fill="#b68b4b" stroke="#f4dca5" stroke-width="3"/>
-          <circle cx="345" cy="215" r="15" fill="#d7192d" stroke="#f4dca5" stroke-width="3"/>
-          <ellipse cx="206" cy="202" rx="37" ry="31" fill="#080808" stroke="#8c6a3a" stroke-width="4"/>
-          <ellipse cx="206" cy="202" rx="18" ry="15" fill="#29231b" stroke="#d8b56d" stroke-width="3"/>
-          <ellipse cx="278" cy="202" rx="37" ry="31" fill="#080808" stroke="#8c6a3a" stroke-width="4"/>
-          <ellipse cx="278" cy="202" rx="18" ry="15" fill="#29231b" stroke="#d8b56d" stroke-width="3"/>
-          <rect x="236" y="137" width="48" height="27" rx="9" fill="#090909" stroke="#80633a" stroke-width="3"/>
-          <circle cx="260" cy="150" r="5" fill="#d7192d" filter="url(#glow)"/>
-          <path d="M95 111 Q260 44 425 111" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity=".8"/>
-        </svg>
-        <div class="stage-caption"><strong>LEVEL UP</strong><small>PLAY • WIN • REPEAT</small></div>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+ <div class="wrap">
+  <h1>LEVEL <span>UP</span></h1>
+  <p>متجرك للألعاب والاشتراكات الرقمية بالأردن. ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية، بأسعار منافسة وخدمة موثوقة.</p>
+  <a class="hero-btn" href="#products">تسوق الآن</a>
+ </div>
+</section>
 
-  <section class="wrap section" id="categories">
-    <div class="section-head"><div><h2 class="section-title">تسوّق حسب القسم</h2><p class="section-sub">كل اللي بدك إياه… صار أقرب</p><div class="gold-line"></div></div></div>
-    <div class="categories">
-      <button class="category-card" type="button" data-category="games"><span class="cat-arrow">↖</span><span class="cat-icon">🎮</span><strong>ألعاب Xbox</strong><small>ألعابك المفضلة بمكان واحد</small></button>
-      <button class="category-card" type="button" data-category="pass"><span class="cat-arrow">↖</span><span class="cat-icon">⚡</span><strong>Game Pass</strong><small>اشتراكات وتجارب لعب</small></button>
-      <button class="category-card" type="button" data-category="cards"><span class="cat-arrow">↖</span><span class="cat-icon">🎁</span><strong>بطاقات رقمية</strong><small>رصيد وبطاقات رقمية</small></button>
-      <button class="category-card" type="button" data-category="shared"><span class="cat-arrow">↖</span><span class="cat-icon">👥</span><strong>حسابات مشتركة</strong><small>خيارات اقتصادية للألعاب</small></button>
-    </div>
-  </section>
+<div class="wrap features">
+ <div class="feature">⚡ تفعيل سريع</div>
+ <div class="feature">🛡️ ضمان وخدمة</div>
+ <div class="feature">🇯🇴 خدمة داخل الأردن</div>
+</div>
 
-  <section class="wrap section" id="products">
-    <div class="section-head"><div><h2 class="section-title">منتجات LEVEL UP</h2><p class="section-sub">اختار اللي بناسبك وشوف أحدث العروض</p><div class="gold-line"></div></div></div>
-    <div class="toolbar">
-      <input id="search" class="search" type="search" placeholder="ابحث عن لعبة أو اشتراك..." aria-label="بحث عن منتج">
-      <select id="category" class="filter" aria-label="تصفية حسب القسم">
-        <option value="all">كل الأقسام</option><option value="games">ألعاب Xbox</option><option value="pass">Game Pass</option><option value="cards">بطاقات رقمية</option><option value="shared">حسابات مشتركة</option>
-      </select>
-      <select id="sort" class="filter" aria-label="ترتيب المنتجات">
-        <option value="default">الترتيب الافتراضي</option><option value="low">السعر: الأقل أولاً</option><option value="high">السعر: الأعلى أولاً</option>
-      </select>
-    </div>
-    <div class="products" id="productGrid"><div class="empty-state">جاري تحميل المنتجات...</div></div>
-    <div class="trust-strip">🛡️ قبل تأكيد الطلب، بنراجع معك السعر والتوفر ونوع الحساب وطريقة التفعيل — عشان تكون كل التفاصيل واضحة.</div>
-  </section>
+<section class="wrap section" id="products">
+ <div class="section-head">
+  <h2>منتجات <span>LEVEL UP</span></h2>
+ </div>
 
-  <section class="wrap section">
-    <div class="section-head"><div><h2 class="se
+ <div class="toolbar">
+  <input id="search" class="search" type="search" placeholder="ابحث عن لعبة أو اشتراك...">
+  <select id="category" class="filter">
+   <option value="all">كل الأقسام</option>
+   <option value="games">ألعاب Xbox</option>
+   <option value="pass">Game Pass</option>
+   <option value="cards">بطاقات رقمية</option>
+   <option value="shared">حسابات مشتركة</option>
+  </select>
+  <select id="sort" class="filter">
+   <option value="default">الترتيب الافتراضي</option>
+   <option value="low">السعر: الأقل أولاً</option>
+   <option value="high">السعر: الأعلى أولاً</option>
+  </select>
+ </div>
+
+ <div class="products" id="productGrid">
+  <div class="empty-state">جاري تحميل المنتجات...</div>
+ </div>
+
+ <div class="trust-strip">
+  🛡️ قبل تأكيد الطلب، بنراجع معك السعر والتوفر ونوع الحساب وطريقة التفعيل — عشان تكون كل التفاصيل واضحة.
+ </div>
+</section>
+
+<footer>
+ <div class="wrap">
+  <strong>LEVEL UP Gaming Store</strong>
+  <p>العب أكثر، استمتع أكثر 🎮</p>
+  <p>الدفع عبر CliQ وZain Cash وOrange Money</p>
+ </div>
+</footer>
+
+<script>
+const SUPABASE_URL="https://miiuhfafabjwtiirirpk.supabase.co";
+const SUPABASE_KEY="sb_publishable_bhRWwfsgSTnU0YB7xUWywA_6LiL5qPh";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const grid=document.getElementById("productGrid");
+const search=document.getElementById("search");
+const category=document.getElementById("category");
+const sort=document.getElementById("sort");
+
+let allProducts=[];
+
+function getCategory(p){
+ const t=(p.product_type||"").toLowerCase();
+ const c=(p.category||"").toLowerCase();
+
+ if(t==="subscription"||c.includes("pass"))return "pass";
+ if(t==="gift_card"||c.includes("card")||c.includes("بطاق"))return "cards";
+ if(t==="shared_account"||c.includes("shared")||c.includes("مشترك"))return "shared";
+ return "games";
+}
+
+function activeDiscount(p){
+ return p.discount_active===true &&
+ p.discount_price!==null &&
+ Number(p.discount_price)>0 &&
+ Number(p.discount_price)<Number(p.price) &&
+ p.discount_ends_at &&
+ new Date(p.discount_ends_at).getTime()>Date.now();
+}
+
+function safeText(value){
+ return String(value??"").replace(/[&<>"']/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+ });
+}
+
+function renderProducts(){
+ let list=[...allProducts];
+ const q=search.value.trim().toLowerCase();
+ const cat=category.value;
+
+ list=list.filter(p=>{
+  const matchesText=(p.name||"").toLowerCase().includes(q)||
+  (p.description||"").toLowerCase().includes(q);
+  return matchesText&&(cat==="all"||getCategory(p)===cat);
+ });
+
+ if(sort.value==="low"){
+  list.sort((a,b)=>(activeDiscount(a)?Number(a.discount_price):Number(a.price))-
+  (activeDiscount(b)?Number(b.discount_price):Number(b.price)));
+ }
+ if(sort.value==="high"){
+  list.sort((a,b)=>(activeDiscount(b)?Number(b.discount_price):Number(b.price))-
+  (activeDiscount(a)?Number(a.discount_price):Number(a.price)));
+ }
+
+ grid.innerHTML="";
+
+ if(!list.length){
+  grid.innerHTML='<div class="empty-state">ما لقينا منتجات بهذا البحث حالياً 🎮</div>';
+  return;
+ }
+
+ list.forEach(p=>{
+  const discounted=activeDiscount(p);
+  const price=discounted?Number(p.discount_price):Number(p.price);
+  const image=p.image_url||"";
+  const title=safeText(p.name);
+  const desc=safeText(p.description||"");
+  const catName=safeText(p.category||"ألعاب Xbox");
+
+  const message="مرحبا LEVEL UP، بدي أطلب: "+(p.name||"منتج")+
+  " - السعر: "+price+" دينار";
+
+  const card=document.createElement("article");
+  card.className="product";
+
+  const img=document.createElement("img");
+  img.src=image||"";
+  img.alt=title;
+  img.loading="lazy";
+  img.onerror=function(){this.style.display="none"};
+
+  const body=document.createElement("div");
+  body.className="product-body";
+
+  body.innerHTML=`
+   <h3>${title}</h3>
+   <div class="desc">${desc}</div>
+   <span class="category-tag">${catName}</span>
+   <div class="price-row">
+    <span class="price">${price.toFixed(2)} د.أ</span>
+    ${discounted?`<span class="old-price">${Number(p.price).toFixed(2)} د.أ</span>`:""}
+   </div>
+   ${discounted?'<div class="discount-note">🔥 عرض خاص لفترة محدودة</div>':""}
+   <a class="buy" target="_blank" rel="noopener"
+   href="https://wa.me/962790984231?text=${encodeURIComponent(message)}">اطلب الآن</a>
+  `;
+
+  card.append(img,body);
+  grid.appendChild(card);
+ });
+}
+
+async function loadProducts(){
+ grid.innerHTML='<div class="empty-state">جاري تحميل المنتجات...</div>';
+
+ const {data,error}=await db.from("products")
+  .select("*")
+  .eq("is_active",true)
+  .order("created_at",{ascending:false});
+
+ if(error){
+  console.error(error);
+  grid.innerHTML='<div class="empty-state">تعذر تحميل المنتجات. تأكد من إعدادات صلاحيات عرض المنتجات في Supabase.</div>';
+  return;
+ }
+
+ allProducts=data||[];
+ renderProducts();
+}
+
+search.addEventListener("input",renderProducts);
+category.addEventListener("change",renderProducts);
+sort.addEventListener("change",renderProducts);
+
+loadProducts();
+</script>
+</body>
+</html>
