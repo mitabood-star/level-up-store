@@ -661,6 +661,58 @@ box-shadow:0 0 8px #d8b56d60,0 0 22px #d8b56d40,0 0 40px #d8b56d20;
     margin-bottom:10px !important;
   }
 }
+/* LEVEL UP - Neon Product Cards */
+@media(max-width:700px){
+  .products{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+
+  .product{
+    border:1px solid #39ff72 !important;
+    border-radius:12px !important;
+    background:linear-gradient(145deg,#142018,#080b09) !important;
+    box-shadow:0 0 9px #39ff7240 !important;
+    overflow:hidden !important;
+  }
+
+  .product img{
+    height:112px !important;
+    max-height:112px !important;
+    object-fit:cover !important;
+    border-bottom:1px solid #39ff72 !important;
+  }
+
+  .product-body{
+    padding:8px !important;
+  }
+
+  .product h3{
+    font-size:12px !important;
+    line-height:1.4 !important;
+  }
+
+  .desc{
+    font-size:10px !important;
+    line-height:1.5 !important;
+  }
+
+  .category-tag{
+    background:#17251b !important;
+    border:1px solid #287d42 !important;
+    color:#e5c779 !important;
+  }
+
+  .price{
+    color:#e8ca79 !important;
+    text-shadow:0 0 8px #d9b66d40 !important;
+  }
+
+  .buy{
+    border:1px solid #39ff72 !important;
+    box-shadow:0 0 8px #39ff7240 !important;
+  }
+}
 </style>
 </head>
 <body>
