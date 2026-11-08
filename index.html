@@ -130,13 +130,19 @@ nav a:hover{color:var(--gold2)}
 .products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
 .product{
  overflow:hidden;display:flex;flex-direction:column;
- border:1px solid #3c3022;border-radius:16px;
- background:linear-gradient(155deg,#201b15,#100f0d);
+ border:1px solid #66502b;border-radius:16px;
+ background:linear-gradient(145deg,#18120d,#090909 65%,#21170d);
  transition:.2s;min-width:0;
+ box-shadow:0 8px 25px rgba(184,135,60,.12);
+transition:all .3s ease;
 }
-.product:hover{transform:translateY(-4px);border-color:#a9844a}
+.product:hover{
+transform:translateY(-4px);
+border-color:#d8b56d;
+box-shadow:0 10px 30px rgba(216,181,109,.22);
+}
 .cover{
- height:180px;position:relative;
+ height:145px;position:relative;
  background:radial-gradient(ellipse,#63312b,#17110e);
  display:grid;place-items:center;overflow:hidden;
 }
@@ -158,8 +164,8 @@ nav a:hover{color:var(--gold2)}
 .new-price{color:var(--green);font-weight:bold;font-size:17px}
 .add-btn{
  border:0;border-radius:8px;padding:10px;
- background:linear-gradient(110deg,#f0d28c,#b8873c);
- color:#17100a;font-weight:bold;font-size:10px;
+ background:linear-gradient(110deg,#c8102e,#ed1c24);
+ color:#fff;font-weight:bold;font-size:13px;
 }
 .empty-state{
  grid-column:1/-1;text-align:center;padding:45px 15px;
