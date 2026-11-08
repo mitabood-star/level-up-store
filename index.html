@@ -1,107 +1,613 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090909">
-<title>LEVEL UP Gaming Store | العب أكثر، استمتع أكثر</title>
-<meta name="description" content="LEVEL UP Gaming Store - ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية في الأردن. اطلب عبر واتساب.">
+<title>LEVEL UP Gaming Store</title>
+<meta name="description" content="LEVEL UP Gaming Store - ألعاب Xbox واشتراكات Game Pass وبطاقات رقمية في الأردن">
+
 <style>
-:root{--bg:#090909;--panel:#141414;--panel2:#1b1b1b;--red:#ed2436;--gold:#d8b56d;--muted:#a7a7a7;--line:#292929;--green:#8de34c}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#351016 0,transparent 35%),var(--bg);color:#f7f7f7;font-family:Tahoma,Arial,sans-serif}
-a{color:inherit;text-decoration:none}button,input,select{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}
-.top{background:#111;border-bottom:1px solid var(--line);font-size:12px;color:#ccc;text-align:center;padding:9px}
-header{position:sticky;top:0;z-index:5;background:#090909ed;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.4px}.logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(145deg,#ff4350,#850b18);display:grid;place-items:center;box-shadow:0 0 24px #ed24364d;font-size:21px}
-.brand b{font-size:19px}.brand small{display:block;color:var(--gold);font-size:10px;letter-spacing:2px;margin-top:3px}
-nav{display:flex;gap:23px;color:#ddd;font-size:13px}nav a:hover{color:var(--gold)}
-.actions{display:flex;gap:8px}.btn{border:0;border-radius:11px;padding:12px 17px;background:var(--red);color:#fff;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{filter:brightness(1.12)}.btn.ghost{background:#202020;border:1px solid #343434}.btn.gold{background:linear-gradient(110deg,#e7c57c,#a77a32);color:#160f06}
-.hero{padding:62px 0 42px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
-.kicker{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px}.hero h1{font-size:clamp(36px,6vw,65px);line-height:1.15;margin:15px 0}.hero h1 span{color:var(--red);text-shadow:0 0 30px #ed243655}.hero p{color:#bbb;line-height:1.9;max-width:580px;font-size:15px}
-.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.hero-art{min-height:330px;border-radius:28px;border:1px solid #4a2428;background:radial-gradient(circle at 50% 40%,#6e1624 0,#261014 42%,#111 75%);display:grid;place-items:center;position:relative;overflow:hidden}
-.hero-art:before,.hero-art:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ed243655;border-radius:50%;transform:rotateX(65deg)}.hero-art:after{width:340px;height:340px}
-.mascot{font-size:105px;filter:drop-shadow(0 15px 25px #000);z-index:1}.mascot-label{position:absolute;bottom:24px;text-align:center;font-weight:900;letter-spacing:4px;color:var(--gold);font-size:21px}
-.stats{display:flex;gap:24px;margin-top:27px;color:#aaa;font-size:12px}.stats b{display:block;color:#fff;font-size:18px;margin-bottom:4px}
-section{padding:35px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:19px}.section-head h2{font-size:25px;margin:0}.section-head p{margin:7px 0 0;color:var(--muted);font-size:12px}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.cat{background:linear-gradient(145deg,#1b1b1b,#101010);border:1px solid var(--line);border-radius:17px;padding:20px;cursor:pointer;transition:.2s}.cat:hover{border-color:var(--red);transform:translateY(-3px)}.cat .ico{font-size:27px}.cat b{display:block;margin-top:12px}.cat small{color:var(--muted);display:block;margin-top:5px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.search{flex:1;min-width:190px;background:#171717;border:1px solid #333;border-radius:11px;padding:13px;color:white}.filter{background:#171717;border:1px solid #333;border-radius:11px;padding:12px;color:#eee}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.product{background:linear-gradient(155deg,#1a1a1a,#101010);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}.cover{height:155px;background:radial-gradient(circle at 50% 35%,#54202a,#191012 65%,#101010);display:grid;place-items:center;font-size:47px;position:relative}.tag{position:absolute;top:12px;right:12px;background:#ed2436;color:#fff;border-radius:7px;padding:5px 8px;font-size:10px;font-weight:bold}.prod-info{padding:14px;display:flex;flex-direction:column;flex:1}.prod-info small{color:var(--gold);font-size:10px}.prod-info h3{font-size:15px;margin:8px 0}.prod-info p{color:#aaa;font-size:11px;line-height:1.6;margin:0 0 14px;flex:1}.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:900;color:#fff}.price em{font-style:normal;color:var(--gold);font-size:11px}.add{border:1px solid #633038;background:#2b1216;color:#fff;border-radius:9px;padding:9px 11px;cursor:pointer;font-size:12px}
-.notice{border:1px dashed #70552c;background:#211b10;color:#dfc58f;padding:13px 15px;border-radius:12px;font-size:12px;line-height:1.7;margin-top:18px}
-.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.benefit{background:#151515;border:1px solid var(--line);padding:20px;border-radius:16px}.benefit b{display:block;margin:8px 0}.benefit p{color:#aaa;font-size:12px;line-height:1.7;margin:0}
-.payments{display:flex;gap:10px;flex-wrap:wrap}.pay{padding:13px 19px;border:1px solid #343434;background:#171717;border-radius:12px;font-weight:bold}
-.faq{border-top:1px solid var(--line);padding:16px 0;color:#ddd}.faq summary{cursor:pointer;font-weight:bold}.faq p{color:#aaa;font-size:13px;line-height:1.8}
-footer{border-top:1px solid var(--line);margin-top:35px;padding:35px 0;color:#aaa;font-size:12px}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.float{position:fixed;bottom:20px;left:20px;z-index:8;border-radius:50px;box-shadow:0 8px 30px #0008}
-.cart-panel{position:fixed;inset:0;background:#0009;z-index:20;display:none;justify-content:flex-end}.cart-panel.open{display:flex}.cart{width:min(420px,100%);background:#111;height:100%;padding:22px;overflow:auto;border-right:1px solid #333}.cart-head{display:flex;justify-content:space-between;align-items:center}.cart-item{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #333;font-size:13px}.cart-total{font-size:19px;font-weight:bold;margin:22px 0}.empty{color:#999;text-align:center;padding:50px 0}
-@media(max-width:850px){nav{display:none}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:260px}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.nav{height:66px}.brand b{font-size:16px}.actions .ghost{display:none}.hero{padding-top:38px}.hero-art{min-height:230px}.products{gap:10px}.cover{height:120px}.prod-info{padding:11px}.prod-info h3{font-size:13px}.benefits{grid-template-columns:1fr}.stats{gap:15px}.section-head h2{font-size:21px}}
+:root{
+--bg:#080808;
+--panel:#121212;
+--panel2:#191714;
+--gold:#d8b56d;
+--gold2:#f5d99a;
+--red:#d7192d;
+--text:#f8f5ef;
+--muted:#aaa197;
+--line:#393027;
+--green:#a4e86b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:95px}
+body{
+margin:0;background:
+radial-gradient(ellipse at 85% 0%,#50131c 0,transparent 30%),
+radial-gradient(ellipse at 0% 45%,#302014 0,transparent 25%),
+#080808;
+color:var(--text);
+font-family:Tahoma,Arial,sans-serif;
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+opacity:.1;
+background-image:linear-gradient(#fff 1px,transparent 1px),
+linear-gradient(90deg,#fff 1px,transparent 1px);
+background-size:45px 45px;
+mask-image:linear-gradient(#000,transparent 80%);
+}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1200px,calc(100% - 32px));margin:auto}
+
+/* announcement */
+.topline{
+background:#0c0b09;
+border-bottom:1px solid #493820;
+text-align:center;padding:10px;
+color:var(--gold2);
+font-size:11px;
+}
+
+/* navigation */
+header{
+position:sticky;top:0;z-index:50;
+background:#090909ed;
+backdrop-filter:blur(18px);
+border-bottom:1px solid #34291d;
+}
+.nav{
+height:76px;display:flex;align-items:center;
+justify-content:space-between;gap:15px;
+}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{
+width:47px;height:47px;border-radius:14px;
+display:grid;place-items:center;
+background:linear-gradient(145deg,#f5d99a,#a87932);
+color:#17100a;font-size:22px;font-weight:1000;
+box-shadow:0 0 25px #d8b56d35;
+}
+.brand-name{font-size:20px;font-weight:1000;letter-spacing:1px}
+.brand-name span{color:var(--gold)}
+.brand-sub{
+display:block;font-size:9px;letter-spacing:3px;
+color:#a18c69;margin-top:4px;
+}
+nav{display:flex;gap:23px;font-size:12px;color:#c9c1b5}
+nav a:hover{color:var(--gold2)}
+.nav-actions{display:flex;gap:9px;align-items:center}
+
+.btn{
+border:1px solid transparent;border-radius:10px;
+padding:12px 17px;display:inline-flex;
+align-items:center;justify-content:center;gap:8px;
+font-size:12px;font-weight:900;transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{
+background:linear-gradient(110deg,#f5d99a,#b8873c);
+color:#17100a;
+}
+.btn-dark{background:#171514;border-color:#493b2a;color:#f4e7cf}
+.btn-red{background:linear-gradient(120deg,#ed3347,#9d1020);color:white}
+.cart-count{
+display:inline-grid;place-items:center;
+min-width:20px;height:20px;border-radius:50%;
+background:var(--gold);color:#17100a;
+font-size:10px;padding:0 5px;
+}
+
+/* hero */
+.hero{padding:60px 0 45px}
+.hero-grid{
+display:grid;grid-template-columns:1fr 1fr;
+align-items:center;gap:40px;
+}
+.eyebrow{
+color:var(--gold);font-size:11px;
+font-weight:bold;letter-spacing:2px;
+}
+.hero h1{
+font-size:clamp(38px,5vw,65px);
+line-height:1.25;margin:20px 0 14px;
+font-weight:1000;
+}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero-copy{font-size:14px;line-height:2.1;color:#bbb2a6;max-width:540px}
+.hero-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:25px}
+.hero-meta{display:flex;gap:25px;flex-wrap:wrap;margin-top:30px;color:#b9ad9c;font-size:11px}
+.hero-meta b{display:block;font-size:15px;color:var(--gold2);margin-bottom:5px}
+
+.hero-stage{
+position:relative;min-height:410px;
+display:grid;place-items:center;
+}
+.stage-frame{
+position:absolute;inset:8px;
+border:1px solid #77552d;border-radius:28px;
+overflow:hidden;
+background:
+radial-gradient(ellipse at 50% 45%,#63232a 0,#281414 48%,#0b0b0b 85%);
+box-shadow:inset 0 0 100px #000c,0 25px 60px #0008;
+}
+.stage-frame:before{
+content:"";position:absolute;inset:17px;
+border:1px solid #d8b56d35;border-radius:20px;
+}
+.stage-glow{
+position:absolute;width:230px;height:230px;
+border-radius:50%;background:#cf1b3155;filter:blur(70px);
+}
+.controller{position:relative;z-index:2;width:85%;max-width:390px;filter:drop-shadow(0 25px 25px #000b)}
+.stage-caption{position:absolute;bottom:32px;z-index:3;text-align:center}
+.stage-caption strong{display:block;color:var(--gold2);font-size:23px;letter-spacing:5px}
+.stage-caption small{font-size:9px;color:#bba781;letter-spacing:3px}
+.stage-chip{
+position:absolute;top:35px;right:28px;z-index:4;
+background:#100e0bdd;border:1px solid #92703e;
+color:var(--gold2);padding:9px 13px;border-radius:30px;font-size:10px;
+}
+
+/* sections */
+.section{padding:38px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:23px}
+.section-title{font-size:25px;font-weight:1000;margin:0}
+.section-sub{font-size:11px;color:var(--muted);margin-top:8px}
+.gold-line{width:45px;height:2px;background:var(--gold);margin-top:13px}
+
+/* category cards */
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.category-card{
+position:relative;overflow:hidden;
+min-height:180px;padding:20px;
+text-align:right;color:white;
+border:1px solid #59432a;border-radius:17px;
+background:linear-gradient(145deg,#342016,#12100e);
+transition:.25s;
+}
+.category-card:before{
+content:"";position:absolute;inset:0;
+background:linear-gradient(0deg,#080808 0%,#08080899 50%,transparent 100%);
+z-index:1;
+}
+.category-card:hover,.category-card.active{
+transform:translateY(-5px);
+border-color:var(--gold);
+box-shadow:0 15px 35px #0009;
+}
+.category-card .cat-content{position:relative;z-index:2}
+.cat-icon{font-size:32px;display:block;margin-bottom:16px}
+.category-card strong{display:block;font-size:16px}
+.category-card small{display:block;color:#d0c3af;font-size:10px;margin-top:8px}
+.cat-arrow{position:absolute;left:18px;top:18px;z-index:2;color:var(--gold2);font-size:20px}
+.cat-games{background:
+linear-gradient(0deg,#090909 0%,#090909a8 65%,#09090933),
+url("https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=85") center/cover}
+.cat-pass{background:
+linear-gradient(0deg,#090909 0%,#090909b5 65%,#09090933),
+url("https://images.unsplash.com/photo-1603481546238-487240415921?auto=format&fit=crop&w=800&q=85") center/cover}
+.cat-cards{background:
+linear-gradient(0deg,#090909 0%,#090909b5 65%,#09090933),
+url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=85") center/cover}
+.cat-shared{background:
+linear-gradient(0deg,#090909 0%,#090909b5 65%,#09090933),
+url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=85") center/cover}
+
+/* filters */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+.search,.filter{
+background:#141210;border:1px solid #40352a;
+border-radius:10px;color:white;padding:13px 14px;outline:none;
+}
+.search{flex:1;min-width:180px}
+.filter{min-width:145px}
+.search:focus,.filter:focus{border-color:var(--gold)}
+
+/* products */
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.product{
+overflow:hidden;display:flex;flex-direction:column;
+border:1px solid #393027;border-radius:17px;
+background:linear-gradient(160deg,#1d1a16,#0e0d0c);
+transition:.25s;min-width:0;
+}
+.product:hover{transform:translateY(-5px);border-color:#98713c;box-shadow:0 16px 35px #0008}
+.cover{
+height:190px;position:relative;overflow:hidden;
+display:grid;place-items:center;
+background:radial-gradient(ellipse at 50% 40%,#652a2d,#17100f 75%);
+}
+.cover:after{
+content:"";position:absolute;inset:0;
+background:linear-gradient(0deg,#0d0c0c 0,transparent 45%);
+pointer-events:none;
+}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover-fallback{font-size:55px;color:var(--gold)}
+.product-tag{
+position:absolute;z-index:3;top:11px;right:11px;
+background:#100e0be8;border:1px solid #d8b56d88;
+color:var(--gold2);border-radius:20px;
+padding:6px 10px;font-size:9px;
+}
+.prod-body{padding:15px;display:flex;flex-direction:column;flex:1}
+.prod-category{color:var(--gold);font-size:10px}
+.prod-body h3{font-size:14px;line-height:1.7;margin:8px 0}
+.prod-desc{color:#aaa197;font-size:10px;line-height:1.8;min-height:35px;margin:0 0 12px}
+.price-row{
+display:flex;justify-content:space-between;
+align-items:center;gap:8px;margin-top:auto;
+}
+.price{font-weight:1000;color:var(--gold2);font-size:16px;white-space:nowrap}
+.add-btn{
+border:1px solid #a47a3d;
+background:linear-gradient(110deg,#e5c47e,#b17f37);
+color:#17100a;border-radius:8px;
+padding:10px 12px;font-size:10px;font-weight:1000;
+}
+.add-btn:hover{filter:brightness(1.1)}
+.discount-box{
+border:1px solid #71432d;background:#25150f;
+border-radius:9px;padding:10px;margin:0 0 12px;
+}
+.discount-label{background:#a21b2c;color:white;padding:4px 7px;border-radius:5px;font-size:9px}
+.old-price{font-size:10px;color:#aaa;text-decoration:line-through;display:block;margin-top:7px}
+.new-price{display:block;color:var(--green);font-size:18px;font-weight:1000;margin-top:3px}
+.discount-timer{font-size:9px;color:#e6c17e;margin-top:7px}
+.empty-state{
+grid-column:1/-1;text-align:center;padding:45px 15px;
+border:1px dashed #55432e;border-radius:15px;
+background:#14110f;color:#c4b49a;font-size:12px;
+}
+.trust-strip{
+margin-top:20px;padding:15px;
+border:1px solid #65502f;border-radius:12px;
+background:linear-gradient(100deg,#21180f,#15110e);
+color:#e5cc96;font-size:11px;line-height:1.9;
+}
+
+/* benefits */
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.benefit{
+padding:22px;border:1px solid #3c3125;border-radius:15px;
+background:linear-gradient(145deg,#1c1915,#100f0e);
+}
+.benefit-icon{font-size:25px}
+.benefit strong{display:block;margin:12px 0 7px;font-size:14px}
+.benefit p{margin:0;color:#aaa197;font-size:10px;line-height:2}
+
+/* payment */
+.payments{display:flex;gap:12px;flex-wrap:wrap}
+.pay{
+flex:1;min-width:145px;padding:19px;text-align:center;
+border:1px solid #51402b;border-radius:12px;
+background:linear-gradient(145deg,#201b15,#100f0e);
+color:var(--gold2);font-size:13px;font-weight:1000;
+}
+
+/* FAQ and footer */
+.faq-list{border-top:1px solid #403329}
+.faq{padding:17px 2px;border-bottom:1px solid #403329}
+.faq summary{cursor:pointer;font-size:12px;font-weight:bold}
+.faq p{font-size:11px;color:#aaa197;line-height:2;margin:12px 0 0}
+footer{
+margin-top:40px;padding:36px 0;
+border-top:1px solid #443524;background:#0b0a09;color:#aaa197;font-size:10px;
+}
+.footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-brand{font-size:18px;color:#f3dfb8;font-weight:1000}
+.footer-brand span{color:var(--gold)}
+.footer-note{line-height:2}
+
+/* cart */
+.float-wa{position:fixed;bottom:18px;left:18px;z-index:20;border-radius:30px;box-shadow:0 10px 30px #0009}
+.cart-overlay{
+position:fixed;inset:0;z-index:100;
+background:#000c;display:none;justify-content:flex-start;
+}
+.cart-overlay.open{display:flex}
+.cart-panel{
+width:min(430px,100%);height:100%;overflow:auto;
+background:#100f0d;border-right:1px solid #59452c;
+padding:22px;
+}
+.cart-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #423426;padding-bottom:15px}
+.cart-head h2{font-size:19px;color:var(--gold2);margin:0}
+.close-btn{background:#211b14;color:white;border:1px solid #51412d;border-radius:8px;padding:9px}
+.cart-items{padding:8px 0}
+.cart-item{
+display:flex;align-items:center;justify-content:space-between;
+gap:12px;padding:14px 0;border-bottom:1px solid #302820;font-size:11px;
+}
+.cart-item strong{display:block;color:var(--gold2);margin-top:6px}
+.qty-controls{display:flex;align-items:center;gap:7px;margin-top:8px}
+.qty-controls button,.remove-btn{
+border:1px solid #51412d;background:#211b14;
+color:#f3dcae;border-radius:6px;padding:6px 9px;font-size:10px;
+}
+.remove-btn{color:#ff9aa3;border-color:#69313a}
+.cart-total{font-size:17px;font-weight:1000;color:var(--gold2);padding:18px 0}
+.cart-hint{font-size:10px;color:#aaa197;line-height:2}
+.empty-cart{text-align:center;color:#aaa197;padding:45px 10px;font-size:12px}
+
+/* responsive */
+@media(max-width:900px){
+nav{gap:12px}
+.products{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:700px){
+.wrap{width:calc(100% - 26px)}
+.nav{height:67px}
+.brand-mark{width:40px;height:40px}
+.brand-name{font-size:17px}
+nav{display:none}
+.nav-actions .btn-dark{display:none}
+.hero{padding:38px 0 25px}
+.hero-grid{grid-template-columns:1fr;gap:22px}
+.hero h1{font-size:42px}
+.hero-copy{font-size:12px}
+.hero-stage{min-height:300px}
+.controller{width:78%}
+.categories{grid-template-columns:repeat(2,1fr);gap:10px}
+.category-card{min-height:155px;padding:14px}
+.category-card strong{font-size:13px}
+.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cover{height:140px}
+.prod-body{padding:11px}
+.prod-body h3{font-size:12px}
+.prod-desc{font-size:9px}
+.price{font-size:13px}
+.add-btn{padding:9px;font-size:9px}
+.benefits{grid-template-columns:1fr}
+.section{padding:27px 0}
+.section-title{font-size:21px}
+.pay{min-width:calc(50% - 8px)}
+.hero-meta{gap:15px}
+}
+@media(max-width:370px){
+.hero h1{font-size:35px}
+.price-row{align-items:flex-start;flex-direction:column}
+.add-btn{width:100%}
+}
 </style>
 </head>
+
 <body>
-<div class="top">🇯🇴 متجر ألعاب واشتراكات رقمية — الطلب والتأكيد عبر واتساب</div>
-<header><div class="wrap nav">
-<a class="brand" href="#"><span class="logo">▲</span><span><b>LEVEL UP</b><small>GAMING STORE</small></span></a>
-<nav><a href="#home">الرئيسية</a><a href="#categories">الأقسام</a><a href="#products">المنتجات</a><a href="#payments">طرق الدفع</a></nav>
-<div class="actions"><button class="btn ghost" onclick="openCart()">🛒 السلة <span id="cartCount">0</span></button><a class="btn" href="https://wa.me/962790984231" target="_blank">اطلب الآن</a></div>
-</div></header>
+
+<div class="topline">🇯🇴 LEVEL UP GAMING STORE — العب أكثر، استمتع أكثر</div>
+
+<header>
+<div class="wrap nav">
+<a class="brand" href="#home">
+<span class="brand-mark">LU</span>
+<span>
+<span class="brand-name">LEVEL <span>UP</span></span>
+<small class="brand-sub">GAMING STORE</small>
+</span>
+</a>
+
+<nav>
+<a href="#home">الرئيسية</a>
+<a href="#categories">الأقسام</a>
+<a href="#products">المنتجات</a>
+<a href="#payments">طرق الدفع</a>
+</nav>
+
+<div class="nav-actions">
+<button class="btn btn-dark" onclick="openCart()">
+🛒 السلة <span class="cart-count" id="cartCount">0</span>
+</button>
+<a class="btn btn-gold" href="https://wa.me/962790984231" target="_blank">اطلب الآن</a>
+</div>
+</div>
+</header>
+
 <main>
-<div class="wrap hero" id="home"><div class="hero-grid">
-<div><div class="kicker">YOUR NEXT LEVEL STARTS HERE</div><h1>اللعب إله مستوى…<br><span>ارفع مستواك!</span></h1><p>كل اللي تحتاجه لعالم Xbox من ألعاب واشتراكات وبطاقات رقمية. اختار اللي بناسبك، ضيفه للسلة، وكمّل طلبك معنا على واتساب.</p>
-<div class="hero-cta"><a class="btn gold" href="#products">تسوّق المنتجات ←</a><a class="btn ghost" href="https://wa.me/962790984231" target="_blank">تواصل معنا</a></div>
-<div class="stats"><div><b>🎮</b> عالم الألعاب</div><div><b>⚡</b> طلب سريع</div><div><b>🇯🇴</b> الأردن</div></div></div>
-<div class="hero-art"><div class="mascot">🧑🏻‍🎮</div><div class="mascot-label">LEVEL UP</div></div>
-</div></div>
-<section class="wrap" id="categories"><div class="section-head"><div><h2>تصفّح حسب القسم</h2><p>اختار عالمك وبلّش اللعب</p></div></div>
+
+<section class="wrap hero" id="home">
+<div class="hero-grid">
+
+<div>
+<div class="eyebrow">THE NEXT LEVEL OF GAMING</div>
+<h1>اللعب إله مستوى…<br><em>ارفع مستواك!</em></h1>
+<p class="hero-copy">
+كل اللي بتدور عليه لعالم الألعاب بمكان واحد.
+ألعاب Xbox، اشتراكات Game Pass وبطاقات رقمية.
+اختار منتجك وضيفه للسلة واطلب بسهولة من LEVEL UP.
+</p>
+
+<div class="hero-buttons">
+<a class="btn btn-gold" href="#products">تسوّق المنتجات ←</a>
+<a class="btn btn-dark" href="https://wa.me/962790984231" target="_blank">تواصل معنا</a>
+</div>
+
+<div class="hero-meta">
+<div><b>🎮 ألعاب</b>عالمك بين إيديك</div>
+<div><b>⚡ تفعيل سريع</b>طلب مباشر وسهل</div>
+<div><b>🇯🇴 الأردن</b>خدمة محلية</div>
+</div>
+</div>
+
+<div class="hero-stage">
+<div class="stage-frame"></div>
+<div class="stage-glow"></div>
+<span class="stage-chip">PREMIUM GAMING</span>
+
+<svg class="controller" viewBox="0 0 520 330" aria-label="يد تحكم ألعاب">
+<defs>
+<linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#51453a"/>
+<stop offset=".48" stop-color="#171513"/>
+<stop offset="1" stop-color="#080808"/>
+</linearGradient>
+</defs>
+<path d="M147 84 Q112 78 91 122 L35 238 Q16 282 53 296 Q88 310 119 275 L165 226 Q260 254 355 226 L401 275 Q432 310 467 296 Q504 282 485 238 L429 122 Q408 78 373 84 Q260 110 147 84Z"
+fill="url(#bodyGrad)" stroke="#d8b56d" stroke-width="5"/>
+<path d="M115 157h75v22h-26v26h-23v-26h-26z" fill="#d8b56d"/>
+<circle cx="345" cy="151" r="15" fill="#d7192d" stroke="#f4dca5" stroke-width="3"/>
+<circle cx="383" cy="181" r="15" fill="#d8b56d" stroke="#f4dca5" stroke-width="3"/>
+<circle cx="307" cy="185" r="15" fill="#b68b4b" stroke="#f4dca5" stroke-width="3"/>
+<circle cx="345" cy="215" r="15" fill="#d7192d" stroke="#f4dca5" stroke-width="3"/>
+<ellipse cx="206" cy="202" rx="37" ry="31" fill="#080808" stroke="#8c6a3a" stroke-width="4"/>
+<ellipse cx="206" cy="202" rx="18" ry="15" fill="#29231b" stroke="#d8b56d" stroke-width="3"/>
+<ellipse cx="278" cy="202" rx="37" ry="31" fill="#080808" stroke="#8c6a3a" stroke-width="4"/>
+<ellipse cx="278" cy="202" rx="18" ry="15" fill="#29231b" stroke="#d8b56d" stroke-width="3"/>
+<rect x="236" y="137" width="48" height="27" rx="9" fill="#090909" stroke="#80633a" stroke-width="3"/>
+<circle cx="260" cy="150" r="5" fill="#d7192d"/>
+</svg>
+
+<div class="stage-caption">
+<strong>LEVEL UP</strong>
+<small>PLAY • WIN • REPEAT</small>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="wrap section" id="categories">
+<div class="section-head">
+<div>
+<h2 class="section-title">تسوّق حسب القسم</h2>
+<p class="section-sub">اختار القسم اللي بناسبك</p>
+<div class="gold-line"></div>
+</div>
+</div>
+
 <div class="categories">
-<div class="cat" onclick="setCategory('games')"><div class="ico">🎮</div><b>ألعاب Xbox</b><small>ألعابك المفضلة بمكان واحد</small></div>
-<div class="cat" onclick="setCategory('pass')"><div class="ico">⚡</div><b>Game Pass</b><small>اشتراكات وتجارب لعب</small></div>
-<div class="cat" onclick="setCategory('cards')"><div class="ico">🎁</div><b>بطاقات رقمية</b><small>رصيد وبطاقات رقمية</small></div>
-<div class="cat" onclick="setCategory('shared')"><div class="ico">👥</div><b>حسابات مشتركة</b><small>خيارات اقتصادية للألعاب</small></div>
-</div></section>
-<section class="wrap" id="products"><div class="section-head"><div><h2>المنتجات</h2><p>كتالوج تجريبي — الأسعار والمنتجات بحاجة لتأكيد المتجر قبل البيع</p></div></div>
-<div class="toolbar"><input id="search" class="search" placeholder="ابحث عن لعبة أو اشتراك..." oninput="render()"><select id="category" class="filter" onchange="render()"><option value="all">كل الأقسام</option><option value="games">ألعاب Xbox</option><option value="pass">Game Pass</option><option value="cards">بطاقات رقمية</option><option value="shared">حسابات مشتركة</option></select><select id="sort" class="filter" onchange="render()"><option value="default">الترتيب الافتراضي</option><option value="low">السعر: الأقل أولاً</option><option value="high">السعر: الأعلى أولاً</option></select></div>
-<div class="products" id="productGrid"></div>
-<div class="notice">تنويه: هذه بيانات توضيحية لتجربة تصميم المتجر وليست عروضاً مؤكدة. يتم تثبيت السعر والتوفر وطريقة التفعيل عند التواصل مع LEVEL UP عبر واتساب.</div>
+<button class="category-card cat-games" data-category="games">
+<span class="cat-arrow">↖</span>
+<div class="cat-content">
+<span class="cat-icon">🎮</span>
+<strong>ألعاب Xbox</strong>
+<small>ألعابك المفضلة بمكان واحد</small>
+</div>
+</button>
+
+<button class="category-card cat-pass" data-category="pass">
+<span class="cat-arrow">↖</span>
+<div class="cat-content">
+<span class="cat-icon">⚡</span>
+<strong>Game Pass</strong>
+<small>اشتراكات وتجارب لعب</small>
+</div>
+</button>
+
+<button class="category-card cat-cards" data-category="cards">
+<span class="cat-arrow">↖</span>
+<div class="cat-content">
+<span class="cat-icon">🎁</span>
+<strong>بطاقات رقمية</strong>
+<small>رصيد وبطاقات رقمية</small>
+</div>
+</button>
+
+<button class="category-card cat-shared" data-category="shared">
+<span class="cat-arrow">↖</span>
+<div class="cat-content">
+<span class="cat-icon">👥</span>
+<strong>حسابات مشتركة</strong>
+<small>خيارات اقتصادية للألعاب</small>
+</div>
+</button>
+</div>
 </section>
-<section class="wrap"><div class="section-head"><div><h2>ليش LEVEL UP؟</h2><p>تجربة شراء واضحة وسهلة</p></div></div><div class="benefits">
-<div class="benefit"><div>⚡</div><b>طلب سريع</b><p>اختار المنتج وأرسل تفاصيل طلبك مباشرة عبر واتساب.</p></div>
-<div class="benefit"><div>🛡️</div><b>تفاصيل واضحة</b><p>تأكد من المنطقة ونوع الحساب وطريقة التفعيل قبل إتمام الطلب.</p></div>
-<div class="benefit"><div>🤝</div><b>تواصل مباشر</b><p>بنرتب معك تفاصيل الطلب والدفع قبل التنفيذ.</p></div>
-</div></section>
-<section class="wrap" id="payments"><div class="section-head"><div><h2>طرق الدفع</h2><p>الدفع يتم تنسيقه بعد التواصل مع المتجر</p></div></div><div class="payments"><div class="pay">CliQ</div><div class="pay">Zain Cash</div><div class="pay">Orange Money</div></div></section>
-<section class="wrap"><div class="section-head"><div><h2>أسئلة بتهمك</h2><p>قبل ما تطلب</p></div></div>
-<details class="faq"><summary>كيف أطلب من المتجر؟</summary><p>ضيف المنتجات للسلة واضغط إرسال الطلب عبر واتساب، ورح توصلك رسالة فيها تفاصيل اختيارك.</p></details>
-<details class="faq"><summary>هل الأسعار المعروضة نهائية؟</summary><p>لا، المنتجات والأسعار الموجودة حالياً تجريبية لتجهيز شكل المتجر، ويتم اعتماد الأسعار الفعلية بعد تحديث الكتالوج.</p></details>
-<details class="faq"><summary>هل الدفع من خلال الموقع؟</summary><p>لا، الموقع لا يستقبل بطاقات بنكية. يتم تأكيد الطلب والدفع مباشرة مع المتجر عبر واتساب.</p></details>
+
+<section class="wrap section" id="products">
+<div class="section-head">
+<div>
+<h2 class="section-title">منتجات LEVEL UP</h2>
+<p class="section-sub">اكتشف المنتجات والعروض المتوفرة</p>
+<div class="gold-line"></div>
+</div>
+</div>
+
+<div class="toolbar">
+<input id="search" class="search" type="search" placeholder="ابحث عن لعبة أو اشتراك...">
+<select id="category" class="filter">
+<option value="all">كل الأقسام</option>
+<option value="games">ألعاب Xbox</option>
+<option value="pass">Game Pass</option>
+<option value="cards">بطاقات رقمية</option>
+<option value="shared">حسابات مشتركة</option>
+<option value="other">منتجات أخرى</option>
+</select>
+<select id="sort" class="filter">
+<option value="default">الترتيب الافتراضي</option>
+<option value="low">السعر: الأقل أولاً</option>
+<option value="high">السعر: الأعلى أولاً</option>
+</select>
+</div>
+
+<div class="products" id="productGrid">
+<div class="empty-state">جاري تحميل المنتجات...</div>
+</div>
+
+<div class="trust-strip">
+🛡️ بنراجع معك السعر والتوفر ونوع الحساب وطريقة التفعيل قبل تأكيد الطلب.
+</div>
 </section>
-</main>
-<footer><div class="wrap foot"><div><b style="color:#fff;font-size:17px">LEVEL UP Gaming Store</b><p>العب أكثر، استمتع أكثر 🎮</p></div><div>الأردن · الطلب عبر واتساب<br><a href="https://wa.me/962790984231">0790984231</a></div><div>© LEVEL UP — جميع الحقوق محفوظة</div></div></footer>
-<a class="btn float" href="https://wa.me/962790984231" target="_blank">واتساب 💬</a>
-<div class="cart-panel" id="cartPanel" onclick="if(event.target===this)closeCart()"><div class="cart"><div class="cart-head"><h2>سلة المشتريات</h2><button class="btn ghost" onclick="closeCart()">إغلاق ✕</button></div><div id="cartItems"></div><div class="cart-total" id="cartTotal"></div><button class="btn" style="width:100%" onclick="checkout()">إرسال الطلب عبر واتساب</button></div></div>
-<script>
-const products=[
-{id:1,name:"اشتراك Game Pass Ultimate",cat:"pass",price:0,icon:"⚡",desc:"مدة الاشتراك ونوع التفعيل يتم تأكيدهما قبل الطلب."},
-{id:2,name:"لعبة Xbox — إصدار رقمي",cat:"games",price:0,icon:"🎮",desc:"حدد اسم اللعبة والمنطقة المطلوبة عند التواصل."},
-{id:3,name:"بطاقة Xbox Gift Card",cat:"cards",price:0,icon:"🎁",desc:"اختر قيمة البطاقة والمنطقة المناسبة لحسابك."},
-{id:4,name:"لعبة بنظام حساب مشترك",cat:"shared",price:0,icon:"👥",desc:"تأكد من شروط الاستخدام وطريقة التفعيل قبل الشراء."},
-{id:5,name:"اشتراك Game Pass — حساب جديد",cat:"pass",price:0,icon:"🕹️",desc:"تفاصيل المدة والتوافق يتم تأكيدها عبر واتساب."},
-{id:6,name:"لعبة Xbox Series X|S",cat:"games",price:0,icon:"🔥",desc:"اسأل عن توفر اللعبة ونوع النسخة."},
-{id:7,name:"بطاقة رقمية",cat:"cards",price:0,icon:"💳",desc:"تتوفر القيم والمناطق حسب المخزون."},
-{id:8,name:"عرض ألعاب مشترك",cat:"shared",price:0,icon:"🏆",desc:"تواصل لمعرفة العروض الحالية والشروط."}
-];
-let cart=[];
-const catNames={games:"ألعاب Xbox",pass:"Game Pass",cards:"بطاقات رقمية",shared:"حسابات مشتركة"};
-function render(){
-let q=document.getElementById('search').value.trim().toLowerCase(),c=document.getElementById('category').value,s=document.getElementById('sort').value;
-let list=products.filter(p=>(c==='all'||p.cat===c)&&p.name.toLowerCase().includes(q));
-if(s==='low')list.sort((a,b)=>a.price-b.price);if(s==='high')list.sort((a,b)=>b.price-a.price);
-document.getElementById('productGrid').innerHTML=list.map(p=>`<article class="product"><div class="cover"><span class="tag">مثال تجريبي</span>${p.icon}</div><div class="prod-info"><small>${catNames[p.cat]}</small><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">السعر عند الاستفسار</span><button class="add" onclick="add(${p.id})">أضف للسلة +</button></div></div></article>`).join('')||'<p>ما لقينا منتجات مطابقة.</p>';
-}
-function setCategory(c){document.getElementById('category').value=c;render();document.getElementById('products').scrollIntoView({behavior:'smooth'});}
-function add(id){let p=products.find(x=>x.id===id),old=cart.find(x=>x.id===id);if(old)old.qty++;else cart.push({...p,qty:1});updateCart();openCart();}
-function updateCart(){document.getElementById('cartCount').textContent=cart.reduce((n,x)=>n+x.qty,0);document.getElementById('cartItems').innerHTML=cart.length?cart.map(x=>`<div class="cart-item"><span>${x.name}<br><small style="color:#aaa">الكمية: ${x.qty}</small></span><button class="add" onclick="removeItem(${x.id})">حذف</button></div>`).join(''):'<div class="empty">السلة فاضية حالياً 🎮</div>';document.getElementById('cartTotal').textContent=cart.length?'الأسعار تُؤكد عبر واتساب':'';}
-function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCart();}
-function openCart(){document.getElementById('cartPanel').classList.add('open');}function closeCart(){document.getElementById('cartPanel').classList.remove('open');}
-function checkout(){if(!cart.length){alert('السلة فارغة');return;}let msg='مرحبا LEVEL UP، بدي أستفسر عن الطلب التالي:%0A'+cart.map(x=>'- '+x.name+' × '+x.qty).join('%0A')+'%0Aيرجى تأكيد السعر والتوفر وطريقة التفعيل.';window.open('https://wa.me/962790984231?text='+msg,'_blank');}
-render();updateCart();
-</script>
-</body></html>
+
+<section class="wrap section">
+<div class="section-head">
+<div>
+<h2 class="section-title">ليش تختار LEVEL UP؟</h2>
+<p class="section-sub">تجربة شراء واضحة من أول خطوة</p>
+<div class="gold-line"></div>
+</div>
+</div>
+
+<div class="benefits">
+<div class="benefit">
+<span class="benefit-icon">⚡</span>
+<strong>طلب سريع</strong>
+<p>اختار المنتج وأرسل طلبك مباشرة عبر واتساب.</p>
+</div>
+<div class="benefit">
+<span class="benefit-icon">🛡️</span>
+<strong>تفاصيل واضحة</strong>
+<p>نتأكد معك من نوع الحساب والمنطقة وطريقة التفعيل.</p>
+</div>
+<div class="benefit">
+<span class="benefit-icon">🤝</span>
+<strong>تواصل مباشر</strong>
+<p>متابعة مباشرة مع المتجر لتنسيق الطلب والدفع.</p>
+</div>
+</div>
+</section>
+
+<section class="wrap section" id="payments">
+<div class="section-head">
+<div>
+<h2 class="section-title">طرق الدفع</h2>
+<p class="section-sub">خيارات الدفع المتاحة في الأردن</p>
+<div class="gold-line"></div>
+</div>
+</div>
+<div class="payments">
+<div class="pay">CliQ</div>
+<div class="pay">Zain Cash</div>
+<div class="pay">Orange Money</div>
+</div>
+</section>
+
+<section class="wrap section">
+<div class="section-head">
+<div>
+<h2 class="section-title">أسئلة بتهمك</h2>
+<p class="section-sub">إجابات سريعة قبل الطلب</p>
+<div class="gold-line"></div>
+</div>
+</div>
+
+<div class="faq-list">
+<details class="faq">
+<summary>كيف أطلب من المتجر؟</summary>
+<p>ضيف المنتجات للسلة واضغط إرسال الطلب عبر واتساب.</p>
+</details>
+<details c
