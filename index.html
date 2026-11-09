@@ -1176,6 +1176,31 @@ header{
  .payments-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
  .payments-title{font-size:21px}
 }
+  /* LEVEL UP - Animated Offers */
+.animated-offer{
+  overflow:hidden;
+  white-space:nowrap;
+  background:linear-gradient(90deg,#071507,#123b20,#071507);
+  border:1px solid #39ef75;
+  border-radius:12px;
+  padding:13px 0;
+  margin:18px auto;
+  box-shadow:0 0 15px #39ef7540;
+}
+
+.animated-offer span{
+  display:inline-block;
+  padding-left:100%;
+  animation:offerMove 18s linear infinite;
+  color:#39ef75;
+  font-size:16px;
+  font-weight:900;
+}
+
+@keyframes offerMove{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(100%)}
+}
 </style>
 </head>
 <body>
@@ -1194,6 +1219,14 @@ header{
   <a class="hero-btn" href="#products">تسوق الآن</a>
  </div>
 </section>
+  <div class="animated-offer">
+  <span>
+    🔥 عروض LEVEL UP 🔥
+    🎮 خصومات ألعاب Xbox
+    💚 Game Pass بأفضل الأسعار
+    🏆 اطلب الآن واستمتع أكثر
+  </span>
+  </div>
 <div class="wrap" style="text-align:center;padding:18px 0;">
   <a href="#products" style="
     display:inline-block;
