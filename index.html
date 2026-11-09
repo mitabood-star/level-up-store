@@ -1625,8 +1625,9 @@ list.forEach(p=>{
     ${discounted? `<span class="old-price">${formatPrice(p.price)}</span>`:""}
    </div>
    ${discounted?'<div class="discount-note">🔥 ينتهي العرض بعد <span class="discount-countdown" data-ends="'+new Date(p.discount_ends_at).getTime()+'">--:--:--</span></div>':""}
-   <a class="buy" target="_blank" rel="noopener"
-   href="https://wa.me/962790984231?text=${encodeURIComponent(message)}">اطلب الآن</a>
+   <button class="buy" onclick="addToCart('${p.id}')">
+🛒 أضف للسلة
+</button>
   `;
 
   card.append(img,body);
@@ -1679,6 +1680,189 @@ category.addEventListener("change",function(){
 });
 sort.addEventListener("change",renderProducts);
 
+let shoppingCart = [];
+
+function getCartPrice(p) {
+  return activeDiscount(p)
+    ? Number(p.discount_price)
+    : Number(p.price);
+}
+
+function addToCart(productId) {
+  const product = allProducts.find(
+    p => String(p.id) === String(productId)
+  );
+
+  if (!product) {
+    alert("المنتج غير موجود");
+    return;
+  }
+
+  const existing = shoppingCart.find(
+    item => String(item.id) === String(productId)
+  );
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    shoppingCart.push({
+      ...product,
+      quantity: 1
+    });
+  }
+
+  renderCart();
+  openCart();
+}
+
+function openCart() {
+  const drawer = document.getElementById("cartDrawer");
+  const overlay = document.getElementById("cartOverlay");
+
+  drawer.style.transform = "translateX(0)";
+  overlay.style.display = "block";
+}
+
+function toggleCart() {
+  const drawer = document.getElementById("cartDrawer");
+  const overlay = document.getElementById("cartOverlay");
+
+  const isOpen = drawer.style.transform === "translateX(0)";
+
+  drawer.style.transform = isOpen
+    ? "translateX(100%)"
+    : "translateX(0)";
+
+  overlay.style.display = isOpen ? "none" : "block";
+}
+
+function changeCartQty(id, amount) {
+  const item = shoppingCart.find(
+    p => String(p.id) === String(id)
+  );
+
+  if (!item) return;
+
+  item.quantity += amount;
+
+  if (item.quantity <= 0) {
+    shoppingCart = shoppingCart.filter(
+      p => String(p.id) !== String(id)
+    );
+  }
+
+  renderCart();
+}
+
+function removeFromCart(id) {
+  shoppingCart = shoppingCart.filter(
+    p => String(p.id) !== String(id)
+  );
+
+  renderCart();
+}
+
+function renderCart() {
+  const items = document.getElementById("cartItems");
+  const count = document.getElementById("drawerCartCount");
+  const totalElement = document.getElementById("cartTotal");
+
+  const totalCount = shoppingCart.reduce(
+    (sum, p) => sum + p.quantity, 0
+  );
+
+  count.textContent = totalCount;
+
+  if (!shoppingCart.length) {
+    items.innerHTML =
+      '<p class="cart-empty">🛒 سلتك فارغة حالياً</p>';
+
+    totalElement.textContent = formatPrice(0);
+    return;
+  }
+
+  let total = 0;
+
+  items.innerHTML = shoppingCart.map(p => {
+    const price = getCartPrice(p);
+    total += price * p.quantity;
+
+    return `
+      <div class="cart-item">
+        <img src="${safeText(p.image_url || "")}"
+             alt="${safeText(p.name)}">
+
+        <div class="cart-item-info">
+          <strong>${safeText(p.name)}</strong>
+          <p>${formatPrice(price)}</p>
+
+          <button data-cart-action="minus"
+                  data-cart-id="${safeText(p.id)}">−</button>
+
+          <span>${p.quantity}</span>
+
+          <button data-cart-action="plus"
+                  data-cart-id="${safeText(p.id)}">+</button>
+
+          <button data-cart-action="remove"
+                  data-cart-id="${safeText(p.id)}">🗑️</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  totalElement.textContent = formatPrice(total);
+}
+
+document.getElementById("cartItems").addEventListener(
+  "click", function(event) {
+    const button = event.target.closest("[data-cart-action]");
+    if (!button) return;
+
+    const id = button.dataset.cartId;
+    const action = button.dataset.cartAction;
+
+    if (action === "plus") changeCartQty(id, 1);
+    if (action === "minus") changeCartQty(id, -1);
+    if (action === "remove") removeFromCart(id);
+  }
+);
+
+function checkoutCart() {
+  if (!shoppingCart.length) {
+    alert("السلة فارغة!");
+    return;
+  }
+
+  let message = "طلب جديد من LEVEL UP Gaming Store%0A%0A";
+
+  shoppingCart.forEach(p => {
+    message += encodeURIComponent(
+      p.name + " × " + p.quantity +
+      " = " + formatPrice(getCartPrice(p) * p.quantity)
+    ) + "%0A";
+  });
+
+  const total = shoppingCart.reduce(
+    (sum, p) => sum + getCartPrice(p) * p.quantity,
+    0
+  );
+
+  message += "%0Aالإجمالي: " +
+    encodeURIComponent(formatPrice(total));
+
+  window.open(
+    "https://wa.me/9627909824321?text=" + message,
+    "_blank"
+  );
+}
+
+document.getElementById("currency").addEventListener(
+  "change", renderCart
+);
+
+renderCart();
+  
 loadProducts();
  setInterval(updateDiscountCountdowns,1000);
 </script>
