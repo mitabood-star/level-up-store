@@ -1228,7 +1228,7 @@ header{
   </span>
   </div>
 <div class="wrap" style="text-align:center;padding:18px 0;">
-  <a href="#products" style="
+  <a href="#products" onclick="showDiscounts();return false;" style="
     display:inline-block;
     background:linear-gradient(135deg,#087b32,#39e875);
     color:#fff;
@@ -1392,12 +1392,23 @@ function safeText(value){
 
   return Number(amount).toFixed(2) + " د.أ";
 }
+window.showOnlyDiscounts = false;
 
+function showDiscounts(){
+  window.showOnlyDiscounts = true;
+  category.value = "all";
+  search.value = "";
+  renderProducts();
+  document.getElementById("products").scrollIntoView({
+    behavior:"smooth"
+  });
+}
 function changeCurrency(){
   renderProducts();
 }
   function renderProducts(){
  let list=[...allProducts];
+    if(window.showOnlyDiscounts) list=list.filter(p=>activeDiscount(p));
  const q=search.value.trim().toLowerCase();
  const cat=category.value;
 
