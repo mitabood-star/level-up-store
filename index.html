@@ -1201,14 +1201,91 @@ header{
   0%{transform:translateX(0)}
   100%{transform:translateX(100%)}
 }
+  /* LEVEL UP TOP NAVIGATION */
+.top-header{
+ position:sticky;
+ top:0;
+ z-index:9999;
+ padding:10px 3%;
+ background:#080b09;
+ border-bottom:2px solid #39ff72;
+ box-shadow:0 2px 15px #39ff7230;
+}
+.top-nav{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:18px;
+ direction:ltr;
+ max-width:1400px;
+ margin:auto;
+}
+.top-nav .logo{
+ white-space:nowrap;
+ font-size:24px;
+ font-weight:900;
+ color:#fff;
+}
+.top-nav .logo span{color:#39ff72}
+.top-links{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:clamp(10px,2vw,28px);
+ direction:rtl;
+}
+.top-links a{
+ white-space:nowrap;
+ font-size:14px;
+ font-weight:bold;
+ color:#eee;
+ padding:10px 3px;
+ transition:.2s;
+}
+.top-links a:hover,
+.top-links a.active{
+ color:#39ff72;
+ border-bottom:2px solid #39ff72;
+}
+.top-search,.top-menu{
+ color:#fff;
+ font-size:25px;
+ white-space:nowrap;
+}
+@media(max-width:700px){
+ .top-header{padding:9px 3%}
+ .top-nav{gap:12px}
+ .top-nav .logo{font-size:18px}
+ .top-links{
+  flex:1;
+  justify-content:flex-start;
+  overflow-x:auto;
+  gap:16px;
+  scrollbar-width:none;
+ }
+ .top-links::-webkit-scrollbar{display:none}
+ .top-links a{font-size:12px;padding:8px 0}
+ .top-search,.top-menu{font-size:20px}
+}
 </style>
 </head>
 <body>
+  
+<header id="top" class="top-header">
+ <div class="top-nav">
+  <a class="logo" href="#top">LEVEL <span>UP</span></a>
 
-<header>
- <div class="wrap nav">
-  <div class="logo">LEVEL <span>UP</span></div>
-  <a href="#products">تصفح المنتجات 🎮</a>
+  <nav class="top-links">
+   <a class="active" href="#top">⌂ الرئيسية</a>
+   <a href="#products" onclick="document.getElementById('category').value='games';document.getElementById('category').dispatchEvent(new Event('change'))">🎮 الألعاب</a>
+   <a href="#products" onclick="document.getElementById('category').value='pass';document.getElementById('category').dispatchEvent(new Event('change'))">Xbox Game Pass</a>
+   <a href="#products" onclick="document.getElementById('category').value='shared';document.getElementById('category').dispatchEvent(new Event('change'))">👥 الحسابات</a>
+   <a href="#products" onclick="document.getElementById('category').value='cards';document.getElementById('category').dispatchEvent(new Event('change'))">💳 البطاقات</a>
+   <a href="#products" onclick="showDiscounts();return false">％ العروض</a>
+  </nav>
+
+  <a class="top-search" href="#products" onclick="setTimeout(()=>document.getElementById('search').focus(),300)">⌕</a>
+  <a class="top-menu" href="#products">☰</a>
  </div>
 </header>
 
