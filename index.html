@@ -1244,6 +1244,10 @@ header{
    <option value="low">السعر: الأقل أولاً</option>
    <option value="high">السعر: الأعلى أولاً</option>
   </select>
+   <select id="currency" class="filter" onchange="changeCurrency()">
+  <option value="JOD">🇯🇴 دينار أردني</option>
+  <option value="OMR">🇴🇲 ريال عُماني</option>
+   </select>
  </div>
 
  <div class="products" id="productGrid">
@@ -1284,7 +1288,6 @@ header{
  <div class="wrap">
   <strong>LEVEL UP Gaming Store</strong>
   <p>العب أكثر، استمتع أكثر 🎮</p>
-  <p>الدفع عبر CliQ وZain Cash وOrange Money</p>
  </div>
 </footer>
 
@@ -1335,7 +1338,20 @@ function safeText(value){
  });
 }
 
-function renderProducts(){
+  function formatPrice(amount){
+  const currency = document.getElementById("currency").value;
+
+  if(currency === "OMR"){
+    return (Number(amount) * 0.543).toFixed(3) + " ر.ع";
+  }
+
+  return Number(amount).toFixed(2) + " د.أ";
+}
+
+function changeCurrency(){
+  renderProducts();
+}
+  function renderProducts(){
  let list=[...allProducts];
  const q=search.value.trim().toLowerCase();
  const cat=category.value;
@@ -1395,7 +1411,7 @@ list.forEach(p=>{
   const catName=safeText(getCategoryName(p));
 
   const message="مرحبا LEVEL UP، بدي أطلب: "+(p.name||"منتج")+
-  " - السعر: "+price+" دينار";
+  " - السعر: "+formatPrice(price);
 
   const card=document.createElement("article");
   card.className="product";
@@ -1414,8 +1430,8 @@ list.forEach(p=>{
    <div class="desc">${desc}</div>
    <span class="category-tag">${catName}</span>
    <div class="price-row">
-    <span class="price">${price.toFixed(2)} د.أ</span>
-    ${discounted?`<span class="old-price">${Number(p.price).toFixed(2)} د.أ</span>`:""}
+    <span class="price">${formatPrice(price)}</span>
+    ${discounted? `<span class="old-price">${formatPrice(p.price)}</span>`:""}
    </div>
    ${discounted?'<div class="discount-note">🔥 ينتهي العرض بعد <span class="discount-countdown" data-ends="'+new Date(p.discount_ends_at).getTime()+'">--:--:--</span></div>':""}
    <a class="buy" target="_blank" rel="noopener"
