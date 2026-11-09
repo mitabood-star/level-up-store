@@ -1350,19 +1350,18 @@ let allProducts=[];
 
 function getCategory(p){
  const t=(p.product_type||"").toLowerCase().trim();
+
+ if(t==="shared_account") return "shared";
+ if(t==="personal_account") return "games";
+ if(t==="subscription") return "pass";
+ if(t==="gift_card") return "cards";
+
  const c=(p.category||"").toLowerCase().trim();
 
- if(t==="shared_account" || c.includes("shared") || c.includes("مشترك"))
- return "shared";
-
- if(t==="personal_account" || c.includes("games") || c.includes("ألعاب"))
- return "games";
-
- if(t==="subscription" || c.includes("pass"))
- return "pass";
-
- if(t==="gift_card" || c.includes("card") || c.includes("بطاق"))
- return "cards";
+ if(c.includes("shared") || c.includes("مشترك")) return "shared";
+ if(c.includes("games") || c.includes("ألعاب")) return "games";
+ if(c.includes("pass")) return "pass";
+ if(c.includes("card") || c.includes("بطاق")) return "cards";
 
  return "other";
 }
