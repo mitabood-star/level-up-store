@@ -205,7 +205,41 @@ box-shadow:0 10px 30px rgba(216,181,109,.22);
 }
 .benefit strong{display:block;margin:10px 0}
 .benefit p{font-size:11px;line-height:1.9;color:var(--muted)}
-.payments{display:flex;gap:12px;flex-wrap:wrap}
+.payments{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+}
+.payment-card{
+min-height:110px;
+padding:15px;
+border:1px solid #393025;
+border-radius:16px;
+background:linear-gradient(145deg,#171a17,#0c0d0c);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:10px;
+}
+.payment-logo{
+height:45px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.payment-logo img{
+max-width:130px;
+max-height:45px;
+object-fit:contain;
+}
+.payment-card strong{
+color:#f2eadb;
+font-size:12px;
+}
+@media(max-width:700px){
+.payments{grid-template-columns:repeat(2,1fr)}
+}
 .pay{
  padding:16px 22px;border:1px solid #51402b;
  border-radius:12px;background:#17130f;color:var(--gold2);
@@ -413,10 +447,34 @@ footer{
   <div class="gold-line"></div>
  </div>
  <div class="payments">
-  <div class="pay">CliQ</div>
-  <div class="pay">Zain Cash</div>
-  <div class="pay">Orange Money</div>
- </div>
+
+<div class="payment-card">
+<div class="payment-logo">💳</div>
+<strong>CliQ</strong>
+</div>
+
+<div class="payment-card">
+<div class="payment-logo">🟣</div>
+<strong>Zain Cash</strong>
+</div>
+
+<div class="payment-card">
+<div class="payment-logo">🟠</div>
+<strong>Orange Money</strong>
+</div>
+
+<div class="payment-card">
+<div class="payment-logo">🟡</div>
+<strong>Binance USDT</strong>
+</div>
+
+<div class="payment-card">
+<div class="payment-logo">🏦</div>
+<strong>Bank Muscat 🇴🇲</strong>
+</div>
+
+</div>
+<p class="payment-note">دفع آمن وسهل — اختار طريقة الدفع المناسبة إلك.</p>
 </section>
 </main>
 
