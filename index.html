@@ -1308,7 +1308,7 @@ header{
   position: fixed;
   top: 0;
   right: 0;
-  width: min(390px, 90vw);
+  width: min(340px, 82vw);
   height: 100vh;
   height: 100dvh;
   background: #101510;
@@ -1515,7 +1515,7 @@ header{
 <aside id="cartDrawer" class="cart-drawer">
  <div class="cart-header">
   <h2>🛒 سلة التسوق <span id="drawerCartCount">0</span></h2>
-  <button onclick="toggleCart()">✕</button>
+  <button onclick="closeCart()">✕</button>
  </div>
 
  <div id="cartItems" class="cart-items">
@@ -1790,17 +1790,26 @@ function openCart() {
   overlay.style.display = "block";
 }
 
+  function closeCart() {
+  const drawer = document.getElementById("cartDrawer");
+  const overlay = document.getElementById("cartOverlay");
+
+  drawer.style.transform = "translateX(110%)";
+  overlay.style.display = "none";
+}
+
 function toggleCart() {
   const drawer = document.getElementById("cartDrawer");
   const overlay = document.getElementById("cartOverlay");
 
-  const isOpen = drawer.style.transform === "translateX(0)";
+  const isOpen = drawer.style.transform === "translateX(0px)" ||
+                 drawer.style.transform === "translateX(0)";
 
-  drawer.style.transform = isOpen
-    ? "translateX(100%)"
-    : "translateX(0)";
-
-  overlay.style.display = isOpen ? "none" : "block";
+  if (isOpen) {
+    closeCart();
+  } else {
+    openCart();
+  }
 }
 
 function changeCartQty(id, amount) {
