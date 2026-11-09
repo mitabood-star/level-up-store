@@ -1349,16 +1349,23 @@ const sort=document.getElementById("sort");
 let allProducts=[];
 
 function getCategory(p){
- const t=(p.product_type||"").toLowerCase();
- const c=(p.category||"").toLowerCase();
+ const t=(p.product_type||"").toLowerCase().trim();
+ const c=(p.category||"").toLowerCase().trim();
 
- if(t==="subscription"||c.includes("pass"))return "pass";
- if(t==="gift_card"||c.includes("card")||c.includes("بطاق"))return "cards";
- if(t==="shared_account"||c.includes("shared")||c.includes("مشترك"))return "shared";
- if(t==="personal_account")return "games";
+ if(t==="shared_account" || c.includes("shared") || c.includes("مشترك"))
+ return "shared";
+
+ if(t==="personal_account" || c.includes("games") || c.includes("ألعاب"))
+ return "games";
+
+ if(t==="subscription" || c.includes("pass"))
+ return "pass";
+
+ if(t==="gift_card" || c.includes("card") || c.includes("بطاق"))
+ return "cards";
+
  return "other";
 }
-
 function getCategoryName(p){
  const t=(p.product_type||"").toLowerCase();
  if(t==="personal_account")return "تفعيل مباشر";
@@ -1538,7 +1545,10 @@ list.forEach(p=>{
 }
 
 search.addEventListener("input",renderProducts);
-category.addEventListener("change",renderProducts);
+category.addEventListener("change",function(){
+  window.showOnlyDiscounts = false;
+  renderProducts();
+});
 sort.addEventListener("change",renderProducts);
 
 loadProducts();
