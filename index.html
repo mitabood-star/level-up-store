@@ -1143,6 +1143,27 @@ header{
   font-weight:900;
   text-align:right;
 }
+  /* LEVEL UP Payment Methods */
+.payments-section{
+ width:92%;max-width:1150px;margin:35px auto 28px;text-align:center;
+}
+.payments-title{color:#39e875;font-size:24px;margin:0 0 8px}
+.payments-subtitle{color:#bdbdbd;font-size:13px;margin:0 0 20px}
+.payments-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+}
+.payment-card{
+ min-height:105px;padding:14px 10px;border:1px solid #238d49;
+ border-radius:14px;background:linear-gradient(145deg,#111,#07150c);
+ box-shadow:0 0 12px #39e87518;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;gap:9px;
+}
+.payment-card img{display:block;width:100%;max-width:125px;height:43px;object-fit:contain}
+.payment-card strong{color:#f4fff6;font-size:12px}
+@media(max-width:520px){
+ .payments-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .payments-title{font-size:21px}
+}
 </style>
 </head>
 <body>
