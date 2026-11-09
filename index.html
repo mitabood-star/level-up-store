@@ -1376,6 +1376,24 @@ border-bottom:1px solid #39ff7255;
   font-weight: bold;
   margin: 7px 0;
 }
+  #cartItems button[data-cart-action] {
+  background: #101b13;
+  color: #39ff72;
+  border: 1px solid #39ff72;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .25s;
+  box-shadow: 0 0 8px #39ff7230;
+}
+
+#cartItems button[data-cart-action]:active {
+  background: #39ff72;
+  color: #071009;
+}
 #cartDrawer .cart-footer {
   margin-top: 20px;
   padding-top: 15px;
@@ -1384,13 +1402,32 @@ border-bottom:1px solid #39ff7255;
 
 #cartDrawer .checkout-btn {
   width: 100%;
-  background: #39ff72;
-  color: #071009;
-  border: 0;
-  border-radius: 10px;
-  padding: 14px;
-  font-weight: bold;
+  background: linear-gradient(135deg, #39ff72, #16c95a, #39ff72);
+  background-size: 200% 200%;
+  color: #061009;
+  border: 1px solid #39ff72;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 900;
   margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 12px #39ff7270, 0 0 25px #39ff7230;
+  transition: .3s ease;
+  animation: checkoutGlow 3s ease infinite;
+}
+
+@keyframes checkoutGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #39ff7250;
+  }
+  50% {
+    box-shadow: 0 0 22px #39ff72, 0 0 35px #39ff7250;
+  }
+}
+
+#cartDrawer .checkout-btn:active {
+  transform: scale(.97);
 }
   
 </style>
