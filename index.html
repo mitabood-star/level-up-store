@@ -1294,6 +1294,73 @@ header{
  display:grid;
  place-items:center;
 }
+  
+/* LEVEL UP - Shopping Cart Drawer */
+#cartOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  z-index: 9998;
+  display: none;
+}
+
+#cartDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(390px, 90vw);
+  height: 100vh;
+  height: 100dvh;
+  background: #101510;
+  color: #fff;
+  border-left: 2px solid #39ff72;
+  box-shadow: 0 0 25px #39ff7240;
+  z-index: 9999;
+  transform: translateX(110%);
+  transition: transform .3s ease;
+  overflow-y: auto;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+#cartDrawer .cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#cartItems img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+#cartDrawer .cart-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #39ff72;
+}
+
+#cartDrawer .checkout-btn {
+  width: 100%;
+  background: #39ff72;
+  color: #071009;
+  border: 0;
+  border-radius: 10px;
+  padding: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+  
 </style>
 </head>
 <body>
