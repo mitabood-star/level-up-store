@@ -1674,10 +1674,10 @@ function safeText(value){
   const currency = document.getElementById("currency").value;
 
   if(currency === "OMR"){
-    return (Number(amount) * 0.543).toFixed(3) + " ر.ع";
+    return (Number(amount) * 0.543).toFixed(3) + " OMR";
   }
 
-  return Number(amount).toFixed(2) + " د.أ";
+  return Number(amount).toFixed(2) + " JOD";
 }
 window.showOnlyDiscounts = false;
 
