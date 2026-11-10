@@ -1129,22 +1129,52 @@ header{
   color:#39e875 !important;
 }
 /* LEVEL UP - Product Section Titles */
+
 .product-group-title{
   grid-column:1 / -1 !important;
+  position:relative;
+  display:flex;
+  align-items:center;
+  direction:rtl;
   width:100%;
-  margin:28px 0 12px;
-  padding:18px 10px;
+  min-height:76px;
+  margin:28px 0 16px;
+  padding:12px 12px 24px;
   color:#fff;
   background:transparent;
   border:0;
-  border-radius:0;
-  border-right:0;
-  border-bottom:2px solid #39e875;
-  box-shadow:0 8px 18px -12px #39e875;
   font-size:21px;
   font-weight:900;
   text-align:right;
+  text-shadow:0 0 10px #39e87555;
 }
+
+.product-group-title::before{
+  content:"";
+  flex-shrink:0;
+  width:48px;
+  height:48px;
+  margin-left:14px;
+  border:2px solid #39e875;
+  border-radius:50%;
+  background:
+    linear-gradient(45deg,transparent 43%,#39e875 45% 53%,transparent 55%),
+    linear-gradient(-45deg,transparent 43%,#39e875 45% 53%,transparent 55%),
+    radial-gradient(circle,#102719,#050705);
+  box-shadow:0 0 12px #39e87599,inset 0 0 10px #39e87555;
+}
+
+.product-group-title::after{
+  content:"";
+  position:absolute;
+  bottom:5px;
+  left:0;
+  width:100%;
+  height:3px;
+  background:linear-gradient(90deg,transparent,#176b36 15%,#39e875 50%,#176b36 85%,transparent);
+  box-shadow:0 0 12px #39e875;
+}
+  
   /* LEVEL UP Payment Methods */
 .payments-section{
  width:92%;max-width:1150px;margin:35px auto 28px;text-align:center;
