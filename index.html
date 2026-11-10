@@ -1478,6 +1478,131 @@ border-bottom:1px solid #39ff7255;
   font-size: 19px;
   text-shadow: 0 0 8px #39ff7270;
 } 
+  /* LEVEL UP PREMIUM HOME DESIGN */
+
+.premium-home{
+  width:94%;
+  max-width:1150px;
+  margin:12px auto 18px;
+}
+
+.premium-discount{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:155px;
+  padding:18px;
+  border:1px solid #39ff72;
+  border-radius:20px;
+  background:
+    radial-gradient(ellipse at 15% 50%,#176b36,transparent 55%),
+    linear-gradient(125deg,#07150b,#102d19,#030704);
+  box-shadow:0 0 15px #39ff7240,inset 0 0 25px #39ff7215;
+  overflow:hidden;
+}
+
+.discount-art,.discount-gift{
+  font-size:65px;
+  filter:drop-shadow(0 0 12px #39ff72);
+}
+
+.discount-content{
+  flex:1;
+  text-align:center;
+}
+
+.discount-content h2{
+  color:#fff;
+  font-size:clamp(22px,4vw,38px);
+  margin:0 0 8px;
+  font-weight:900;
+}
+
+.discount-content p{
+  color:#ddd;
+  font-size:14px;
+  margin:0 0 13px;
+}
+
+.discount-action{
+  display:inline-block;
+  padding:11px 20px;
+  border-radius:30px;
+  background:linear-gradient(120deg,#b5ff00,#39ff72);
+  color:#071009;
+  font-weight:900;
+  box-shadow:0 0 15px #39ff7270;
+}
+
+.premium-services{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:13px;
+}
+
+.service-box{
+  min-height:115px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:12px;
+  border-radius:17px;
+}
+
+.service-box h3{
+  color:#fff;
+  font-size:20px;
+  margin:0 0 7px;
+}
+
+.service-box p{
+  color:#ddd;
+  font-size:12px;
+  margin:0;
+}
+
+.service-icon{
+  font-size:48px;
+}
+
+.service-gold{
+  background:linear-gradient(135deg,#29200b,#080808,#44300d);
+  border:2px solid #e9bd52;
+  box-shadow:0 0 12px #e9bd5260;
+}
+
+.service-green{
+  background:linear-gradient(135deg,#063817,#061008,#0c4921);
+  border:2px solid #39ff72;
+  box-shadow:0 0 14px #39ff7260;
+}
+
+@media(max-width:520px){
+  .premium-home{margin:10px auto 14px}
+  .premium-discount{
+    min-height:125px;
+    padding:10px 7px;
+    gap:5px;
+    border-radius:14px;
+  }
+  .discount-art{font-size:38px}
+  .discount-gift{font-size:34px}
+  .discount-content h2{font-size:21px}
+  .discount-content p{font-size:10px}
+  .discount-action{font-size:11px;padding:9px 12px}
+  .premium-services{gap:9px;margin-top:10px}
+  .service-box{
+    min-height:100px;
+    padding:8px 5px;
+    gap:5px;
+  }
+  .service-box h3{font-size:14px}
+  .service-box p{font-size:10px}
+  .service-icon{font-size:35px}
+}
 </style>
 </head>
 <body>
