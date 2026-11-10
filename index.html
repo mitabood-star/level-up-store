@@ -1603,6 +1603,90 @@ border-bottom:1px solid #39ff7255;
   .service-box p{font-size:10px}
   .service-icon{font-size:35px}
 }
+  
+/* LEVEL UP - PREMIUM XBOX NEON PRODUCTS */
+
+#products {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 28px 18px 35px !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(ellipse at 15% 25%, #06451f 0%, transparent 42%),
+    radial-gradient(ellipse at 85% 80%, #06351b 0%, transparent 45%),
+    linear-gradient(135deg, #020805, #07180e 55%, #020805) !important;
+  border: 1px solid #176b36;
+  box-shadow: 0 0 25px #00ff5520;
+}
+
+#products .section-head h2 {
+  color: #fff !important;
+  font-size: clamp(24px, 4vw, 38px) !important;
+  font-weight: 900 !important;
+}
+
+#products .section-head h2 span {
+  color: #39e875 !important;
+}
+
+#products .toolbar {
+  display: grid !important;
+  grid-template-columns: 1.2fr 1.2fr .9fr !important;
+  gap: 12px !important;
+}
+
+#products .search,
+#products .filter {
+  color: white !important;
+  background: #07150d !important;
+  border: 2px solid #31d968 !important;
+  border-radius: 17px !important;
+  box-shadow: 0 0 12px #39e87525 !important;
+  outline: none !important;
+}
+
+#products .search {
+  height: 65px !important;
+  font-size: 18px !important;
+}
+
+#products .filter {
+  height: 58px !important;
+  min-width: 0 !important;
+  font-size: 15px !important;
+}
+
+#products .search:focus,
+#products .filter:focus {
+  border-color: #65ff91 !important;
+  box-shadow: 0 0 18px #39e87570 !important;
+}
+
+@media(max-width:600px) {
+  #products {
+    padding: 20px 12px 25px !important;
+  }
+
+  #products .toolbar {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 9px !important;
+  }
+
+  #products #currency {
+    grid-column: 1 / -1;
+  }
+
+  #products .search {
+    height: 52px !important;
+    font-size: 15px !important;
+  }
+
+  #products .filter {
+    height: 48px !important;
+    font-size: 13px !important;
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -1691,29 +1775,47 @@ border-bottom:1px solid #39ff7255;
 </section>
   
 <section class="wrap section" id="products">
- <div class="section-head">
-  <h2>منتجات <span>LEVEL UP</span></h2>
- </div>
 
- <div class="toolbar">
-  <input id="search" class="search" type="search" placeholder="ابحث عن لعبة أو اشتراك...">
-  <select id="category" class="filter">
-   <option value="all">كل الأقسام</option>
-   <option value="games">ألعاب Xbox</option>
-   <option value="pass">Game Pass</option>
-   <option value="cards">بطاقات رقمية</option>
-   <option value="shared">حسابات مشتركة</option>
-  </select>
-  <select id="sort" class="filter">
-   <option value="default">الترتيب الافتراضي</option>
-   <option value="low">السعر: الأقل أولاً</option>
-   <option value="high">السعر: الأعلى أولاً</option>
-  </select>
-   <select id="currency" class="filter" onchange="changeCurrency()">
-  <option value="JOD">🇯🇴 JOD</option>
-  <option value="OMR">🇴🇲 OMR</option>
-   </select>
- </div>
+<div style="position:relative;overflow:hidden;padding:28px 18px 35px;border-radius:22px;background:radial-gradient(ellipse at 50% 45%,#062817 0%,#03150c 48%,#050907 100%);">
+
+  <div style="text-align:right;margin-bottom:28px;position:relative;">
+    <h2 style="font-size:clamp(23px,4vw,38px);font-weight:900;margin:0;color:white;">
+      منتجات <span style="color:#39e875;">LEVEL UP</span> 🎮
+    </h2>
+    <div style="height:3px;width:150px;background:#39e875;box-shadow:0 0 15px #39e875;margin:14px 0 0 auto;border-radius:5px;"></div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px;position:relative;">
+
+    <input id="search" class="search" type="search"
+      placeholder="ابحث عن لعبة أو اشتراك..."
+      style="width:100%;height:65px;box-sizing:border-box;border:2px solid #39e875;border-radius:20px;background:#101a14;color:white;padding:0 22px;font-size:19px;box-shadow:0 0 12px #39e87535;">
+
+    <div class="toolbar" style="display:grid;grid-template-columns:1.2fr 1.2fr .9fr;gap:12px;">
+
+      <select id="category" class="filter" style="width:100%;min-width:0;height:58px;border:2px solid #287c48;border-radius:17px;background:#101a14;color:white;font-size:15px;">
+        <option value="all">كل الأقسام</option>
+        <option value="games">ألعاب Xbox</option>
+        <option value="pass">Game Pass</option>
+        <option value="cards">بطاقات رقمية</option>
+        <option value="shared">حسابات مشتركة</option>
+      </select>
+
+      <select id="sort" class="filter" style="width:100%;min-width:0;height:58px;border:2px solid #287c48;border-radius:17px;background:#101a14;color:white;font-size:15px;">
+        <option value="default">الترتيب الافتراضي</option>
+        <option value="low">السعر: الأقل أولاً</option>
+        <option value="high">السعر: الأعلى أولاً</option>
+      </select>
+
+      <select id="currency" class="filter" onchange="changeCurrency()" style="width:100%;min-width:0;height:58px;border:2px solid #287c48;border-radius:17px;background:#101a14;color:white;font-size:15px;">
+        <option value="JOD">🇯🇴 JOD</option>
+        <option value="OMR">🇴🇲 OMR</option>
+      </select>
+
+    </div>
+  </div>
+</div>
+  
 
  <div class="products" id="productGrid">
   <div class="empty-state">جاري تحميل المنتجات...</div>
