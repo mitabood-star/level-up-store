@@ -22,6 +22,30 @@ small{color:#bbb}
 .discount-box h3{margin:5px 0 10px;color:#ff5555}
 .discount-box label{display:block;margin-top:8px;color:#ddd}
 .discount-status{color:#ffb347;font-size:13px}
+ 
+/* LEVEL UP - Horizontal Products Grid */
+#products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+#products .product {
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #383838;
+  border-radius: 12px;
+  padding: 12px;
+  background: #151515;
+  overflow-wrap: anywhere;
+}
+
+#products .product button {
+  max-width: 100%;
+  margin: 4px 2px;
+}
+ 
 </style>
 </head>
 <body>
