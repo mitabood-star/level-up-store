@@ -283,32 +283,29 @@ async function editProduct(p){
 
   if(confirm("هل تريد تغيير صورة المنتج؟")){
     
+
 const photo=document.createElement("input");
 photo.type="file";
 photo.accept="image/*";
-photo.style.position="fixed";
-photo.style.left="0";
-photo.style.top="0";
-photo.style.opacity="0";
-photo.style.width="1px";
-photo.style.height="1px";
+photo.style.cssText="position:fixed;bottom:20px;left:5%;width:90%;height:55px;z-index:999999;background:#fff;color:#000;padding:12px;border-radius:10px;";
 
 document.body.appendChild(photo);
 
+message("اضغط زر اختيار ملف لاختيار صورة المنتج");
+
 const file=await new Promise(resolve=>{
-  photo.onchange=()=>{
+  photo.addEventListener("change",()=>{
     const selected=photo.files[0] || null;
     photo.remove();
     resolve(selected);
-  };
+  },{once:true});
 
   photo.addEventListener("cancel",()=>{
     photo.remove();
     resolve(null);
   },{once:true});
-
-  photo.click();
 });
+   
    
     if(file){
       const ext=(file.name.split(".").pop()||"jpg")
