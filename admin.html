@@ -282,16 +282,34 @@ async function editProduct(p){
   let image_url=p.image_url;
 
   if(confirm("هل تريد تغيير صورة المنتج؟")){
-    const photo=document.createElement("input");
-    photo.type="file";
-    photo.accept="image/*";
+    
+const photo=document.createElement("input");
+photo.type="file";
+photo.accept="image/*";
+photo.style.position="fixed";
+photo.style.left="0";
+photo.style.top="0";
+photo.style.opacity="0";
+photo.style.width="1px";
+photo.style.height="1px";
 
-    const file=await new Promise(resolve=>{
-      photo.onchange=()=>resolve(photo.files[0]||null);
-      photo.addEventListener("cancel",()=>resolve(null),{once:true});
-      photo.click();
-    });
+document.body.appendChild(photo);
 
+const file=await new Promise(resolve=>{
+  photo.onchange=()=>{
+    const selected=photo.files[0] || null;
+    photo.remove();
+    resolve(selected);
+  };
+
+  photo.addEventListener("cancel",()=>{
+    photo.remove();
+    resolve(null);
+  },{once:true});
+
+  photo.click();
+});
+   
     if(file){
       const ext=(file.name.split(".").pop()||"jpg")
         .toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
