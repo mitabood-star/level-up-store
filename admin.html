@@ -180,7 +180,10 @@ async function loadProducts(){
   const del=document.createElement("button");
   del.textContent="حذف المنتج";
   del.onclick=()=>deleteProduct(p.id);
-
+const edit=document.createElement("button");
+edit.className="secondary";
+edit.textContent="تعديل المنتج";
+edit.onclick=()=>editProduct(p);
   const discount=document.createElement("div");
   discount.className="discount-box";
 
@@ -246,13 +249,88 @@ async function loadProducts(){
    dateLabel,endDate,activeLabel,save,discountStatus
   );
 
-  item.append(title,info,toggle,del,discount);
+  item.append(title,info,toggle,del,edit,discount);
   box.appendChild(item);
  });
 
  if(!data || !data.length)box.textContent="لا توجد منتجات حالياً";
 }
+async function editProduct(p){
+  const name=prompt("اسم المنتج:",p.name);
+  if(name===null)return;
 
+  const description=prompt("وصف المنتج:",p.description||"");
+  if(description===null)return;
+
+  const price=prompt("السعر بالدينار:",p.price);
+  if(price===null)return;
+
+  const category=prompt("القسم:",p.category||"");
+  if(category===null)return;
+
+  const productType=prompt(
+    "نوع المنتج:\nshared_account\npersonal_account\nsubscription\ngift_card\nother",
+    p.product_type||"other"
+  );
+  if(productType===null)return;
+
+  if(!name.trim()||!Number.isFinite(Number(price))||Number(price)<0){
+    message("تأكد من اسم المنتج والسعر");
+    return;
+  }
+
+  let image_url=p.image_url;
+
+  if(confirm("هل تريد تغيير صورة المنتج؟")){
+    const photo=document.createElement("input");
+    photo.type="file";
+    photo.accept="image/*";
+
+    const file=await new Promise(resolve=>{
+      photo.onchange=()=>resolve(photo.files[0]||null);
+      photo.addEventListener("cancel",()=>resolve(null),{once:true});
+      photo.click();
+    });
+
+    if(file){
+      const ext=(file.name.split(".").pop()||"jpg")
+        .toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+
+      const path=Date.now()+"-"+Math.random()
+        .toString(36).slice(2,8)+"."+ext;
+
+      const {error:uploadError}=await db.storage
+        .from("product-images").upload(path,file);
+
+      if(uploadError){
+        message("خطأ رفع الصورة: "+uploadError.message);
+        return;
+      }
+
+      const {data:urlData}=db.storage
+        .from("product-images").getPublicUrl(path);
+
+      image_url=urlData.publicUrl;
+    }
+  }
+
+  const {error}=await db.from("products").update({
+    name:name.trim(),
+    description:description.trim(),
+    price:Number(price),
+    category:category.trim(),
+    product_type:productType,
+    image_url:image_url
+  }).eq("id",p.id);
+
+  if(error){
+    message("فشل تعديل المنتج: "+error.message);
+    return;
+  }
+
+  message("تم تعديل المنتج بنجاح");
+  await loadProducts();
+}
 async function saveDiscount(id,originalPrice,priceValue,endValue,isActive){
  const discountPrice=priceValue.trim()===""?null:Number(priceValue);
  let endsAt=null;
