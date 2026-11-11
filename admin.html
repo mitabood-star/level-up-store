@@ -193,6 +193,17 @@ async function loadProducts(){
   const title=document.createElement("strong");
   title.textContent=p.name+" — "+p.price+" د.أ";
 
+const productImage=document.createElement("img");
+productImage.src=p.image_url || "";
+productImage.alt=p.name;
+productImage.style.width="100%";
+productImage.style.height="120px";
+productImage.style.objectFit="contain";
+productImage.style.borderRadius="10px";
+productImage.style.marginBottom="10px";
+productImage.style.background="#222";
+productImage.style.display=p.image_url?"block":"none";
+  
   const info=document.createElement("small");
   info.textContent=" | "+(p.is_active?"ظاهر للزبائن":"مخفي");
 
@@ -273,7 +284,23 @@ edit.onclick=()=>editProduct(p);
    dateLabel,endDate,activeLabel,save,discountStatus
   );
 
-  item.append(title,info,toggle,del,edit,discount);
+  
+const discountToggle=document.createElement("button");
+discountToggle.className="secondary";
+discountToggle.textContent="إدارة الخصم ▼";
+
+discount.style.display="none";
+
+discountToggle.onclick=()=>{
+  const isHidden=discount.style.display==="none";
+  discount.style.display=isHidden?"block":"none";
+  discountToggle.textContent=isHidden
+    ?"إخفاء إدارة الخصم ▲"
+    :"إدارة الخصم ▼";
+};
+
+item.append(productImage,title,info,toggle,del,edit,discountToggle,discount);
+  
   box.appendChild(item);
  });
 
