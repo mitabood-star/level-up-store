@@ -2183,7 +2183,7 @@ list.forEach(p=>{
 
  const {data,error}=await db.from("products")
   .select("*")
-  .eq("is_active",true)
+  
   .order("created_at",{ascending:false});
 
  if(error){
@@ -2193,7 +2193,15 @@ list.forEach(p=>{
  }
 
  allProducts=data||[];
- renderProducts();
+
+try {
+  renderProducts();
+} catch (e) {
+  console.error("Product display error:", e);
+  grid.innerHTML =
+    '<div class="empty-state">خطأ في عرض المنتجات: ' +
+    String(e.message) + '</div>';
+}
 }
 
 search.addEventListener("input",renderProducts);
