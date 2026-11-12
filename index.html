@@ -2411,7 +2411,7 @@ async function sendCliqOrder() {
   }));
 
   try {
-    const { data, error } = await db
+    const { error } = await db
       .from("orders")
       .insert({
         items: orderItems,
@@ -2421,13 +2421,12 @@ async function sendCliqOrder() {
         payment_alias: "ALSHATTI22",
         status: "pending"
       })
-      .select("order_number")
-      .single();
+      });
 
     if (error) throw error;
 
     let message = "طلب جديد من LEVEL UP Gaming Store\n";
-    message += "رقم الطلب: #" + data.order_number + "\n\n";
+    
 
     orderItems.forEach(p => {
       message += p.name + " × " + p.quantity +
