@@ -1951,8 +1951,18 @@ background:
 
     <button class="cliq-send" onclick="sendCliqOrder()">
       تأكيد التحويل عبر واتساب
+      
     </button>
-
+<div class="proof-upload">
+  <label for="paymentProof">📸 ارفع صورة إثبات الدفع</label>
+  <input
+    type="file"
+    id="paymentProof"
+    accept="image/*"
+    required
+  >
+  <p>يجب إرفاق صورة الحوالة قبل إرسال الطلب</p>
+</div>
     <p class="cliq-note">
       يتم تأكيد الطلب بعد التحقق من وصول الحوالة.
     </p>
@@ -2389,21 +2399,33 @@ function checkoutCart() {
 
 function closeCliqModal() {
   document.getElementById("cliqOverlay").style.display = "none";
-}
-
-function copyCliqAlias() {
-  navigator.clipboard.writeText("ALSHATTI22")
-    .then(() => alert("تم نسخ معرّف CliQ بنجاح"))
-    .catch(() => alert("انسخ المعرّف يدوياً: ALSHATTI22"));
-}
 
 async function sendCliqOrder() {
   if (!shoppingCart.length) return;
 
+  const proofInput = document.getElementById("paymentProof");
+  const proofFile = proofInput?.files?.[0];
+
+  if (!proofFile) {
+    alert("يرجى إرفاق صورة إثبات الدفع أولاً");
+    return;
+  }
+
+  if (!proofFile.type.startsWith("image/")) {
+    alert("يرجى اختيار صورة صحيحة");
+    return;
+  }
+
+  if (proofFile.size > 5 * 1024 * 1024) {
+    alert("حجم الصورة يجب ألا يتجاوز 5 ميجابايت");
+    return;
+  }
+
   const button = document.querySelector(".cliq-send");
+
   if (button) {
     button.disabled = true;
-    button.textContent = "جاري حفظ الطلب...";
+    button.textContent = "جاري رفع إثبات الدفع...";
   }
 
   const total = shoppingCart.reduce(
@@ -2419,7 +2441,21 @@ async function sendCliqOrder() {
   }));
 
   try {
-    const { error } = await db
+    const fileExt = proofFile.name.split(".").pop().toLowerCase();
+    const filePath = crypto.randomUUID() + "." + fileExt;
+
+    const { error: uploadError } = await db.storage
+      .from("payment-proofs")
+      .upload(filePath, proofFile, {
+        contentType: proofFile.type,
+        upsert: false
+      });
+
+    if (uploadError) throw uploadError;
+
+    if (button) button.textContent = "جاري حفظ الطلب...";
+
+    const { error: orderError } = await db
       .from("orders")
       .insert({
         items: orderItems,
@@ -2427,14 +2463,13 @@ async function sendCliqOrder() {
         currency: "JOD",
         payment_method: "CliQ",
         payment_alias: "ALSHATTI22",
+        payment_proof_path: filePath,
         status: "pending"
       });
-      
 
-    if (error) throw error;
+    if (orderError) throw orderError;
 
     let message = "طلب جديد من LEVEL UP Gaming Store\n";
-    
 
     orderItems.forEach(p => {
       message += p.name + " × " + p.quantity +
@@ -2442,16 +2477,25 @@ async function sendCliqOrder() {
     });
 
     message += "\nالإجمالي: " + formatPrice(total);
-    message += "\nالبنك: البنك العربي";
     message += "\nطريقة الدفع: CliQ";
     message += "\nمعرّف الدفع: ALSHATTI22";
-    message += "\nيرجى إرفاق صورة إثبات التحويل.";
+    message += "\nإثبات الدفع محفوظ في Supabase";
+    message += "\nمسار الإثبات: " + filePath;
 
     window.location.href =
       "https://wa.me/962790984231?text=" +
       encodeURIComponent(message);
 
   } catch (error) {
+    alert("تعذر إرسال الطلب: " + error.message);
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "تأكيد التحويل عبر واتساب";
+    }
+  }
+}
+} catch (error) {
     alert("سبب فشل حفظ الطلب: " + error.message);
     
 
