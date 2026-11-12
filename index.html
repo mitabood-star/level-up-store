@@ -2389,30 +2389,70 @@ function copyCliqAlias() {
     .catch(() => alert("انسخ المعرّف يدوياً: ALSHATTI22"));
 }
 
-function sendCliqOrder() {
+async function sendCliqOrder() {
   if (!shoppingCart.length) return;
+
+  const button = document.querySelector(".cliq-send");
+  if (button) {
+    button.disabled = true;
+    button.textContent = "جاري حفظ الطلب...";
+  }
 
   const total = shoppingCart.reduce(
     (sum, p) => sum + getCartPrice(p) * p.quantity,
     0
   );
 
-  let message = "طلب جديد من LEVEL UP Gaming Store\n\n";
+  const orderItems = shoppingCart.map(p => ({
+    product_id: String(p.id),
+    name: String(p.name),
+    quantity: Number(p.quantity),
+    unit_price: Number(getCartPrice(p))
+  }));
 
-  shoppingCart.forEach(p => {
-    message += p.name + " × " + p.quantity +
-      " = " + formatPrice(getCartPrice(p) * p.quantity) + "\n";
-  });
+  try {
+    const { data, error } = await db
+      .from("orders")
+      .insert({
+        items: orderItems,
+        total: Number(total.toFixed(2)),
+        currency: "JOD",
+        payment_method: "CliQ",
+        payment_alias: "ALSHATTI22",
+        status: "pending"
+      })
+      .select("order_number")
+      .single();
 
-  message += "\nالإجمالي: " + formatPrice(total);
-  message += "\nالبنك: البنك العربي";
-  message += "\nطريقة الدفع: CliQ";
-  message += "\nمعرّف الدفع: ALSHATTI22";
-  message += "\nيرجى إرفاق إثبات التحويل.";
+    if (error) throw error;
 
-  window.location.href =
-    "https://wa.me/962790984231?text=" +
-    encodeURIComponent(message);
+    let message = "طلب جديد من LEVEL UP Gaming Store\n";
+    message += "رقم الطلب: #" + data.order_number + "\n\n";
+
+    orderItems.forEach(p => {
+      message += p.name + " × " + p.quantity +
+        " = " + formatPrice(p.unit_price * p.quantity) + "\n";
+    });
+
+    message += "\nالإجمالي: " + formatPrice(total);
+    message += "\nالبنك: البنك العربي";
+    message += "\nطريقة الدفع: CliQ";
+    message += "\nمعرّف الدفع: ALSHATTI22";
+    message += "\nيرجى إرفاق صورة إثبات التحويل.";
+
+    window.location.href =
+      "https://wa.me/962790984231?text=" +
+      encodeURIComponent(message);
+
+  } catch (error) {
+    console.error(error);
+    alert("تعذر حفظ الطلب، حاول مرة ثانية.");
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "تأكيد التحويل عبر واتساب";
+    }
+  }
 }
   
 
