@@ -1948,11 +1948,6 @@ background:
     <button class="cliq-copy" onclick="copyCliqAlias()">
       📋 نسخ معرّف الدفع
     </button>
-
-    <button class="cliq-send" onclick="sendCliqOrder()">
-      تأكيد التحويل عبر واتساب
-      
-    </button>
 <div class="proof-upload">
   <label for="paymentProof">📸 ارفع صورة إثبات الدفع</label>
   <input
@@ -1963,6 +1958,11 @@ background:
   >
   <p>يجب إرفاق صورة الحوالة قبل إرسال الطلب</p>
 </div>
+    <button class="cliq-send" onclick="sendCliqOrder()">
+      تأكيد التحويل عبر واتساب
+      
+    </button>
+
     <p class="cliq-note">
       يتم تأكيد الطلب بعد التحقق من وصول الحوالة.
     </p>
@@ -2399,7 +2399,8 @@ function checkoutCart() {
 
 function closeCliqModal() {
   document.getElementById("cliqOverlay").style.display = "none";
-
+}
+  
 async function sendCliqOrder() {
   if (!shoppingCart.length) return;
 
