@@ -2268,11 +2268,9 @@ function checkoutCart() {
   message += "\nمعرّف CliQ: ALSHATTI22";
   message += "\nيرجى إرفاق إثبات التحويل.";
 
-  window.open(
-    "https://wa.me/962790984231?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
+  window.location.href =
+  "https://wa.me/962790984231?text=" +
+  encodeURIComponent(message);
 }
   
 
