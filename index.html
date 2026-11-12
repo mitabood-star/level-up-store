@@ -1689,6 +1689,91 @@ background:
     font-size: 13px !important;
   }
 }
+
+/* LEVEL UP - CliQ Payment Window */
+.cliq-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:rgba(0,0,0,.88);
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  overflow-y:auto;
+}
+.cliq-modal{
+  width:100%;
+  max-width:480px;
+  max-height:94vh;
+  overflow-y:auto;
+  position:relative;
+  background:linear-gradient(145deg,#101b13,#050806);
+  border:2px solid #39ff72;
+  border-radius:24px;
+  padding:22px 17px;
+  color:#fff;
+  text-align:center;
+  box-shadow:0 0 25px #39ff7260;
+}
+.cliq-modal h2{
+  color:#39ff72;
+  font-size:27px;
+  margin:10px 0;
+}
+.cliq-bank{
+  border:1px solid #39ff72;
+  border-radius:14px;
+  padding:15px 8px;
+  margin:18px 0;
+  font-size:20px;
+  font-weight:bold;
+}
+.cliq-amount{
+  color:#f0cf55;
+  font-size:34px;
+  font-weight:900;
+  margin:15px 0;
+}
+.cliq-id{
+  background:#07110a;
+  border:1px dashed #39ff72;
+  border-radius:12px;
+  padding:15px;
+  color:#39ff72;
+  font-size:25px;
+  font-weight:900;
+  margin:12px 0;
+  direction:ltr;
+}
+.cliq-modal button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  margin-top:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.cliq-copy{
+  background:#39ff72;
+  color:#061008;
+}
+.cliq-send{
+  background:linear-gradient(120deg,#087b32,#25d95d);
+  color:white;
+}
+.cliq-close{
+  background:#292929;
+  color:white;
+}
+.cliq-note{
+  color:#bbb;
+  font-size:12px;
+  line-height:1.8;
+  margin-top:15px;
+}
   
 </style>
 </head>
@@ -1837,6 +1922,44 @@ background:
 >
   
 </section>
+  
+<!-- LEVEL UP CLIQ PAYMENT WINDOW -->
+<div id="cliqOverlay" class="cliq-overlay">
+  <div class="cliq-modal">
+
+    <button class="cliq-close" onclick="closeCliqModal()">✕ إغلاق</button>
+
+    <h2>LEVEL UP</h2>
+    <h2>تفاصيل الدفع 💳</h2>
+    <p>إتمام طلبك عبر تحويل CliQ</p>
+
+    <div class="cliq-bank">
+      🏦 البنك العربي<br>
+      ARAB BANK<br>
+      <span>الدفع عبر CliQ</span>
+    </div>
+
+    <p>المبلغ المطلوب</p>
+    <div class="cliq-amount" id="cliqAmount">0.00 JOD</div>
+
+    <p>معرّف الدفع (CliQ)</p>
+    <div class="cliq-id">ALSHATTI22</div>
+
+    <button class="cliq-copy" onclick="copyCliqAlias()">
+      📋 نسخ معرّف الدفع
+    </button>
+
+    <button class="cliq-send" onclick="sendCliqOrder()">
+      تأكيد التحويل عبر واتساب
+    </button>
+
+    <p class="cliq-note">
+      يتم تأكيد الطلب بعد التحقق من وصول الحوالة.
+    </p>
+
+  </div>
+</div>
+  
 <footer>
  <div class="wrap">
   <strong>LEVEL UP Gaming Store</strong>
@@ -2238,6 +2361,7 @@ document.getElementById("cartItems").addEventListener(
 );
 
 
+
 function checkoutCart() {
   if (!shoppingCart.length) {
     alert("السلة فارغة!");
@@ -2249,11 +2373,28 @@ function checkoutCart() {
     0
   );
 
-  alert(
-    "الدفع عبر CliQ - البنك العربي\n\n" +
-    "المبلغ المطلوب: " + formatPrice(total) +
-    "\nمعرّف CliQ: ALSHATTI22" +
-    "\n\nحوّل المبلغ ثم اضغط موافق لإرسال طلبك عبر واتساب."
+  document.getElementById("cliqAmount").textContent =
+    formatPrice(total);
+
+  document.getElementById("cliqOverlay").style.display = "flex";
+}
+
+function closeCliqModal() {
+  document.getElementById("cliqOverlay").style.display = "none";
+}
+
+function copyCliqAlias() {
+  navigator.clipboard.writeText("ALSHATTI22")
+    .then(() => alert("تم نسخ معرّف CliQ بنجاح"))
+    .catch(() => alert("انسخ المعرّف يدوياً: ALSHATTI22"));
+}
+
+function sendCliqOrder() {
+  if (!shoppingCart.length) return;
+
+  const total = shoppingCart.reduce(
+    (sum, p) => sum + getCartPrice(p) * p.quantity,
+    0
   );
 
   let message = "طلب جديد من LEVEL UP Gaming Store\n\n";
@@ -2264,13 +2405,14 @@ function checkoutCart() {
   });
 
   message += "\nالإجمالي: " + formatPrice(total);
-  message += "\nالدفع: CliQ - البنك العربي";
-  message += "\nمعرّف CliQ: ALSHATTI22";
+  message += "\nالبنك: البنك العربي";
+  message += "\nطريقة الدفع: CliQ";
+  message += "\nمعرّف الدفع: ALSHATTI22";
   message += "\nيرجى إرفاق إثبات التحويل.";
 
   window.location.href =
-  "https://wa.me/962790984231?text=" +
-  encodeURIComponent(message);
+    "https://wa.me/962790984231?text=" +
+    encodeURIComponent(message);
 }
   
 
