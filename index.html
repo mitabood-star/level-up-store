@@ -2445,8 +2445,8 @@ async function sendCliqOrder() {
       encodeURIComponent(message);
 
   } catch (error) {
-    console.error(error);
-    alert("تعذر حفظ الطلب، حاول مرة ثانية.");
+    alert("سبب فشل حفظ الطلب: " + error.message);
+    
 
     if (button) {
       button.disabled = false;
