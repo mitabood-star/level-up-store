@@ -2496,16 +2496,7 @@ async function sendCliqOrder() {
     }
   }
 }
-} catch (error) {
-    alert("سبب فشل حفظ الطلب: " + error.message);
-    
 
-    if (button) {
-      button.disabled = false;
-      button.textContent = "تأكيد التحويل عبر واتساب";
-    }
-  }
-}
   
 
 document.getElementById("currency").addEventListener(
