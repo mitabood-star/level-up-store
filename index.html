@@ -2237,34 +2237,44 @@ document.getElementById("cartItems").addEventListener(
   }
 );
 
+
 function checkoutCart() {
   if (!shoppingCart.length) {
     alert("السلة فارغة!");
     return;
   }
 
-  let message = "طلب جديد من LEVEL UP Gaming Store%0A%0A";
-
-  shoppingCart.forEach(p => {
-    message += encodeURIComponent(
-      p.name + " × " + p.quantity +
-      " = " + formatPrice(getCartPrice(p) * p.quantity)
-    ) + "%0A";
-  });
-
   const total = shoppingCart.reduce(
     (sum, p) => sum + getCartPrice(p) * p.quantity,
     0
   );
 
-  message += "%0Aالإجمالي: " +
-    encodeURIComponent(formatPrice(total));
+  alert(
+    "الدفع عبر CliQ - البنك العربي\n\n" +
+    "المبلغ المطلوب: " + formatPrice(total) +
+    "\nمعرّف CliQ: ALSHATTI22" +
+    "\n\nحوّل المبلغ ثم اضغط موافق لإرسال طلبك عبر واتساب."
+  );
+
+  let message = "طلب جديد من LEVEL UP Gaming Store\n\n";
+
+  shoppingCart.forEach(p => {
+    message += p.name + " × " + p.quantity +
+      " = " + formatPrice(getCartPrice(p) * p.quantity) + "\n";
+  });
+
+  message += "\nالإجمالي: " + formatPrice(total);
+  message += "\nالدفع: CliQ - البنك العربي";
+  message += "\nمعرّف CliQ: ALSHATTI22";
+  message += "\nيرجى إرفاق إثبات التحويل.";
 
   window.open(
-  "https://wa.me/962790984231?text=" + message,
-  "_blank"
-);
+    "https://wa.me/962790984231?text=" +
+    encodeURIComponent(message),
+    "_blank"
+  );
 }
+  
 
 document.getElementById("currency").addEventListener(
   "change", renderCart
