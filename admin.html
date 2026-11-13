@@ -88,6 +88,9 @@ small{color:#bbb}
   <button class="secondary" onclick="loadOrders()">
     🔄 تحديث الطلبات
   </button>
+  <button onclick="deleteAllOrders()" style="background:#8b0000">
+  🗑️ حذف جميع الطلبات
+  </button>
   <div id="orders">جاري تحميل الطلبات...</div>
  </section>
 <section class="card">
@@ -548,10 +551,73 @@ if(order.payment_proof_path){
     const proofBox = document.createElement("div");
     proofBox.innerHTML = proof;
 
-    card.append(title, details, proofBox);
-    box.appendChild(card);
+    const deleteButton = document.createElement("button");
+deleteButton.textContent = "🗑️ حذف هذا الطلب";
+deleteButton.style.background = "#8b0000";
+
+deleteButton.onclick = () => deleteOrder(order.id, order.order_number);
+
+card.append(title, details, proofBox, deleteButton);
+box.appendChild(card);
   }
 }
+ 
+async function deleteOrder(id, number){
+  if(!confirm("متأكد من حذف الطلب رقم " + number + "؟")) return;
+
+  const {error} = await db
+    .from("orders")
+    .delete()
+    .eq("id", id);
+
+  if(error){
+    message("فشل الحذف: " + error.message);
+    return;
+  }
+
+  message("تم حذف الطلب بنجاح");
+  await loadOrders();
+}
+
+async function deleteAllOrders(){
+  if(!confirm("تحذير: سيتم حذف جميع الطلبات نهائياً!")) return;
+
+  const confirmText = prompt("اكتب مسح للتأكيد");
+
+  if(confirmText !== "مسح"){
+    message("تم إلغاء العملية");
+    return;
+  }
+
+  const {data: orders, error: readError} =
+    await db.from("orders").select("id");
+
+  if(readError){
+    message("خطأ قراءة الطلبات: " + readError.message);
+    return;
+  }
+
+  if(!orders || orders.length === 0){
+    message("لا توجد طلبات");
+    return;
+  }
+
+  const ids = orders.map(o => o.id);
+
+  const {error} = await db
+    .from("orders")
+    .delete()
+    .in("id", ids);
+
+  if(error){
+    message("فشل حذف الطلبات: " + error.message);
+    return;
+  }
+
+  message("تم حذف جميع الطلبات");
+  await loadOrders();
+}
+ 
 db.auth.getSession().then(({data})=>{
  if(data.session && owner(data.session.user))showDashboard();
  else message("سجّل الدخول للمتابعة");
