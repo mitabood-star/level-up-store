@@ -61,6 +61,13 @@ small{color:#bbb}
 </section>
 
 <div id="dashboard" hidden>
+ <section class="card" id="ordersSection">
+  <h2>📦 إدارة الطلبات</h2>
+  <button class="secondary" onclick="loadOrders()">
+    🔄 تحديث الطلبات
+  </button>
+  <div id="orders">جاري تحميل الطلبات...</div>
+ </section>
 <section class="card">
 <h2>إضافة لعبة أو منتج</h2>
 <input id="name" placeholder="اسم اللعبة أو المنتج">
@@ -124,6 +131,7 @@ async function showDashboard(){
  document.getElementById("dashboard").hidden=false;
  message("تم تسجيل الدخول");
  await loadProducts();
+ await loadOrders();
 }
 
 async function logout(){
@@ -462,7 +470,64 @@ async function deleteProduct(id){
  message("تم حذف المنتج");
  await loadProducts();
 }
+async function loadOrders(){
+  const box = document.getElementById("orders");
 
+  box.textContent = "جاري تحميل الطلبات...";
+
+  const {data: orders, error} = await db
+    .from("orders")
+    .select("*")
+    .order("created_at", {ascending:false});
+
+  if(error){
+    box.textContent = "خطأ تحميل الطلبات: " + error.message;
+    return;
+  }
+
+  if(!orders || !orders.length){
+    box.textContent = "لا توجد طلبات حالياً";
+    return;
+  }
+
+  box.innerHTML = "";
+
+  for(const order of orders){
+
+    let proof = "لا يوجد إثبات دفع";
+
+    if(order.payment_proof_path){
+      const {data} = await db.storage
+        .from("payment-proofs")
+        .createSignedUrl(order.payment_proof_path, 3600);
+
+      if(data?.signedUrl){
+        proof = `<a href="${data.signedUrl}" target="_blank">
+          📷 مشاهدة إثبات الدفع
+        </a>`;
+      }
+    }
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const title = document.createElement("h3");
+    title.textContent = "طلب رقم: " + order.order_number;
+
+    const details = document.createElement("pre");
+    details.textContent =
+      "المنتجات: " + JSON.stringify(order.items) +
+      "\nالإجمالي: " + order.total + " " + order.currency +
+      "\nطريقة الدفع: " + order.payment_method +
+      "\nالحالة: " + order.status;
+
+    const proofBox = document.createElement("div");
+    proofBox.innerHTML = proof;
+
+    card.append(title, details, proofBox);
+    box.appendChild(card);
+  }
+}
 db.auth.getSession().then(({data})=>{
  if(data.session && owner(data.session.user))showDashboard();
  else message("سجّل الدخول للمتابعة");
