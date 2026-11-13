@@ -524,9 +524,9 @@ async function loadOrders(){
         .createSignedUrl(order.payment_proof_path, 3600);
 
       if(data?.signedUrl){
-        proof = `<a href="${data.signedUrl}" target="_blank">
-          📷 مشاهدة إثبات الدفع
-        </a>`;
+        proof = `<a href="${data.signedUrl}"
+📷 مشاهدة إثبات الدفع
+</a>`;
       }
     }
 
