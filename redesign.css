@@ -1,0 +1,186 @@
+
+/* =================================
+   LEVEL UP - PREMIUM GAMING DESIGN
+   ================================= */
+
+:root {
+  --lu-green: #39ff72;
+  --lu-lime: #a3ff12;
+  --lu-bg: #070b08;
+  --lu-card: #111a14;
+  --lu-border: #244d31;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--lu-bg) !important;
+  color: #fff !important;
+}
+
+/* Header */
+header {
+  background: rgba(5, 12, 7, .97) !important;
+  border-bottom: 1px solid var(--lu-border) !important;
+  box-shadow: 0 5px 25px #0008 !important;
+}
+
+.logo {
+  color: var(--lu-green) !important;
+  text-shadow: 0 0 15px #39ff7260;
+}
+
+/* Hero section */
+.hero {
+  border-bottom: 1px solid #245d36 !important;
+  box-shadow: 0 12px 30px #0008 !important;
+}
+
+.hero h1 {
+  color: #fff !important;
+  font-weight: 900 !important;
+}
+
+.hero h1 span {
+  color: var(--lu-green) !important;
+}
+
+.hero p {
+  color: #d0ddd3 !important;
+  line-height: 1.9 !important;
+}
+
+.hero-btn {
+  background: linear-gradient(120deg, var(--lu-lime), var(--lu-green)) !important;
+  color: #071009 !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 20px #39ff7250 !important;
+}
+
+/* Sections */
+.section {
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+}
+
+.section h2,
+.section-head h2 {
+  color: #fff !important;
+  font-weight: 900 !important;
+}
+
+/* Categories */
+.features {
+  gap: 14px !important;
+}
+
+.features button {
+  background: linear-gradient(145deg, #142219, #080d09) !important;
+  border: 1px solid var(--lu-border) !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  transition: .2s ease !important;
+}
+
+.features button:active {
+  transform: scale(.97);
+  border-color: var(--lu-green) !important;
+}
+
+/* Products */
+.products {
+  gap: 14px !important;
+}
+
+.product {
+  background: linear-gradient(145deg, #151f18, #090d0a) !important;
+  border: 1px solid #294b34 !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  box-shadow: 0 6px 18px #0007 !important;
+}
+
+.product img {
+  object-fit: cover !important;
+}
+
+.product-body {
+  padding: 13px !important;
+}
+
+.product h3 {
+  color: #fff !important;
+  font-weight: 800 !important;
+}
+
+.price {
+  color: var(--lu-green) !important;
+  font-weight: 900 !important;
+}
+
+.buy {
+  background: linear-gradient(120deg, var(--lu-lime), var(--lu-green)) !important;
+  color: #071009 !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  font-weight: 900 !important;
+}
+
+/* Search and filters */
+.search,
+.filter {
+  background: #111a14 !important;
+  border: 1px solid #31563b !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+}
+
+/* Trust and payment sections */
+.trust-strip {
+  background: #101a13 !important;
+  border: 1px solid var(--lu-border) !important;
+  border-radius: 14px !important;
+}
+
+footer {
+  background: #040705 !important;
+  border-top: 1px solid #245d36 !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .product {
+    border-radius: 12px !important;
+  }
+
+  .product-body {
+    padding: 9px !important;
+  }
+
+  .product h3 {
+    font-size: 12px !important;
+  }
+
+  .price {
+    font-size: 15px !important;
+  }
+
+  .buy {
+    font-size: 11px !important;
+    padding: 9px 5px !important;
+  }
+
+  .section {
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+}
