@@ -1,14 +1,21 @@
 
-/* =================================
-   LEVEL UP - PREMIUM GAMING DESIGN
-   ================================= */
+/* =========================================
+   LEVEL UP | ROYAL GAMING IDENTITY
+   Crown Lion - Neon Green - Premium Black
+   ========================================= */
 
 :root {
   --lu-green: #39ff72;
-  --lu-lime: #a3ff12;
-  --lu-bg: #070b08;
-  --lu-card: #111a14;
-  --lu-border: #244d31;
+  --lu-lime: #a6ff00;
+  --lu-gold: #d8b45a;
+  --lu-bg: #050806;
+  --lu-card: #101712;
+  --lu-border: #254c32;
+  --lu-white: #f5fff7;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -16,31 +23,140 @@ html {
 }
 
 body {
-  background: var(--lu-bg) !important;
-  color: #fff !important;
+  margin: 0 !important;
+  background:
+    radial-gradient(ellipse at 50% 0%, #102b19 0%, transparent 42%),
+    var(--lu-bg) !important;
+  color: var(--lu-white) !important;
+  font-family: Arial, sans-serif !important;
 }
 
-/* Header */
-header {
-  background: rgba(5, 12, 7, .97) !important;
-  border-bottom: 1px solid var(--lu-border) !important;
-  box-shadow: 0 5px 25px #0008 !important;
+a {
+  text-decoration: none;
+}
+
+/* HEADER */
+
+.top-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 9999;
+  background: rgba(3, 8, 5, .97) !important;
+  border-bottom: 1px solid #315b3c !important;
+  box-shadow: 0 5px 25px #000b !important;
+  backdrop-filter: blur(14px);
+}
+
+.top-nav {
+  width: 96% !important;
+  max-width: 1450px !important;
+  min-height: 76px;
+  margin: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
 }
 
 .logo {
-  color: var(--lu-green) !important;
-  text-shadow: 0 0 15px #39ff7260;
+  color: #fff !important;
+  font-size: 27px !important;
+  font-weight: 1000 !important;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-shadow: 0 0 16px #39ff7240;
 }
 
-/* Hero section */
+.logo span {
+  color: var(--lu-green) !important;
+}
+
+.top-links {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px !important;
+  flex: 1;
+}
+
+.top-links a {
+  color: #e6eee8 !important;
+  padding: 12px 10px !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-weight: 700;
+  transition: .2s ease;
+}
+
+.top-links a:hover,
+.top-links a.active {
+  color: var(--lu-green) !important;
+  background: #14251a !important;
+}
+
+.top-search,
+.cart-icon,
+.top-menu {
+  color: var(--lu-green) !important;
+  background: #101912 !important;
+  border: 1px solid #31583b !important;
+  border-radius: 12px !important;
+  min-width: 42px;
+  min-height: 42px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px !important;
+}
+
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+#cartCount {
+  background: var(--lu-lime) !important;
+  color: #061008 !important;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* HERO - OFFICIAL LEVEL UP ARTWORK */
+
 .hero {
-  border-bottom: 1px solid #245d36 !important;
-  box-shadow: 0 12px 30px #0008 !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1550px !important;
+  min-height: clamp(350px, 43vw, 590px) !important;
+  margin: 0 auto !important;
+  padding: 30px 5% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  overflow: hidden !important;
+  text-align: right !important;
+  background:
+    linear-gradient(90deg, transparent 15%, rgba(2,8,4,.08) 55%, rgba(2,8,4,.82) 100%),
+    url("https://raw.githubusercontent.com/mitabood-star/level-up-store/redesign-homepage/file_000000007ea881f49387535231468211.png")
+    center 43% / cover no-repeat !important;
+  border-bottom: 1px solid #327d42 !important;
+  box-shadow: 0 15px 35px #0009 !important;
+}
+
+.hero .wrap {
+  width: min(43%, 520px) !important;
+  margin: 0 0 0 auto !important;
+  position: relative;
+  z-index: 2;
+  text-align: right !important;
 }
 
 .hero h1 {
   color: #fff !important;
-  font-weight: 900 !important;
+  font-size: clamp(30px, 4.5vw, 58px) !important;
+  font-weight: 1000 !important;
+  text-shadow: 0 4px 20px #000 !important;
 }
 
 .hero h1 span {
@@ -48,111 +164,376 @@ header {
 }
 
 .hero p {
-  color: #d0ddd3 !important;
+  color: #f0f5f1 !important;
+  font-size: clamp(13px, 1.4vw, 18px) !important;
   line-height: 1.9 !important;
+  text-shadow: 0 2px 8px #000 !important;
 }
 
 .hero-btn {
-  background: linear-gradient(120deg, var(--lu-lime), var(--lu-green)) !important;
-  color: #071009 !important;
-  border: 0 !important;
+  display: inline-block !important;
+  background: linear-gradient(120deg, #a6ff00, #39ff72) !important;
+  color: #071008 !important;
+  border: 1px solid #c4ff66 !important;
   border-radius: 12px !important;
-  font-weight: 900 !important;
-  box-shadow: 0 0 20px #39ff7250 !important;
+  padding: 13px 28px !important;
+  font-weight: 1000 !important;
+  font-size: 16px !important;
+  box-shadow: 0 0 25px #39ff7260 !important;
 }
 
-/* Sections */
-.section {
-  padding-top: 25px !important;
-  padding-bottom: 25px !important;
+/* PROMOTIONS */
+
+.premium-home {
+  width: 94% !important;
+  max-width: 1350px !important;
+  margin: 25px auto !important;
 }
 
-.section h2,
-.section-head h2 {
-  color: #fff !important;
-  font-weight: 900 !important;
+.premium-discount img {
+  width: 100% !important;
+  border: 1px solid var(--lu-border);
+  border-radius: 16px !important;
+  box-shadow: 0 8px 25px #0008;
 }
 
-/* Categories */
-.features {
+.premium-services {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 14px !important;
+  margin-top: 14px !important;
 }
 
-.features button {
-  background: linear-gradient(145deg, #142219, #080d09) !important;
-  border: 1px solid var(--lu-border) !important;
+.premium-services img {
+  width: 100% !important;
+  border: 1px solid #285a37;
   border-radius: 15px !important;
-  overflow: hidden !important;
-  transition: .2s ease !important;
 }
 
-.features button:active {
-  transform: scale(.97);
-  border-color: var(--lu-green) !important;
+/* CATEGORY SECTION */
+
+body > section[style*="max-width:1150px"] {
+  width: 94% !important;
+  max-width: 1350px !important;
+  margin: 32px auto !important;
+  text-align: right !important;
 }
 
-/* Products */
-.products {
+body > section[style*="max-width:1150px"] h2 {
+  color: #fff !important;
+  font-size: 25px !important;
+  font-weight: 900 !important;
+  text-align: right !important;
+  border-right: 5px solid var(--lu-green);
+  padding-right: 12px;
+}
+
+body > section[style*="max-width:1150px"] > div {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   gap: 14px !important;
+}
+
+body > section[style*="max-width:1150px"] button {
+  background: #101811 !important;
+  border: 1px solid #315c3c !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 6px 20px #0008 !important;
+  transition: .25s ease;
+}
+
+body > section[style*="max-width:1150px"] button:hover {
+  border-color: var(--lu-green) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px #39ff7230 !important;
+}
+
+body > section[style*="max-width:1150px"] button img {
+  display: block;
+  width: 100% !important;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* PRODUCTS AREA */
+
+#products {
+  width: 94% !important;
+  max-width: 1350px !important;
+  margin: 30px auto !important;
+}
+
+#products > div:first-child {
+  border: 1px solid #285a37 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px #0008 !important;
+}
+
+#products h2 {
+  color: #fff !important;
+}
+
+.search,
+.filter {
+  background: #101912 !important;
+  color: #fff !important;
+  border: 1px solid #315b3c !important;
+  border-radius: 12px !important;
+}
+
+.search:focus,
+.filter:focus {
+  outline: 1px solid var(--lu-green) !important;
+  box-shadow: 0 0 12px #39ff7230 !important;
+}
+
+.products {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  margin-top: 22px !important;
 }
 
 .product {
-  background: linear-gradient(145deg, #151f18, #090d0a) !important;
-  border: 1px solid #294b34 !important;
-  border-radius: 15px !important;
+  background: linear-gradient(145deg, #152019, #080d09) !important;
+  border: 1px solid #31543a !important;
+  border-radius: 16px !important;
   overflow: hidden !important;
-  box-shadow: 0 6px 18px #0007 !important;
+  box-shadow: 0 7px 22px #0009 !important;
+  transition: .25s ease !important;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  border-color: var(--lu-green) !important;
+  box-shadow: 0 8px 25px #39ff7225 !important;
 }
 
 .product img {
+  width: 100% !important;
+  height: 185px !important;
   object-fit: cover !important;
+  background: #0a100c !important;
 }
 
 .product-body {
-  padding: 13px !important;
+  padding: 14px !important;
 }
 
 .product h3 {
   color: #fff !important;
-  font-weight: 800 !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+}
+
+.desc {
+  color: #b9c7bc !important;
+  line-height: 1.7 !important;
 }
 
 .price {
   color: var(--lu-green) !important;
-  font-weight: 900 !important;
+  font-size: 21px !important;
+  font-weight: 1000 !important;
 }
 
 .buy {
-  background: linear-gradient(120deg, var(--lu-lime), var(--lu-green)) !important;
-  color: #071009 !important;
+  background: linear-gradient(120deg, #a6ff00, #39ff72) !important;
+  color: #071008 !important;
   border: 0 !important;
-  border-radius: 9px !important;
-  font-weight: 900 !important;
+  border-radius: 10px !important;
+  padding: 12px !important;
+  font-weight: 1000 !important;
 }
 
-/* Search and filters */
-.search,
-.filter {
-  background: #111a14 !important;
-  border: 1px solid #31563b !important;
+.buy:hover {
+  box-shadow: 0 0 18px #39ff7260 !important;
+}
+
+.trust-strip {
+  background: #101a13 !important;
+  border: 1px solid #315b3c !important;
+  border-radius: 14px !important;
+  color: #e5f2e8 !important;
+  padding: 18px !important;
+}
+
+/* PAYMENT */
+
+.payments-section {
+  width: 94% !important;
+  max-width: 1200px !important;
+  margin: 35px auto !important;
+}
+
+.payments-section img {
+  width: 100% !important;
+  height: auto !important;
+  border: 1px solid #315b3c !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 25px #0008;
+}
+
+/* FOOTER */
+
+footer {
+  background: #030604 !important;
+  border-top: 1px solid #315b3c !important;
+  color: #c2cec5 !important;
+  padding: 30px 4% !important;
+}
+
+footer strong,
+footer span {
+  color: var(--lu-green) !important;
+}
+
+/* CART AND PAYMENT MODALS */
+
+.cliq-modal,
+.cart-drawer,
+.cart-panel {
+  border: 1px solid #315b3c !important;
+  background: #0b120d !important;
   color: #fff !important;
+  border-radius: 18px !important;
+}
+
+.cliq-modal button,
+.cart-drawer button {
   border-radius: 10px !important;
 }
 
-/* Trust and payment sections */
-.trust-strip {
-  background: #101a13 !important;
-  border: 1px solid var(--lu-border) !important;
-  border-radius: 14px !important;
+/* TABLET */
+
+@media (max-width: 900px) {
+  .top-nav {
+    gap: 8px !important;
+  }
+
+  .top-links {
+    gap: 3px !important;
+  }
+
+  .top-links a {
+    padding: 9px 6px !important;
+    font-size: 12px !important;
+  }
+
+  .products {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .hero .wrap {
+    width: 48% !important;
+  }
 }
 
-footer {
-  background: #040705 !important;
-  border-top: 1px solid #245d36 !important;
-}
+/* MOBILE */
 
-/* Mobile */
 @media (max-width: 600px) {
+  .top-nav {
+    width: 94% !important;
+    min-height: 62px !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 7px 0 !important;
+  }
+
+  .logo {
+    font-size: 19px !important;
+  }
+
+  .top-links {
+    order: 5;
+    flex: 0 0 100% !important;
+    justify-content: space-between !important;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .top-links a {
+    font-size: 10px !important;
+    padding: 8px 5px !important;
+  }
+
+  .top-search,
+  .cart-icon,
+  .top-menu {
+    min-width: 35px !important;
+    min-height: 35px !important;
+    font-size: 17px !important;
+  }
+
+  .hero {
+    min-height: 320px !important;
+    padding: 18px 5% !important;
+    background-position: center center !important;
+  }
+
+  .hero .wrap {
+    width: 58% !important;
+  }
+
+  .hero h1 {
+    font-size: 27px !important;
+  }
+
+  .hero p {
+    font-size: 11px !important;
+    line-height: 1.7 !important;
+  }
+
+  .hero-btn {
+    font-size: 12px !important;
+    padding: 10px 16px !important;
+  }
+
+  .premium-home {
+    width: 94% !important;
+    margin: 16px auto !important;
+  }
+
+  .premium-services {
+    gap: 8px !important;
+  }
+
+  body > section[style*="max-width:1150px"] {
+    margin: 20px auto !important;
+  }
+
+  body > section[style*="max-width:1150px"] h2 {
+    font-size: 19px !important;
+  }
+
+  body > section[style*="max-width:1150px"] > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+  }
+
+  #products {
+    width: 94% !important;
+  }
+
+  #products > div:first-child {
+    padding: 16px 12px !important;
+  }
+
+  #products .toolbar {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  #products .toolbar select {
+    height: 46px !important;
+    font-size: 12px !important;
+  }
+
+  #search {
+    height: 49px !important;
+    font-size: 14px !important;
+  }
+
   .products {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
@@ -160,6 +541,10 @@ footer {
 
   .product {
     border-radius: 12px !important;
+  }
+
+  .product img {
+    height: 115px !important;
   }
 
   .product-body {
@@ -170,17 +555,24 @@ footer {
     font-size: 12px !important;
   }
 
+  .desc {
+    font-size: 10px !important;
+  }
+
   .price {
     font-size: 15px !important;
   }
 
   .buy {
-    font-size: 11px !important;
     padding: 9px 5px !important;
+    font-size: 11px !important;
   }
 
-  .section {
-    padding-top: 18px !important;
-    padding-bottom: 18px !important;
+  .payments-section {
+    margin: 22px auto !important;
+  }
+
+  footer {
+    padding: 22px 4% !important;
   }
 }
