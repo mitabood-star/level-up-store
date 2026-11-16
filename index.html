@@ -2149,7 +2149,6 @@ list.sort((a,b)=>
 );
 
 
-const categoryOrder=["games","pass","shared","cards","other"];
 const groups={};
 
 list.forEach(p=>{
@@ -2218,7 +2217,7 @@ Object.keys(groups)
     group.append(heading,track);
     grid.appendChild(group);
   });
-
+  }
  function updateDiscountCountdowns(){
  const timers=document.querySelectorAll(".discount-countdown");
  let expired=false;
