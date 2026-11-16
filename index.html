@@ -1775,6 +1775,46 @@ background:
   margin-top:15px;
 }
   
+/* Horizontal product sliders */
+#productGrid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 22px !important;
+}
+
+#productGrid .product-group {
+  width: 100%;
+  min-width: 0;
+}
+
+#productGrid .product-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 12px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 5px 2px 14px !important;
+  direction: rtl;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #39e875 #101a14;
+}
+
+#productGrid .product-track .product {
+  flex: 0 0 230px !important;
+  width: 230px !important;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 600px) {
+  #productGrid .product-track .product {
+    flex: 0 0 72vw !important;
+    width: 72vw !important;
+  }
+}
+  
+  
 </style>
 </head>
 <body>
@@ -2108,65 +2148,77 @@ list.sort((a,b)=>
  categoryOrder.indexOf(getCategory(a))-categoryOrder.indexOf(getCategory(b))
 );
 
-let lastCategory="";
+
+const categoryOrder=["games","pass","shared","cards","other"];
+const groups={};
 
 list.forEach(p=>{
- const currentCategory=getCategory(p);
+  const key=getCategory(p);
+  if(!groups[key]) groups[key]=[];
+  groups[key].push(p);
+});
 
- if(currentCategory!==lastCategory){
-  const heading=document.createElement("div");
-  heading.className="product-group-title";
-  heading.textContent={
-   games:"🎮 ألعاب Xbox",
-   pass:"🟢 Game Pass",
-   shared:"👥 حساب مشترك",
-   cards:"🎁 بطاقات رقمية",
-   other:"📦 منتجات أخرى"
-  }[currentCategory];
+Object.keys(groups)
+  .sort((a,b)=>categoryOrder.indexOf(a)-categoryOrder.indexOf(b))
+  .forEach(key=>{
+    const group=document.createElement("div");
+    group.className="product-group";
 
-  grid.appendChild(heading);
-  lastCategory=currentCategory;
- }
-  const discounted=activeDiscount(p);
-  const price=discounted?Number(p.discount_price):Number(p.price);
-  const image=p.image_url||"";
-  const title=safeText(p.name);
-  const desc=safeText(p.description||"");
-  const catName=safeText(getCategoryName(p));
+    const heading=document.createElement("h3");
+    heading.className="product-group-title";
+    heading.textContent={
+      games:"🎮 ألعاب Xbox",
+      pass:"🟢 Game Pass",
+      shared:"👥 حساب مشترك",
+      cards:"🎁 بطاقات رقمية",
+      other:"📦 منتجات أخرى"
+    }[key];
 
-  const message="مرحبا LEVEL UP، بدي أطلب: "+(p.name||"منتج")+
-  " - السعر: "+formatPrice(price);
+    const track=document.createElement("div");
+    track.className="product-track";
 
-  const card=document.createElement("article");
-  card.className="product";
+    groups[key].forEach(p=>{
+      const discounted=activeDiscount(p);
+      const price=discounted?Number(p.discount_price):Number(p.price);
+      const image=p.image_url||"";
+      const title=safeText(p.name);
+      const desc=safeText(p.description||"");
+      const catName=safeText(getCategoryName(p));
 
-  const img=document.createElement("img");
-  img.src=image||"";
-  img.alt=title;
-  img.loading="lazy";
-  img.onerror=function(){this.style.display="none"};
+      const card=document.createElement("article");
+      card.className="product";
 
-  const body=document.createElement("div");
-  body.className="product-body";
+      const img=document.createElement("img");
+      img.src=image;
+      img.alt=title;
+      img.loading="lazy";
+      img.onerror=function(){this.style.display="none"};
 
-  body.innerHTML=`
-   <h3>${title}</h3>
-   <div class="desc">${desc}</div>
-   <span class="category-tag">${catName}</span>
-   <div class="price-row">
-    <span class="price">${formatPrice(price)}</span>
-    ${discounted? `<span class="old-price">${formatPrice(p.price)}</span>`:""}
-   </div>
-   ${discounted?'<div class="discount-note">🔥 ينتهي العرض بعد <span class="discount-countdown" data-ends="'+new Date(p.discount_ends_at).getTime()+'">--:--:--</span></div>':""}
-   <button class="buy" onclick="addToCart('${p.id}')">
-🛒 أضف للسلة
-</button>
-  `;
+      const body=document.createElement("div");
+      body.className="product-body";
 
-  card.append(img,body);
-  grid.appendChild(card);
- });
-}
+      body.innerHTML=`
+        <h3>${title}</h3>
+        <div class="desc">${desc}</div>
+        <span class="category-tag">${catName}</span>
+        <div class="price-row">
+          <span class="price">${formatPrice(price)}</span>
+          ${discounted?`<span class="old-price">${formatPrice(p.price)}</span>`:""}
+        </div>
+        ${discounted?'<div class="discount-note">🔥 ينتهي العرض بعد <span class="discount-countdown" data-ends="'+new Date(p.discount_ends_at).getTime()+'">--:--:--</span></div>':""}
+        <button class="buy" onclick="addToCart('${p.id}')">
+          🛒 أضف للسلة
+        </button>
+      `;
+
+      card.append(img,body);
+      track.appendChild(card);
+    });
+
+    group.append(heading,track);
+    grid.appendChild(group);
+  });
+
  function updateDiscountCountdowns(){
  const timers=document.querySelectorAll(".discount-countdown");
  let expired=false;
