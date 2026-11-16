@@ -576,3 +576,226 @@ footer span {
     padding: 22px 4% !important;
   }
 }
+
+/* LEVEL UP - PREMIUM BLUE & WHITE IDENTITY */
+
+:root {
+  --lu-blue: #159cff;
+  --lu-cyan: #55d8ff;
+  --lu-white: #f4f9ff;
+  --lu-bg: #050b14;
+  --lu-card: #0d1928;
+  --lu-border: #24577f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, #102b48 0%, transparent 45%),
+    var(--lu-bg) !important;
+  color: var(--lu-white) !important;
+}
+
+/* Header */
+.top-header {
+  background: rgba(4, 10, 19, .96) !important;
+  border-bottom: 1px solid #168fe0 !important;
+  box-shadow: 0 5px 25px #008cff25 !important;
+  backdrop-filter: blur(14px);
+}
+
+.logo {
+  color: white !important;
+  text-shadow: 0 0 15px #159cff60 !important;
+}
+
+.logo span,
+.top-links a.active {
+  color: var(--lu-blue) !important;
+}
+
+.top-links a {
+  background: transparent !important;
+  border-radius: 10px !important;
+  transition: .2s;
+}
+
+.top-links a:hover,
+.top-links a.active {
+  background: #102943 !important;
+  box-shadow: 0 0 15px #159cff30 !important;
+}
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(ellipse at 50% 30%, #123c61 0%, transparent 65%),
+    linear-gradient(145deg, #07182b, #030810) !important;
+  border-bottom: 1px solid #168fe0 !important;
+  box-shadow: inset 0 -25px 55px #0008 !important;
+}
+
+.hero h1 {
+  color: white !important;
+  text-shadow: 0 0 20px #159cff40 !important;
+}
+
+.hero h1 span {
+  color: var(--lu-blue) !important;
+}
+
+.hero p {
+  color: #d6e8f8 !important;
+}
+
+.hero-btn,
+.buy {
+  background: linear-gradient(120deg, #eafaff, #55caff, #168fff) !important;
+  color: #03101c !important;
+  border: 1px solid #b8edff !important;
+  border-radius: 12px !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 20px #159cff45 !important;
+}
+
+/* Promotional banners */
+.premium-home {
+  width: 94% !important;
+  margin: 22px auto !important;
+}
+
+.premium-discount,
+.premium-services img {
+  border: 1px solid #258ed0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 0 18px #159cff20 !important;
+}
+
+.premium-services {
+  gap: 12px !important;
+}
+
+/* Categories */
+body > section[style*="max-width:1150px"] h2 {
+  color: white !important;
+}
+
+body > section[style*="max-width:1150px"] button {
+  background: #0b1929 !important;
+  border: 1px solid #258ed0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 0 15px #159cff20 !important;
+  overflow: hidden;
+}
+
+/* Products */
+#products > div:first-child {
+  background:
+    radial-gradient(ellipse at 50% 0%, #123657, transparent 70%),
+    #081321 !important;
+  border: 1px solid #24577f !important;
+  border-radius: 20px !important;
+}
+
+#products h2 span {
+  color: var(--lu-cyan) !important;
+}
+
+.search,
+.filter,
+#products .search,
+#products .filter {
+  background: #071726 !important;
+  color: white !important;
+  border: 1px solid #286b9c !important;
+  border-radius: 12px !important;
+}
+
+.products {
+  gap: 14px !important;
+}
+
+.product {
+  background: linear-gradient(145deg, #102238, #081321) !important;
+  border: 1px solid #24577f !important;
+  border-radius: 15px !important;
+  box-shadow: 0 8px 22px #0006 !important;
+  overflow: hidden;
+}
+
+.product h3 {
+  color: white !important;
+}
+
+.desc {
+  color: #a9bed0 !important;
+}
+
+.price {
+  color: #62d2ff !important;
+}
+
+.category-tag {
+  background: #103451 !important;
+  color: #dff6ff !important;
+}
+
+.buy:hover {
+  box-shadow: 0 0 25px #159cff70 !important;
+}
+
+/* Payment and footer */
+.payments-section img {
+  border: 1px solid #286b9c !important;
+  border-radius: 16px !important;
+  box-shadow: 0 0 20px #159cff20 !important;
+}
+
+footer {
+  background: #071321 !important;
+  border-top: 1px solid #24577f !important;
+}
+
+footer strong {
+  color: #62d2ff !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .hero {
+    padding: 55px 15px !important;
+  }
+
+  .hero h1 {
+    font-size: 36px !important;
+  }
+
+  .premium-home {
+    width: 94% !important;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .product img {
+    height: 125px !important;
+  }
+
+  .product-body {
+    padding: 10px !important;
+  }
+
+  .product h3 {
+    font-size: 13px !important;
+  }
+
+  .price {
+    font-size: 16px !important;
+  }
+}
+
