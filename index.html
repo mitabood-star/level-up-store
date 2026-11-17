@@ -2040,6 +2040,136 @@ background:
   #productGrid .product .buy-icon,.products .product .buy-icon{width:12px!important;height:12px!important;flex-basis:12px!important}
 }
 
+
+/* LEVEL UP - refined compact product controls */
+#products .catalog-heading{
+  position:relative;
+  margin:0 0 18px;
+  text-align:right;
+}
+#products .catalog-heading h2{
+  margin:0;
+  color:#fff;
+  font-size:clamp(22px,4vw,34px);
+  font-weight:900;
+}
+#products .catalog-heading h2 span{color:#39e875}
+#products .catalog-heading-line{
+  width:112px;
+  height:3px;
+  margin:10px 0 0 auto;
+  border-radius:8px;
+  background:#39e875;
+  box-shadow:0 0 12px #39e87580;
+}
+#products .catalog-controls{
+  display:grid;
+  grid-template-columns:minmax(190px,.8fr) minmax(220px,1.2fr) minmax(280px,1.2fr);
+  align-items:center;
+  gap:10px;
+  margin:0 0 20px;
+}
+#products .catalog-currency-row{
+  min-width:0;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:6px 10px;
+  border:1px solid #246b40;
+  border-radius:12px;
+  background:linear-gradient(110deg,#07130c,#0c1c12);
+  color:#dcebe0;
+  font-size:12px;
+  font-weight:700;
+}
+#products .catalog-currency{
+  min-width:86px;
+  height:34px;
+  padding:4px 7px;
+  border:1px solid #39e875;
+  border-radius:8px;
+  background:#07150d;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+}
+#products .catalog-search{
+  width:100%;
+  min-width:0;
+  height:48px;
+  padding:0 14px;
+  border:1px solid #287c48;
+  border-radius:12px;
+  background:#07150d;
+  color:#fff;
+  font-size:14px;
+  box-shadow:none;
+}
+#products .catalog-filters{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  min-width:0;
+}
+#products .catalog-filters .filter{
+  width:100%;
+  min-width:0;
+  height:48px;
+  padding:0 9px;
+  border:1px solid #287c48;
+  border-radius:12px;
+  background:#07150d;
+  color:#fff;
+  font-size:12px;
+  box-shadow:none;
+}
+#products .catalog-search:focus,
+#products .catalog-currency:focus,
+#products .catalog-filters .filter:focus{
+  border-color:#65ff91;
+  outline:none;
+  box-shadow:0 0 12px #39e87535;
+}
+@media(max-width:800px){
+  #products .catalog-controls{
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+  #products .catalog-currency-row{
+    grid-column:1/-1;
+    min-height:42px;
+  }
+  #products .catalog-search{
+    grid-column:1/-1;
+    height:44px;
+  }
+  #products .catalog-filters{
+    grid-column:1/-1;
+  }
+  #products .catalog-filters .filter{height:42px}
+}
+@media(max-width:380px){
+  #products .catalog-currency-row{font-size:11px}
+  #products .catalog-filters{gap:6px}
+  #products .catalog-filters .filter{font-size:11px;padding:0 5px}
+}
+
+
+/* Remove the old oversized product-panel background while keeping the controls */
+#products{
+  background:none !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+  padding:22px 0 35px !important;
+}
+@media(max-width:600px){
+  #products{padding:16px 0 28px !important;}
+}
+
 </style>
 </head>
 <body>
@@ -2129,24 +2259,25 @@ background:
   
 <section class="wrap section" id="products">
 
-<div style="position:relative;overflow:hidden;padding:28px 18px 35px;border-radius:22px;background:radial-gradient(ellipse at 50% 45%,#062817 0%,#03150c 48%,#050907 100%);">
-
-  <div style="text-align:right;margin-bottom:28px;position:relative;">
-    <h2 style="font-size:clamp(23px,4vw,38px);font-weight:900;margin:0;color:white;">
-      منتجات <span style="color:#39e875;">LEVEL UP</span> 🎮
-    </h2>
-    <div style="height:3px;width:150px;background:#39e875;box-shadow:0 0 15px #39e875;margin:14px 0 0 auto;border-radius:5px;"></div>
+  <div class="catalog-heading">
+    <h2>منتجات <span>LEVEL UP</span> 🎮</h2>
+    <div class="catalog-heading-line"></div>
   </div>
 
-  <div style="display:flex;flex-direction:column;gap:20px;position:relative;">
+  <div class="catalog-controls">
+    <div class="catalog-currency-row">
+      <span>عرض الأسعار حسب العملة</span>
+      <select id="currency" class="catalog-currency" onchange="changeCurrency()" aria-label="اختيار العملة">
+        <option value="JOD">🇯🇴 JOD</option>
+        <option value="OMR">🇴🇲 OMR</option>
+      </select>
+    </div>
 
-    <input id="search" class="search" type="search"
-      placeholder="ابحث عن لعبة أو اشتراك..."
-      style="width:100%;height:65px;box-sizing:border-box;border:2px solid #39e875;border-radius:20px;background:#101a14;color:white;padding:0 22px;font-size:19px;box-shadow:0 0 12px #39e87535;">
+    <input id="search" class="search catalog-search" type="search"
+      placeholder="ابحث عن لعبة أو اشتراك..." aria-label="البحث عن منتج">
 
-    <div class="toolbar" style="display:grid;grid-template-columns:1.2fr 1.2fr .9fr;gap:12px;">
-
-      <select id="category" class="filter" style="width:100%;min-width:0;height:58px;border:2px solid #287c48;border-radius:17px;background:#101a14;color:white;font-size:15px;">
+    <div class="catalog-filters">
+      <select id="category" class="filter" aria-label="تصفية حسب القسم">
         <option value="all">كل الأقسام</option>
         <option value="games">ألعاب Xbox</option>
         <option value="pass">Game Pass</option>
@@ -2154,21 +2285,13 @@ background:
         <option value="shared">حسابات مشتركة</option>
       </select>
 
-      <select id="sort" class="filter" style="width:100%;min-width:0;height:58px;border:2px solid #287c48;border-radius:17px;background:#101a14;color:white;font-size:15px;">
+      <select id="sort" class="filter" aria-label="ترتيب المنتجات">
         <option value="default">الترتيب الافتراضي</option>
         <option value="low">السعر: الأقل أولاً</option>
         <option value="high">السعر: الأعلى أولاً</option>
       </select>
-
-      <select id="currency" class="filter" onchange="changeCurrency()" style="width:100%;min-width:0;height:58px;border:2px solid #287c48;border-radius:17px;background:#101a14;color:white;font-size:15px;">
-        <option value="JOD">🇯🇴 JOD</option>
-        <option value="OMR">🇴🇲 OMR</option>
-      </select>
-
     </div>
   </div>
-</div>
-  
 
  <div class="products" id="productGrid">
   <div class="empty-state">جاري تحميل المنتجات...</div>
